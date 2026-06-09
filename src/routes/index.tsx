@@ -1,29 +1,38 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/hero";
+import {
+  ClientLogos, TechEcosystem, ServicesShowcase, Industries,
+  Journey, Metrics, CaseStudiesPreview, Testimonials, Certifications, FinalCTA,
+} from "@/components/home-sections";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "Accorto Technologies — Oracle ERP, SAP, AI & Cloud Consulting" },
+      { name: "description", content: "Enterprise consulting in Oracle ERP, SAP, AI, Cloud and Digital Transformation. Trusted by 50+ enterprise clients across 14 countries." },
+      { property: "og:title", content: "Accorto Technologies — Enterprise Consulting" },
+      { property: "og:description", content: "Oracle ERP, SAP, AI/ML, Cloud, Digital Transformation for global enterprises." },
+      { property: "og:url", content: "/" },
     ],
+    links: [{ rel: "canonical", href: "/" }],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <ClientLogos />
+      <TechEcosystem />
+      <ServicesShowcase />
+      <Industries />
+      <Journey />
+      <Metrics />
+      <CaseStudiesPreview />
+      <Testimonials />
+      <Certifications />
+      <FinalCTA />
+    </>
   );
 }
