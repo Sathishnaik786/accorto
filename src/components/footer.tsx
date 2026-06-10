@@ -4,7 +4,7 @@ import { Linkedin, Twitter, Github, Youtube, Mail, MapPin, Phone, ArrowRight } f
 export function Footer() {
   return (
     <footer className="relative mt-32">
-      <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-brand to-transparent opacity-50" />
+      <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-brand to-transparent opacity-50" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-10">
         <div className="glass-strong rounded-3xl p-8 md:p-12">
           <div className="grid gap-12 lg:grid-cols-12">
