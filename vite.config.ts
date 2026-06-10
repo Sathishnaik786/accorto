@@ -10,7 +10,7 @@ export default defineConfig({
     }),
     tailwindcss(),
     tanstackStart({
-      target: "static",
+      spa: { enabled: true },
     }),
   ],
 });
