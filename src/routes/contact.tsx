@@ -263,9 +263,18 @@ function Contact() {
               </p>
             </div>
             <div className="mt-5 flex items-center gap-2">
-              {[Linkedin, Twitter, Github].map((I, i) => (
-                <a key={i} href="#" className="glass grid h-9 w-9 place-items-center rounded-full">
-                  <I className="h-4 w-4" />
+              {[
+                { Icon: Linkedin, name: "LinkedIn" },
+                { Icon: Twitter, name: "Twitter" },
+                { Icon: Github, name: "GitHub" },
+              ].map(({ Icon, name }, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  aria-label={`Follow Accorto on ${name}`}
+                  className="glass grid h-9 w-9 place-items-center rounded-full"
+                >
+                  <Icon className="h-4 w-4" />
                 </a>
               ))}
             </div>

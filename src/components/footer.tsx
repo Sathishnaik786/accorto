@@ -36,10 +36,16 @@ export function Footer() {
                 </p>
               </div>
               <div className="flex items-center gap-2">
-                {[Linkedin, Twitter, Github, Youtube].map((Icon, i) => (
+                {[
+                  { Icon: Linkedin, name: "LinkedIn" },
+                  { Icon: Twitter, name: "Twitter" },
+                  { Icon: Github, name: "GitHub" },
+                  { Icon: Youtube, name: "YouTube" },
+                ].map(({ Icon, name }, i) => (
                   <a
                     key={i}
                     href="#"
+                    aria-label={`Follow Accorto on ${name}`}
                     className="glass grid h-9 w-9 place-items-center rounded-full hover:scale-110 transition-transform"
                   >
                     <Icon className="h-4 w-4" />
