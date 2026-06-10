@@ -1,15 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 
-const BASE_URL = "";
+const BASE_URL = "https://accorto.tech";
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: async () => {
-        const paths = ["/", "/about", "/services", "/industries", "/case-studies", "/careers", "/insights", "/contact"];
-        const urls = paths.map((p) =>
-          `  <url><loc>${BASE_URL}${p}</loc><changefreq>weekly</changefreq><priority>${p === "/" ? "1.0" : "0.8"}</priority></url>`
+        const paths = [
+          "/",
+          "/about",
+          "/services",
+          "/industries",
+          "/case-studies",
+          "/careers",
+          "/insights",
+          "/contact",
+        ];
+        const urls = paths.map(
+          (p) =>
+            `  <url><loc>${BASE_URL}${p}</loc><changefreq>weekly</changefreq><priority>${p === "/" ? "1.0" : "0.8"}</priority></url>`,
         );
         const xml = [
           `<?xml version="1.0" encoding="UTF-8"?>`,
@@ -17,7 +27,9 @@ export const Route = createFileRoute("/sitemap.xml")({
           ...urls,
           `</urlset>`,
         ].join("\n");
-        return new Response(xml, { headers: { "Content-Type": "application/xml", "Cache-Control": "public, max-age=3600" } });
+        return new Response(xml, {
+          headers: { "Content-Type": "application/xml", "Cache-Control": "public, max-age=3600" },
+        });
       },
     },
   },

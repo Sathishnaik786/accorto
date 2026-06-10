@@ -1,7 +1,15 @@
 import { animate, useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
-export function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
+export function Counter({
+  to,
+  suffix = "",
+  duration = 2,
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-50px" });
   const [val, setVal] = useState(0);
@@ -14,5 +22,10 @@ export function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?
     });
     return () => controls.stop();
   }, [inView, to, duration]);
-  return <span ref={ref}>{Math.round(val).toLocaleString()}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {Math.round(val).toLocaleString()}
+      {suffix}
+    </span>
+  );
 }

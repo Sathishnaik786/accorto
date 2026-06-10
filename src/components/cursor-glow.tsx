@@ -5,6 +5,7 @@ export function CursorGlow() {
   const [enabled, setEnabled] = useState(false);
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     setEnabled(true);
     const onMove = (e: MouseEvent) => setPos({ x: e.clientX, y: e.clientY });
     window.addEventListener("mousemove", onMove);
@@ -18,7 +19,8 @@ export function CursorGlow() {
       style={{
         left: pos.x,
         top: pos.y,
-        background: "radial-gradient(circle, rgba(124,58,237,0.35), rgba(37,99,235,0.2) 40%, transparent 70%)",
+        background:
+          "radial-gradient(circle, rgba(124,58,237,0.35), rgba(37,99,235,0.2) 40%, transparent 70%)",
       }}
     />
   );
