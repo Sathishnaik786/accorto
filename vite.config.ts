@@ -10,7 +10,10 @@ export default defineConfig({
     }),
     tailwindcss(),
     tanstackStart({
-      spa: { enabled: true },
+      prerender: {
+        enabled: true,
+        crawlLinks: true,
+      },
     }),
   ],
 });
