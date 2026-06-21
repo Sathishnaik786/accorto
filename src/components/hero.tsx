@@ -16,24 +16,33 @@ export function Hero() {
 
   return (
     <section
-      className="relative h-screen w-full flex flex-col justify-end overflow-hidden pt-20 pb-8 lg:pt-24 lg:pb-10 bg-[#031224]"
+      className="relative w-full min-h-0 flex flex-col lg:h-screen lg:justify-end overflow-hidden pt-20 pb-8 lg:pt-24 lg:pb-10 bg-[#031224]"
       style={{
         background: "#031224",
       }}
     >
-      {/* Background Video — object-cover fills the frame on all screen sizes */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 !w-full !h-full !max-w-none object-cover z-0 pointer-events-none"
+      {/* Background Video — mobile card with gap/corners/animations, absolute full-screen on desktop */}
+      <motion.div
+        initial={{ opacity: 0, y: 30, scale: 0.96 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+        className="relative w-full px-4 sm:px-6 mt-10 lg:absolute lg:inset-0 lg:w-full lg:h-full lg:px-0 lg:mt-0 z-0"
       >
-        <source src="/videos/Hero_video.mp4" type="video/mp4" />
-      </video>
+        <div className="relative w-full aspect-video lg:absolute lg:inset-0 lg:w-full lg:h-full lg:aspect-auto rounded-3xl lg:rounded-none overflow-hidden border border-white/10 lg:border-none shadow-[0_25px_60px_rgba(0,162,255,0.15)] lg:shadow-none animate-float-slow-oscillation lg:animate-none">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover lg:!max-w-none rounded-3xl lg:rounded-none"
+          >
+            <source src="/videos/Hero_video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </motion.div>
 
-      {/* Main Container - Aligned to bottom */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 mt-auto">
+      {/* Main Container - Flow-positioned below video on mobile, mt-auto on desktop */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 mt-6 lg:mt-auto">
         
         <div className="flex flex-col items-start text-left space-y-4 sm:space-y-6">
           {/* CTA Buttons */}
