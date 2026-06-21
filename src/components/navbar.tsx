@@ -194,10 +194,10 @@ function MegaMenuPanel<T extends string>({
         id={menuId}
         role="menu"
         aria-labelledby={triggerId}
-        className="bg-white/90 dark:bg-[#0C223D]/95 border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] rounded-2xl overflow-hidden grid grid-cols-12 backdrop-blur-3xl relative"
+        className="bg-white/95 dark:bg-[#0C223D]/95 border border-slate-200/80 dark:border-white/10 shadow-[0_30px_80px_rgba(15,23,42,0.08)] dark:shadow-[0_50px_100px_rgba(0,0,0,0.5)] rounded-2xl overflow-hidden grid grid-cols-12 backdrop-blur-3xl relative"
       >
         {/* Top reflection line */}
-        <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-slate-200/50 dark:via-white/20 to-transparent pointer-events-none" />
         
         {/* ── Left: category tabs ── */}
         <div className="col-span-3 border-r border-slate-200 dark:border-white/10 p-6 flex flex-col gap-1.5">
@@ -354,13 +354,13 @@ export function Navbar() {
           className={cn(
             "relative flex items-center justify-between transition-all duration-500 rounded-2xl border",
             scrolled
-              ? "px-4 py-2 bg-white/85 dark:bg-[#031224]/65 border-slate-200/80 dark:border-white/6 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-[30px]"
-              : "px-6 py-3 bg-white/50 dark:bg-[#061B33]/75 border-white/5 shadow-sm backdrop-blur-xl"
+              ? "px-4 py-2 bg-white/75 dark:bg-[#031224]/65 border-slate-200/60 dark:border-white/6 shadow-[0_10px_30px_rgba(15,23,42,0.08)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-[20px] dark:backdrop-blur-[30px]"
+              : "px-6 py-3 bg-white/40 dark:bg-[#061B33]/75 border-slate-200/20 dark:border-white/5 shadow-xs dark:shadow-sm backdrop-blur-xl"
           )}
           onMouseLeave={closeMenu}
         >
           {/* Top reflection highlight */}
-          <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
+          <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-slate-200/40 dark:via-white/20 to-transparent pointer-events-none" />
 
           {/* Logo */}
           <Link to="/" className="flex items-center group shrink-0 relative z-10 py-1">
@@ -462,11 +462,11 @@ export function Navbar() {
                 const ev = new KeyboardEvent("keydown", { key: "k", ctrlKey: true });
                 window.dispatchEvent(ev);
               }}
-              className="glass hidden md:flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 font-semibold hover:text-slate-900 dark:hover:text-white hover:-translate-y-0.5 hover:shadow-md transition-all duration-300"
+              className="hidden md:flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 font-semibold hover:text-slate-900 dark:hover:text-white hover:-translate-y-0.5 transition-all duration-300 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-xs dark:shadow-none hover:shadow-md"
               aria-label="Search"
             >
               <Search className="h-3.5 w-3.5 text-brand" /> Search
-              <kbd className="ml-1 rounded border border-slate-200 dark:border-white/10 px-1 text-[10px] bg-slate-100 dark:bg-white/5">⌘K</kbd>
+              <kbd className="ml-1 rounded border border-slate-200 dark:border-white/10 px-1 text-[10px] bg-slate-50 dark:bg-white/5">⌘K</kbd>
             </button>
             <ThemeToggle />
             <Link
@@ -477,7 +477,7 @@ export function Navbar() {
             </Link>
             <button
               onClick={() => setMobile(true)}
-              className="glass lg:hidden grid h-9 w-9 place-items-center rounded-full hover:bg-slate-100 dark:hover:bg-white/5 transition-colors"
+              className="lg:hidden grid h-9 w-9 place-items-center rounded-full transition-all duration-300 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-xs dark:shadow-none hover:bg-slate-50 dark:hover:bg-white/10 hover:shadow-sm"
               aria-label="Open menu"
               aria-expanded={mobile}
               aria-controls="mobile-menu"

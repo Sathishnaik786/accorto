@@ -152,16 +152,16 @@ export function ServicesShowcase() {
             <Reveal className="h-full">
               <PremiumCard 
                 hover={true}
-                className="relative h-full p-6 sm:p-8 md:p-10 group transition-all duration-500 ease-out rounded-[32px]"
+                className="relative h-full p-6 sm:p-8 md:p-10 group transition-all duration-500 ease-out rounded-[32px] bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1"
               >
                 <div className="relative z-10">
-                  <div className="inline-flex items-center gap-2 bg-white/5 rounded-full px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300">
+                  <div className="inline-flex items-center gap-2 bg-slate-100 dark:bg-white/5 rounded-full px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-transparent">
                     <Star className="h-3 w-3 text-amber-400 animate-pulse" /> Featured Practice
                   </div>
                   <h3 className="mt-5 font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white leading-[1.05] tracking-tight">
                     Oracle ERP Cloud, end-to-end
                   </h3>
-                  <p className="mt-4 text-zinc-400 leading-8 max-w-xl text-sm">
+                  <p className="mt-4 text-[#64748B] dark:text-zinc-400 leading-8 max-w-xl text-sm font-medium">
                     From discovery through hypercare, our certified Oracle practice has delivered 60+
                     ERP programs across Finance, SCM, HCM and EPM. We accelerate value with reusable
                     accelerators, prebuilt analytics, and a global delivery pod.
@@ -175,7 +175,7 @@ export function ServicesShowcase() {
                       "Oracle Analytics",
                       "Integration Cloud",
                     ].map((p) => (
-                      <div key={p} className="flex items-center gap-2 text-sm text-zinc-400 leading-8">
+                      <div key={p} className="flex items-center gap-2 text-sm text-[#64748B] dark:text-zinc-400 leading-8 font-medium">
                         <CheckCircle2 className="h-4 w-4 text-emerald-400" /> {p}
                       </div>
                     ))}
@@ -208,7 +208,7 @@ export function ServicesShowcase() {
                   </div>
                   <Link
                     to="/services"
-                    className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-white hover:text-brand transition-colors"
+                    className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white hover:text-brand transition-colors"
                   >
                     Explore Oracle practice <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -233,8 +233,8 @@ export function ServicesShowcase() {
 function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1">
-      <div className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-[0.95]">{value}</div>
-      <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-zinc-500 font-bold mt-1">{label}</div>
+      <div className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white tracking-tight leading-[0.95]">{value}</div>
+      <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-slate-500 dark:text-zinc-500 font-bold mt-1">{label}</div>
     </div>
   );
 }
@@ -252,24 +252,24 @@ function ServiceCard({ icon: Icon, name, color, desc, points, wide = false }: Se
     <PremiumCard
       hover={true}
       className={cn(
-        "group relative p-5 sm:p-6 md:p-8 h-full flex flex-col justify-between gap-5 sm:gap-8 transition-all duration-500 ease-out z-10 rounded-[32px]",
+        "group relative p-5 sm:p-6 md:p-8 h-full flex flex-col justify-between gap-5 sm:gap-8 transition-all duration-500 ease-out z-10 rounded-[32px] bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1",
         wide ? "md:flex-row md:items-center md:gap-10" : ""
       )}
     >
       <div className={cn("flex flex-col gap-4 relative z-10", wide ? "md:flex-1" : "")}>
         <div
-          className="inline-grid h-12 w-12 place-items-center rounded-[18px] bg-white/5 border border-white/10 text-brand dark:text-brand-3 shadow-md md:group-hover:scale-105 transition-all duration-500 ease-out"
+          className="inline-grid h-12 w-12 place-items-center rounded-[18px] bg-brand/8 dark:bg-white/5 border border-brand/15 dark:border-white/10 text-brand shadow-xs md:group-hover:scale-105 transition-all duration-500 ease-out animate-none"
         >
           <Icon className="h-6 w-6" />
         </div>
         <div>
           <h3 className="font-display text-xl font-semibold text-slate-900 dark:text-white leading-[0.95] tracking-tight">{name}</h3>
-          <p className="mt-2 text-sm text-zinc-400 leading-8">{desc}</p>
+          <p className="mt-2 text-sm text-[#64748B] dark:text-zinc-400 leading-8 font-medium">{desc}</p>
         </div>
       </div>
       <div
         className={cn(
-          "grid grid-cols-2 gap-3 text-xs text-zinc-400 leading-8 relative z-10",
+          "grid grid-cols-2 gap-3 text-xs text-[#64748B] dark:text-zinc-400 leading-8 relative z-10 font-medium",
           wide ? "md:mt-0 md:flex-1" : ""
         )}
       >
@@ -336,17 +336,17 @@ export function Industries() {
               <motion.div
                 whileHover={cardHover}
                 transition={cardHoverTransition}
-                className="group relative h-full overflow-hidden rounded-2xl sm:rounded-3xl glass p-4 sm:p-6 border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
+                className="group relative h-full overflow-hidden rounded-2xl sm:rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-4 sm:p-6 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 group-hover:opacity-10 transition-opacity blur-2xl" />
-                <div className="grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-xl bg-gradient-brand-soft text-brand">
+                <div className="grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-xl bg-brand/10 dark:bg-gradient-brand-soft text-brand">
                   <it.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
                 <h3 className="mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold text-slate-900 dark:text-white">{it.name}</h3>
-                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{it.desc}</p>
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-[#64748B] dark:text-slate-300 leading-relaxed font-medium">{it.desc}</p>
                 <Link
                   to="/industries"
-                  className="mt-3 sm:mt-5 inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-brand transition-colors"
+                  className="mt-3 sm:mt-5 inline-flex items-center gap-1 text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-brand transition-colors"
                 >
                   Explore solutions <ArrowRight className="h-3 w-3" />
                 </Link>
@@ -409,15 +409,15 @@ export function Journey() {
                 <div className="text-center group">
                   <div className="relative mx-auto h-24 w-24">
                     <div className="absolute inset-0 rounded-full bg-gradient-brand opacity-[0.06] blur-xl group-hover:opacity-10 transition-opacity" />
-                    <div className="relative h-24 w-24 grid place-items-center rounded-full glass">
+                    <div className="relative h-24 w-24 grid place-items-center rounded-full bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md">
                       <s.icon className="h-9 w-9 text-brand" />
                     </div>
-                    <div className="absolute -top-2 -right-2 grid h-7 w-7 place-items-center rounded-full bg-gradient-brand text-white text-xs font-bold">
+                    <div className="absolute -top-2 -right-2 grid h-7 w-7 place-items-center rounded-full bg-gradient-brand text-white text-xs font-bold shadow-sm">
                       {i + 1}
                     </div>
                   </div>
                   <h3 className="mt-5 font-display text-lg font-semibold text-slate-900 dark:text-white">{s.name}</h3>
-                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{s.desc}</p>
+                  <p className="mt-2 text-sm text-[#64748B] dark:text-slate-300 font-medium">{s.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -437,16 +437,16 @@ export function Metrics() {
     { v: 18, s: "", l: "Countries" },
   ];
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 bg-[#031224]">
+    <section className="relative py-16 md:py-24 lg:py-32 bg-[#F8FAFB] dark:bg-[#031224]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 text-center">
           {items.map((m, i) => (
             <Reveal key={m.l} delay={i * 0.08}>
               <div className="flex flex-col items-center gap-3">
-                <div className="font-display text-4xl sm:text-6xl lg:text-8xl font-bold text-white tracking-tight leading-[0.95]">
+                <div className="font-display text-4xl sm:text-6xl lg:text-8xl font-bold text-slate-900 dark:text-white tracking-tight leading-[0.95]">
                   <Counter to={m.v} suffix={m.s} />
                 </div>
-                <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold mt-2">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-slate-500 dark:text-zinc-500 font-bold mt-2">
                   {m.l}
                 </div>
               </div>
@@ -508,7 +508,7 @@ export function CaseStudiesPreview() {
                 to="/case-studies"
                 whileHover={cardHover}
                 transition={cardHoverTransition}
-                className="group block overflow-hidden rounded-[32px] glass border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
+                className="group block overflow-hidden rounded-[32px] bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <div className="relative aspect-4/3 overflow-hidden m-3 rounded-[24px] shadow-sm">
                   <img
@@ -518,10 +518,10 @@ export function CaseStudiesPreview() {
                     className="h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-[#031224]/80 via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 glass-strong rounded-full px-3 py-1 text-xs font-medium text-white">
+                  <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md rounded-full px-3 py-1 text-xs font-semibold text-white">
                     {c.tag}
                   </div>
-                  <div className="absolute bottom-4 right-4 glass-strong rounded-full px-3 py-1 text-xs font-semibold text-white">
+                  <div className="absolute bottom-4 right-4 bg-slate-900/80 backdrop-blur-md rounded-full px-3 py-1 text-xs font-bold text-white">
                     {c.metric}
                   </div>
                 </div>
@@ -529,7 +529,7 @@ export function CaseStudiesPreview() {
                   <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand transition-colors">
                     {c.title}
                   </h3>
-                  <div className="mt-3 inline-flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
+                  <div className="mt-3 inline-flex items-center gap-1 text-xs font-bold text-slate-500 dark:text-slate-400">
                     Read case study <ArrowRight className="h-3 w-3" />
                   </div>
                 </div>
@@ -565,7 +565,7 @@ export function Testimonials() {
     },
   ];
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-[#061B33]">
+    <section className="py-16 md:py-24 lg:py-32 bg-[#F8FAFB] dark:bg-[#061B33]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="Client Voices"
@@ -581,7 +581,7 @@ export function Testimonials() {
             <Reveal key={i} delay={i * 0.1}>
               <PremiumCard
                 hover={true}
-                className="h-full p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-6 rounded-[32px]"
+                className="h-full p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-6 rounded-[32px] bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1"
               >
                 <div className="space-y-4 text-left">
                   <div className="flex gap-1 text-amber-400">
@@ -589,17 +589,17 @@ export function Testimonials() {
                       <Star key={k} className="h-3.5 w-3.5 fill-current" />
                     ))}
                   </div>
-                  <p className="text-base text-zinc-300 leading-relaxed italic font-medium">
+                  <p className="text-base text-slate-700 dark:text-zinc-300 leading-relaxed italic font-medium">
                     "{t.quote}"
                   </p>
                 </div>
                 <div className="flex items-center gap-4 text-left">
-                  <div className="h-10 w-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white font-semibold text-sm">
+                  <div className="h-10 w-10 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex items-center justify-center text-slate-800 dark:text-white font-semibold text-sm">
                     {t.name[0]}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white">{t.name}</div>
-                    <div className="text-xs text-zinc-500 mt-0.5">{t.role}</div>
+                    <div className="text-sm font-semibold text-slate-900 dark:text-white">{t.name}</div>
+                    <div className="text-xs text-slate-500 dark:text-zinc-500 mt-0.5 font-medium">{t.role}</div>
                   </div>
                 </div>
               </PremiumCard>
@@ -636,11 +636,11 @@ export function Certifications() {
               <motion.div
                 whileHover={cardHover}
                 transition={cardHoverTransition}
-                className="glass rounded-3xl p-5 flex flex-col items-center text-center gap-2 border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
+                className="bg-white dark:bg-card border border-slate-100 dark:border-white/5 rounded-3xl p-5 flex flex-col items-center text-center gap-2 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
               >
                 <i.icon className="h-6 w-6 text-brand" />
                 <div className="text-sm font-semibold text-slate-900 dark:text-white">{i.name}</div>
-                <div className="text-xs text-slate-500 dark:text-slate-400">{i.lvl}</div>
+                <div className="text-xs text-[#64748B] dark:text-slate-400 font-medium">{i.lvl}</div>
               </motion.div>
             </Reveal>
           ))}

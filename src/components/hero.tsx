@@ -16,11 +16,11 @@ export function Hero() {
 
   return (
     <section
-      className="relative w-full min-h-0 flex flex-col lg:h-screen lg:justify-end overflow-hidden pt-20 pb-8 lg:pt-24 lg:pb-10 bg-[#031224]"
-      style={{
-        background: "#031224",
-      }}
+      className="relative w-full min-h-0 flex flex-col lg:h-screen lg:justify-end overflow-hidden pt-20 pb-8 lg:pt-24 lg:pb-10 bg-background dark:bg-[#031224]"
     >
+      {/* Light mode radial green glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(112,255,74,0.04)_0%,transparent_70%)] dark:hidden pointer-events-none z-0" />
+
       {/* Background Video — mobile card with gap/corners/animations, absolute full-screen on desktop */}
       <motion.div
         initial={{ opacity: 0, y: 30, scale: 0.96 }}
@@ -28,7 +28,7 @@ export function Hero() {
         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
         className="relative w-full px-4 sm:px-6 mt-10 lg:absolute lg:inset-0 lg:w-full lg:h-full lg:px-0 lg:mt-0 z-0"
       >
-        <div className="relative w-full aspect-video lg:absolute lg:inset-0 lg:w-full lg:h-full lg:aspect-auto rounded-3xl lg:rounded-none overflow-hidden border border-white/10 lg:border-none shadow-[0_25px_60px_rgba(0,162,255,0.15)] lg:shadow-none animate-float-slow-oscillation lg:animate-none">
+        <div className="relative w-full aspect-video lg:absolute lg:inset-0 lg:w-full lg:h-full lg:aspect-auto rounded-3xl lg:rounded-none overflow-hidden border border-slate-200/80 dark:border-white/10 lg:border-none shadow-[0_25px_60px_rgba(15,23,42,0.06)] dark:shadow-[0_25px_60px_rgba(0,162,255,0.15)] lg:shadow-none animate-float-slow-oscillation lg:animate-none">
           <video
             autoPlay
             muted
@@ -65,7 +65,7 @@ export function Hero() {
             </Link>
             <Link
               to="/services"
-              className="w-full sm:w-auto inline-flex items-center justify-center font-bold text-sm text-white hover:text-[#FCE76C] transition-all duration-200 hover:translate-x-1"
+              className="w-full sm:w-auto inline-flex items-center justify-center font-bold text-sm text-slate-700 dark:text-white lg:text-white hover:text-brand dark:hover:text-[#FCE76C] lg:hover:text-[#FCE76C] transition-all duration-200 hover:translate-x-1"
               style={{
                 height: "48px",
                 paddingInline: "20px",
@@ -88,15 +88,15 @@ export function Hero() {
                   key={i}
                   src={url}
                   alt="Client Profile"
-                  className="h-9 w-9 rounded-full border-2 border-[#031224] object-cover shadow-md brightness-[0.95] contrast-[1.05]"
+                  className="h-9 w-9 rounded-full border-2 border-white dark:border-[#031224] lg:border-[#031224] object-cover shadow-md brightness-[0.95] contrast-[1.05]"
                   loading="lazy"
                 />
               ))}
-              <div className="h-9 w-9 rounded-full border-2 border-[#031224] bg-gradient-brand text-[#031224] font-display font-bold text-xs flex items-center justify-center shadow-md">
+              <div className="h-9 w-9 rounded-full border-2 border-white dark:border-[#031224] lg:border-[#031224] bg-gradient-brand text-[#031224] font-display font-bold text-xs flex items-center justify-center shadow-md">
                 <Counter to={10} suffix="k+" />
               </div>
             </div>
-            <p className="text-xs sm:text-sm text-white/70 font-semibold text-left">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-white/70 lg:text-white/70 font-semibold text-left">
               Trusted by <Counter to={100} suffix="+" /> growing businesses worldwide
             </p>
           </motion.div>

@@ -27,6 +27,31 @@
 }
 
 :root {
+  --card-bg: var(--bg-card, rgba(255, 255, 255, 0.85));
+  --card-border: var(--border-secondary, rgba(15, 23, 42, 0.08));
+  --card-hover-border: var(--border-hover, rgba(66, 132, 117, 0.18));
+
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: var(--border-secondary, rgba(15, 23, 42, 0.08));
+
+  --shadow-soft: var(--shadow-soft, 0 8px 24px rgba(15, 23, 42, 0.06));
+  --shadow-hover: var(--shadow-hover, 0 30px 80px rgba(15, 23, 42, 0.12));
+
+  --primary-glow: rgba(0, 162, 255, 0.04);
+  --secondary-glow: rgba(0, 217, 255, 0.04);
+  --green-glow: rgba(143, 255, 61, 0.04);
+
+  --section-radius: 32px;
+  --card-radius: var(--card-radius, 24px);
+  --button-radius: var(--button-radius, 16px);
+  --input-radius: var(--input-radius, 14px);
+
+  /* Typography Colors */
+  --body-text-color: var(--text-secondary, #475569);
+  --label-text-color: var(--text-muted, #64748B);
+}
+
+.dark {
   --card-bg: var(--bg-card, rgba(12, 34, 61, 0.5));
   --card-border: var(--border-secondary, rgba(255, 255, 255, 0.06));
   --card-hover-border: var(--border-hover, rgba(255, 255, 255, 0.12));
@@ -41,17 +66,6 @@
   --secondary-glow: rgba(0, 217, 255, 0.15);
   --green-glow: rgba(143, 255, 61, 0.15);
 
-  --section-radius: 32px;
-  --card-radius: var(--card-radius, 24px);
-  --button-radius: var(--button-radius, 16px);
-  --input-radius: var(--input-radius, 14px);
-
-  /* Typography Colors */
-  --body-text-color: var(--text-secondary, #B9C2CE);
-  --label-text-color: var(--text-muted, #8895A7);
-}
-
-.dark {
   --body-text-color: var(--text-secondary, #B9C2CE);
   --label-text-color: var(--text-muted, #8895A7);
 }
@@ -98,17 +112,6 @@ p:not([class*="text-"]):not([class*="text-gradient"]):not([class*="text-brand"])
   pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   z-index: 1;
-}
-
-/* ==========================================
-   GLOBAL SHADOW & GLOW STANDARDIZATION
-   ========================================== */
-.shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl, .shadow-2xl {
-  box-shadow: var(--shadow-soft) !important;
-}
-
-.hover\:shadow-md:hover, .hover\:shadow-lg:hover, .hover\:shadow-xl:hover, .hover\:shadow-2xl:hover {
-  box-shadow: var(--shadow-hover) !important;
 }
 
 /* ==========================================
