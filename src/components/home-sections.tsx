@@ -53,7 +53,7 @@ export function ClientLogos() {
   ];
   const doubled = [...logos, ...logos, ...logos, ...logos];
   return (
-    <section className="py-32 lg:py-40 border-y border-border/50">
+    <section className="py-16 md:py-24 lg:py-32 border-y border-border/50">
       <Reveal>
         <p className="text-center text-xs uppercase tracking-[0.3em] text-muted-foreground mb-8">
           Trusted by industry leaders worldwide
@@ -135,7 +135,7 @@ export function ServicesShowcase() {
   ];
 
   return (
-    <section className="relative py-32 lg:py-40">
+    <section className="relative py-16 md:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="What we do"
@@ -319,7 +319,7 @@ export function Industries() {
     },
   ];
   return (
-    <section className="py-32 lg:py-40 relative">
+    <section className="py-16 md:py-24 lg:py-32 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="Industries"
@@ -389,7 +389,7 @@ export function Journey() {
     },
   ];
   return (
-    <section className="py-32 lg:py-40 relative bg-radial-subtle">
+    <section className="py-16 md:py-24 lg:py-32 relative bg-radial-subtle">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="Our Methodology"
@@ -482,7 +482,7 @@ export function CaseStudiesPreview() {
     },
   ];
   return (
-    <section className="py-32 lg:py-40">
+    <section className="py-16 md:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-end justify-between flex-wrap gap-6">
           <SectionHeading
@@ -623,7 +623,7 @@ export function Certifications() {
     { icon: ShieldCheck, name: "SOC 2 Type II", lvl: "Audited Operations" },
   ];
   return (
-    <section className="py-32 lg:py-40 border-t border-border/50">
+    <section className="py-16 md:py-24 lg:py-32 border-t border-border/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <p className="text-center text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">

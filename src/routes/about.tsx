@@ -65,7 +65,7 @@ function About() {
         subtitle="We are a global team of strategists, engineers, and designers helping enterprises modernize with Oracle, SAP, AI, and cloud — without slowing the business down."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40 grid lg:grid-cols-2 gap-16 items-center">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32 grid lg:grid-cols-2 gap-16 items-center">
         <Reveal>
           <SectionHeading
             tag="Our story"
@@ -119,7 +119,7 @@ function About() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <h2 className="sr-only">Mission & Vision</h2>
         <div className="grid md:grid-cols-2 gap-6">
           {[
@@ -146,7 +146,7 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <SectionHeading
           tag="Core values"
           title={
@@ -186,7 +186,7 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <SectionHeading
           tag="Leadership"
           title={
@@ -246,7 +246,7 @@ function About() {
 
       <SectionDivider label="03 / CHRONOLOGY" />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <SectionHeading
           tag="Timeline"
           title={
@@ -268,7 +268,7 @@ function About() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <div className="relative overflow-hidden rounded-3xl glass-strong p-10 border border-white/10 shadow-xl bg-radial-subtle">
           <Globe2 className="h-8 w-8 text-brand" />
           <SectionHeading

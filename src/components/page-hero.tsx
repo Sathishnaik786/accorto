@@ -24,7 +24,7 @@ export function PageHero({
           </div>
         </Reveal>
         <Reveal delay={0.05}>
-          <h1 className="mt-5 font-display text-5xl md:text-7xl font-semibold tracking-tight leading-[1.02] max-w-4xl">
+          <h1 className="mt-5 font-display text-4xl sm:text-5xl md:text-7xl font-semibold tracking-tight leading-[1.04] max-w-4xl">
             {title}
           </h1>
         </Reveal>

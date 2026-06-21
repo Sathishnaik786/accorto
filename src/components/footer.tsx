@@ -15,7 +15,7 @@ export function Footer() {
   } = useMotionSystem();
 
   return (
-    <footer className="relative mt-32">
+    <footer className="relative mt-16 md:mt-24 lg:mt-32">
       {/* Flagship top gradient divider */}
       <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-brand/35 to-transparent dark:via-brand-3/20" />
       <div className="absolute inset-x-0 top-[-2px] h-[3px] bg-linear-to-r from-transparent via-brand/10 to-transparent blur-xs pointer-events-none" />
@@ -26,7 +26,7 @@ export function Footer() {
         viewport={{ once: true, amount: 0.1 }}
         className="mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-10"
       >
-        <div className="glass-strong rounded-3xl p-8 md:p-12">
+        <div className="glass-strong rounded-3xl p-5 sm:p-8 md:p-12">
           <div className="grid gap-12 lg:grid-cols-12">
             
             {/* Brand Column */}

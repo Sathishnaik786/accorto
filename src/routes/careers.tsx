@@ -76,9 +76,9 @@ function Careers() {
         subtitle="Work on the programs that boards talk about. With operators who've shipped at scale, and a culture that respects your craft."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <h2 className="sr-only">Why choose Accorto</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[
             {
               icon: Heart,
@@ -107,7 +107,7 @@ function Careers() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <SectionHeading
           tag="Life at Accorto"
           title={
@@ -131,7 +131,7 @@ function Careers() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <SectionHeading
           tag="Hiring process"
           title={
@@ -156,7 +156,7 @@ function Careers() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
         <SectionHeading
           tag="Open positions"
           title={

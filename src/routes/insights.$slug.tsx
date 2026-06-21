@@ -75,7 +75,7 @@ function InsightDetail() {
             </h1>
           </Reveal>
           <Reveal delay={0.1}>
-            <div className="flex items-center gap-3 text-sm text-zinc-400 font-medium pt-2">
+            <div className="flex flex-wrap items-center gap-2 text-sm text-zinc-400 font-medium pt-2">
               <span className="text-white">{article.author}</span>
               <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
               <span>{article.date}</span>
@@ -87,7 +87,7 @@ function InsightDetail() {
 
         {/* Hero Image */}
         <Reveal delay={0.15}>
-          <div className="relative w-full aspect-21/9 overflow-hidden rounded-[32px] border border-white/10 shadow-2xl mb-12">
+          <div className="relative w-full aspect-video sm:aspect-21/9 overflow-hidden rounded-[32px] border border-white/10 shadow-2xl mb-12">
             <img
               src={article.img}
               alt={article.title}

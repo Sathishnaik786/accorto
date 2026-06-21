@@ -267,7 +267,7 @@ function CaseStudies() {
         subtitle="Real client outcomes from the last few quarters across our Oracle, SAP, AI and Cloud practices."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-32">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-16 md:pb-24 lg:pb-32">
         <h2 className="sr-only">Client Case Studies</h2>
         <div className="flex flex-wrap gap-2 mb-14">
           {CATS.map((c) => (

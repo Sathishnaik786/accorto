@@ -118,10 +118,10 @@ function Contact() {
         subtitle="Tell us about your business, and we'll match you with the right enterprise architect within 24 hours."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-20 grid lg:grid-cols-12 gap-8">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-16 sm:pb-20 grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-7">
           <form
-            className="glass rounded-3xl p-8 shadow-xl"
+            className="glass rounded-3xl p-5 sm:p-8 shadow-xl"
             onSubmit={(e) => {
               e.preventDefault();
               setSubmitted(true);
@@ -232,11 +232,11 @@ function Contact() {
                           We respect your privacy and will sign a mutual NDA before reviewing system details or architecture logs.
                         </p>
                       </div>
-                      <div className="flex items-center justify-between gap-4 flex-wrap pt-2">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 flex-wrap pt-2">
                         <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                           By submitting you agree to our privacy policy.
                         </p>
-                        <button className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all duration-300">
+                        <button className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all duration-300">
                           Send message <Send className="h-4 w-4" />
                         </button>
                       </div>

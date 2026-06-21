@@ -111,7 +111,7 @@ function InsightsIndex() {
           {/* Right: Featured Stack (3 list items) */}
           <div className="lg:col-span-4 flex flex-col items-start text-left">
             <Reveal>
-              <h2 className="font-display text-5xl font-semibold tracking-tight text-white mb-8">
+              <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-white mb-8">
                 Featured
               </h2>
             </Reveal>
@@ -243,7 +243,7 @@ function InsightsIndex() {
               </Reveal>
               <Reveal delay={0.1}>
                 <form
-                  className="bg-white/5 border border-white/10 flex items-center rounded-full p-1 max-w-md mx-auto"
+                  className="bg-white/5 border border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl sm:rounded-full p-2 sm:p-1 max-w-md mx-auto gap-2 sm:gap-0"
                   onSubmit={(e) => e.preventDefault()}
                 >
                   <input

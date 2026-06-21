@@ -466,7 +466,7 @@ function Services() {
 
 function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boolean }) {
   return (
-    <section id={p.id} className="relative py-32 lg:py-40 border-t border-border/40 bg-radial-subtle">
+    <section id={p.id} className="relative py-16 md:py-24 lg:py-32 border-t border-border/40 bg-radial-subtle">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div
           className={`grid lg:grid-cols-12 gap-12 items-start ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}

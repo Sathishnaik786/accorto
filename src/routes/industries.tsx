@@ -169,8 +169,8 @@ function Industries() {
 
         {INDUSTRIES.filter((i) => i.id === active).map((it) => (
           <Reveal key={it.id}>
-            <div className="grid lg:grid-cols-12 gap-6">
-              <div className="lg:col-span-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-12 gap-6">
+              <div className="sm:col-span-1 lg:col-span-4">
                 <Card
                   title="Challenges"
                   icon={AlertCircle}
@@ -178,7 +178,7 @@ function Industries() {
                   tone="text-rose-400"
                 />
               </div>
-              <div className="lg:col-span-4">
+              <div className="sm:col-span-1 lg:col-span-4">
                 <Card
                   title="Our solutions"
                   icon={Sparkles}
@@ -186,10 +186,10 @@ function Industries() {
                   tone="text-brand"
                 />
               </div>
-              <div className="lg:col-span-4">
+              <div className="sm:col-span-1 lg:col-span-4">
                 <Card title="Benefits" icon={Target} items={it.benefits} tone="text-emerald-400" />
               </div>
-              <div className="lg:col-span-12">
+              <div className="sm:col-span-3 lg:col-span-12">
                 <div className="relative overflow-hidden rounded-3xl glass-strong p-8 md:p-10 border border-white/10 shadow-lg">
                   <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-gradient-brand opacity-[0.06] blur-3xl" />
                   <h3 className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">
