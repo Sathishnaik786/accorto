@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoImg from "../../logo.png";
+import logoImg from "../../logo_1.png";
 import { useMotionSystem } from "../lib/motion-presets";
 import { cn } from "../lib/utils";
 import {
@@ -194,7 +194,7 @@ function MegaMenuPanel<T extends string>({
         id={menuId}
         role="menu"
         aria-labelledby={triggerId}
-        className="bg-white/90 dark:bg-[#001c1a]/95 border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] rounded-2xl overflow-hidden grid grid-cols-12 backdrop-blur-3xl relative"
+        className="bg-white/90 dark:bg-[#0C223D]/95 border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] rounded-2xl overflow-hidden grid grid-cols-12 backdrop-blur-3xl relative"
       >
         {/* Top reflection line */}
         <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
@@ -354,8 +354,8 @@ export function Navbar() {
           className={cn(
             "relative flex items-center justify-between transition-all duration-500 rounded-2xl border",
             scrolled
-              ? "px-4 py-2 bg-white/85 dark:bg-[#002624]/90 border-white/10 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-3xl"
-              : "px-6 py-3 bg-white/50 dark:bg-[#002624]/75 border-white/5 shadow-sm backdrop-blur-xl"
+              ? "px-4 py-2 bg-white/85 dark:bg-[#031224]/65 border-slate-200/80 dark:border-white/6 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-[30px]"
+              : "px-6 py-3 bg-white/50 dark:bg-[#061B33]/75 border-white/5 shadow-sm backdrop-blur-xl"
           )}
           onMouseLeave={closeMenu}
         >
@@ -363,22 +363,17 @@ export function Navbar() {
           <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5 group shrink-0 relative z-10">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-brand blur-md opacity-60 group-hover:opacity-100 transition-opacity rounded-lg" />
-              <div className="relative h-9 w-9 rounded-lg overflow-hidden border border-slate-200/20 dark:border-white/10 shadow-md">
-                <img
-                  src={logoImg}
-                  alt="Accorto Technologies Logo"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-            <div className="hidden sm:flex flex-col leading-none">
-              <span className="font-display font-semibold text-foreground">Accorto</span>
-              <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
-                Technologies
-              </span>
+          <Link to="/" className="flex items-center group shrink-0 relative z-10 py-1">
+            {/* Logo Backdrop Glow */}
+            <div className="absolute inset-y-[-10px] inset-x-[-15px] bg-gradient-brand blur-md opacity-0 group-hover:opacity-25 transition-opacity rounded-lg pointer-events-none" />
+            
+            {/* Height-constrained wrapper to prevent stretching navbar */}
+            <div className="relative h-9 flex items-center overflow-visible">
+              <img
+                src={logoImg}
+                alt="Accorto Logo"
+                className="h-22 w-auto max-w-none object-contain"
+              />
             </div>
           </Link>
 
@@ -553,7 +548,7 @@ export function Navbar() {
             animate="animate"
             exit="exit"
             onKeyDown={(e) => e.key === "Escape" && setMobile(false)}
-            className="fixed inset-0 z-80 bg-[#002624]/95 backdrop-blur-2xl lg:hidden flex flex-col"
+            className="fixed inset-0 z-80 bg-[#031224]/95 backdrop-blur-2xl lg:hidden flex flex-col"
           >
             <div className="flex items-center justify-between p-5 shrink-0">
               <span className="font-display font-semibold">Menu</span>

@@ -53,7 +53,7 @@ export function ProcessFlow({ className }: { className?: string }) {
             <div key={idx} className="flex-1 flex flex-col items-stretch relative z-10 group">
               {/* Timeline indicator node */}
               {/* Desktop node dot */}
-              <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-[50%] -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-[#002624] border-2 border-brand-2 z-20 shadow-md group-hover:scale-125 transition-transform duration-300" />
+              <div className="hidden lg:block absolute left-1/2 -translate-x-1/2 top-[50%] -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-[#031224] border-2 border-brand-2 z-20 shadow-md group-hover:scale-125 transition-transform duration-300" />
               
               {/* Mobile node dot */}
               <div className="sm:hidden absolute left-4 top-6 w-2.5 h-2.5 rounded-full bg-brand-2 z-20 shadow-sm" />

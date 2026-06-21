@@ -11,12 +11,12 @@ export const PremiumCard = React.forwardRef<HTMLDivElement, PremiumCardProps>(
       <div
         ref={ref}
         className={cn(
-          "premium-card relative overflow-hidden rounded-[32px] bg-white/3 border transition-all duration-600 ease-out",
-          hover && "hover:-translate-y-1.5 hover:bg-white/5 hover:shadow-[0_25px_70px_rgba(0,0,0,0.22)]",
+          "premium-card relative overflow-hidden rounded-(--card-radius,24px) bg-white/3 border transition-all duration-600 ease-out",
+          hover && "hover:-translate-y-1.5 hover:bg-white/5 hover:shadow-(--shadow-hover)",
           className
         )}
         style={{
-          boxShadow: "0 10px 40px rgba(0, 0, 0, 0.12)",
+          boxShadow: "var(--shadow-soft)",
         }}
         {...props}
       >

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Github, Youtube, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
-import logoImg from "../../logo.png";
+import logoImg from "../../logo_1.png";
 import { useMotionSystem, EASING } from "../lib/motion-presets";
 
 export function Footer() {
@@ -31,23 +31,17 @@ export function Footer() {
             
             {/* Brand Column */}
             <motion.div variants={footerFadeUp(footerDelays.brand)} className="lg:col-span-4 space-y-5">
-              <Link to="/" className="flex items-center gap-3 group/logo relative">
+              <Link to="/" className="flex flex-col items-start gap-2.5 group/logo relative">
                 {/* Logo Backdrop Glow */}
-                <div className="absolute -left-2 -top-2 w-16 h-16 rounded-full bg-brand/10 dark:bg-brand-3/10 blur-xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                <div className="absolute -left-2 -top-2 w-36 h-20 rounded-full bg-brand/10 dark:bg-brand-3/10 blur-xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 
-                {/* Glass Backdrop Logo Wrapper */}
-                <div className="relative h-12 w-12 rounded-2xl overflow-hidden border border-slate-200/30 dark:border-white/10 shadow-lg bg-white/20 dark:bg-white/5 backdrop-blur-md flex items-center justify-center p-1.5 transition-all duration-300 group-hover/logo:border-brand-2/40">
-                  <img
-                    src={logoImg}
-                    alt="Accorto Technologies Logo"
-                    className="h-full w-full object-cover rounded-lg transition-transform duration-500 group-hover/logo:scale-105"
-                  />
-                </div>
-                <div>
-                  <div className="font-display font-bold text-slate-900 dark:text-white transition-colors duration-300 group-hover/logo:text-brand dark:group-hover/logo:text-brand-3">Accorto Technologies</div>
-                  <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 font-semibold">
-                    Private Limited
-                  </div>
+                <img
+                  src={logoImg}
+                  alt="Accorto Logo"
+                  className="h-24 w-auto object-contain transition-transform duration-500 group-hover/logo:scale-105"
+                />
+                <div className="text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 font-semibold pl-1">
+                  Private Limited
                 </div>
               </Link>
               <p className="text-sm text-slate-600 dark:text-slate-300 max-w-sm">

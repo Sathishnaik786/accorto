@@ -26,7 +26,7 @@ function InsightDetail() {
 
   if (!article) {
     return (
-      <section className="relative min-h-screen w-full bg-[#001c18] text-white pt-36 pb-20 flex items-center justify-center">
+      <section className="relative min-h-screen w-full bg-[#031224] text-white pt-36 pb-20 flex items-center justify-center">
         <div className="text-center space-y-6">
           <h1 className="font-display text-4xl font-bold">Insight Not Found</h1>
           <p className="text-zinc-400">The article you are looking for does not exist.</p>
@@ -45,7 +45,7 @@ function InsightDetail() {
   const relatedArticles = ARTICLES.filter((a) => a.slug !== slug).slice(0, 2);
 
   return (
-    <section className="relative min-h-screen w-full bg-[#001c18] text-white pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden">
+    <section className="relative min-h-screen w-full bg-[#031224] text-white pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden">
       {/* Ambient premium radial glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-3/5 blur-[120px] pointer-events-none" />
@@ -93,7 +93,7 @@ function InsightDetail() {
               alt={article.title}
               className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 bg-linear-to-t from-[#001c18]/40 to-transparent pointer-events-none" />
+            <div className="absolute inset-0 bg-linear-to-t from-[#031224]/40 to-transparent pointer-events-none" />
           </div>
         </Reveal>
 
@@ -145,7 +145,7 @@ function InsightDetail() {
               <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block h-full">
                 <PremiumCard
                   hover={true}
-                  className="h-full flex flex-col border border-white/10 hover:border-brand/35 bg-[#061a15]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
+                  className="h-full flex flex-col border border-white/10 hover:border-brand/35 bg-[#0C223D]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
                 >
                   <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px]">
                     <img
@@ -153,7 +153,7 @@ function InsightDetail() {
                       alt={a.title}
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103 group-hover:brightness-105"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-[#061a15] via-[#061a15]/20 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-t from-[#031224] via-[#031224]/20 to-transparent pointer-events-none" />
                   </div>
 
                   <div className="p-6 flex flex-col grow text-left">

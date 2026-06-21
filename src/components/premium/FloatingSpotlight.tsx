@@ -29,7 +29,7 @@ export function FloatingSpotlight() {
       style={{
         left: pos.x,
         top: pos.y,
-        background: "radial-gradient(circle, rgba(137, 215, 183, 0.04) 0%, rgba(66, 132, 117, 0.02) 40%, transparent 70%)",
+        background: "radial-gradient(circle, rgba(0, 162, 255, 0.06) 0%, rgba(143, 255, 61, 0.03) 40%, transparent 70%)",
       }}
     />
   );

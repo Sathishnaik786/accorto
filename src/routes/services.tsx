@@ -550,7 +550,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-transform duration-700 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#1A312C] via-[#1A312C]/30 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#031224] via-[#031224]/30 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 grid grid-cols-2 xs:grid-cols-3 gap-2 sm:gap-3">
                 {p.results.map(([v, l]) => {
                   const num = parseInt(v);

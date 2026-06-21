@@ -61,7 +61,7 @@ function InsightsIndex() {
   );
 
   return (
-    <section className="relative min-h-screen w-full bg-[#001c18] text-white pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden">
+    <section className="relative min-h-screen w-full bg-[#031224] text-white pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden">
       {/* Ambient premium radial glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-3/5 blur-[120px] pointer-events-none" />
@@ -75,7 +75,7 @@ function InsightsIndex() {
               <Link to="/insights/$slug" params={{ slug: FEATURED.slug }} className="group block">
                 <PremiumCard
                   hover={true}
-                  className="p-0 border border-white/10 hover:border-brand/35 bg-[#061a15]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
+                  className="p-0 border border-white/10 hover:border-brand/35 bg-[#0C223D]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
                 >
                   {/* Image Container with rounded top corners */}
                   <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px]">
@@ -85,7 +85,7 @@ function InsightsIndex() {
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-103 group-hover:brightness-105"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-[#061a15] via-[#061a15]/10 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-t from-[#031224] via-[#031224]/10 to-transparent pointer-events-none" />
                   </div>
 
                   {/* Card Body */}
@@ -180,7 +180,7 @@ function InsightsIndex() {
                 <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block h-full">
                   <PremiumCard
                     hover={true}
-                    className="h-full flex flex-col border border-white/10 hover:border-brand/35 bg-[#061a15]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
+                    className="h-full flex flex-col border border-white/10 hover:border-brand/35 bg-[#0C223D]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
                   >
                     {/* Image at top */}
                     <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px]">
@@ -190,7 +190,7 @@ function InsightsIndex() {
                         loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103 group-hover:brightness-105"
                       />
-                      <div className="absolute inset-0 bg-linear-to-t from-[#061a15] via-[#061a15]/20 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-linear-to-t from-[#031224] via-[#031224]/20 to-transparent pointer-events-none" />
                     </div>
 
                     {/* Card Body */}
@@ -227,7 +227,7 @@ function InsightsIndex() {
 
         {/* Newsletter Subscription Box */}
         <div className="mt-24">
-          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#061a15]/40 backdrop-blur-md p-10 md:p-14 text-center">
+          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0C223D]/40 backdrop-blur-md p-10 md:p-14 text-center">
             <div className="absolute inset-0 bg-gradient-brand opacity-[0.06] dark:opacity-[0.08]" />
             <div className="relative max-w-2xl mx-auto">
               <Reveal>

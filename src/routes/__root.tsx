@@ -20,6 +20,7 @@ import { BackToTop } from "../components/back-to-top";
 import { CursorGlow } from "../components/cursor-glow";
 import { CommandPalette } from "../components/command-palette";
 import { FloatingSpotlight } from "../components/premium/FloatingSpotlight";
+import { FloatingParticles } from "../components/premium/FloatingParticles";
 
 function NotFoundComponent() {
   return (
@@ -102,7 +103,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "theme-color",
         media: "(prefers-color-scheme: dark)",
-        content: "#1A312C",
+        content: "#031224",
       },
       {
         name: "theme-color",
@@ -179,6 +180,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <ScrollProgress />
+        <FloatingParticles />
         <CursorGlow />
         <FloatingSpotlight />
         <CommandPalette />

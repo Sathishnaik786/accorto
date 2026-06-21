@@ -437,7 +437,7 @@ export function Metrics() {
     { v: 18, s: "", l: "Countries" },
   ];
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 bg-[#002624]">
+    <section className="relative py-16 md:py-24 lg:py-32 bg-[#031224]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 text-center">
           {items.map((m, i) => (
@@ -517,7 +517,7 @@ export function CaseStudiesPreview() {
                     loading="lazy"
                     className="h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#1A312C]/80 via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#031224]/80 via-transparent to-transparent" />
                   <div className="absolute top-4 left-4 glass-strong rounded-full px-3 py-1 text-xs font-medium text-white">
                     {c.tag}
                   </div>
@@ -565,7 +565,7 @@ export function Testimonials() {
     },
   ];
   return (
-    <section className="py-16 md:py-24 lg:py-32 bg-[#002624]">
+    <section className="py-16 md:py-24 lg:py-32 bg-[#061B33]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="Client Voices"
@@ -682,7 +682,7 @@ export function FinalCTA() {
               setIsHovered(false);
               handleMouseLeave();
             }}
-            className="relative overflow-hidden rounded-[32px] bg-[#001a18] border border-white/6 px-5 py-10 sm:p-16 md:p-28 text-center group shadow-2xl select-none"
+            className="relative overflow-hidden rounded-[32px] bg-[#0C223D] border border-white/6 px-5 py-10 sm:p-16 md:p-28 text-center group shadow-2xl select-none"
           >
             {/* Backdrop image overlay */}
             <img 
@@ -720,7 +720,7 @@ export function FinalCTA() {
                   whileHover={{ scale: 1.03 }}
                   whileTap={buttonTap}
                   transition={buttonTransition}
-                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-sm font-bold text-[#002624] hover:bg-slate-100 transition-all duration-200 shadow-md"
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-sm font-bold text-[#031224] hover:bg-slate-100 transition-all duration-200 shadow-md"
                 >
                   Book Free Consultation
                 </MotionLink>

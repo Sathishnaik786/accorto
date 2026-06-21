@@ -170,7 +170,7 @@ const TECHS = [
   { name: "Azure", glow: "hover:text-[#0078D4]" },
   { name: "PostgreSQL", glow: "hover:text-[#336791]" },
   { name: "Redis", glow: "hover:text-[#DC382D]" },
-  { name: "Pinecone", glow: "hover:text-[#1A312C]" },
+  { name: "Pinecone", glow: "hover:text-[#70FF4A]" },
   { name: "ChromaDB", glow: "hover:text-[#1F618D]" },
   { name: "GitHub", glow: "hover:text-[#181717]" },
 ];

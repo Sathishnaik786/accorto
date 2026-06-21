@@ -80,7 +80,7 @@ export function EcosystemSection() {
         >
           {/* Inner fixed-size diagram container */}
           <div
-            className="relative flex-shrink-0 pointer-events-none"
+            className="relative shrink-0 pointer-events-none"
             style={{ width: dimensions.width, height: dimensions.height }}
           >
             {/* Dashed outer orbit ring */}

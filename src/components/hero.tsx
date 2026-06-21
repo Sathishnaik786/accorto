@@ -16,9 +16,9 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-screen lg:h-screen w-full flex flex-col justify-end overflow-hidden pt-20 pb-6 lg:pt-24 lg:pb-10 bg-[#002624]"
+      className="relative min-h-screen lg:h-screen w-full flex flex-col justify-end overflow-hidden pt-20 pb-6 lg:pt-24 lg:pb-10 bg-[#031224]"
       style={{
-        background: "#002624",
+        background: "#031224",
       }}
     >
       {/* Background Video */}
@@ -27,7 +27,7 @@ export function Hero() {
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+        className="absolute inset-0 w-full h-full object-contain lg:object-cover z-0 pointer-events-none"
       >
         <source src="/videos/Hero_video.mp4" type="video/mp4" />
       </video>
@@ -45,9 +45,9 @@ export function Hero() {
           >
             <Link
               to="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center font-bold text-sm text-[#002624] bg-[#FCE76C] transition-all duration-200 hover:scale-105 shadow-[0_10px_30px_rgba(252,231,108,0.15)]"
+              className="w-full sm:w-auto inline-flex items-center justify-center font-bold text-sm text-[#031224] bg-gradient-brand transition-all duration-200 hover:scale-105 shadow-brand hover:shadow-brand-lg"
               style={{
-                borderRadius: "18px",
+                borderRadius: "var(--button-radius, 16px)",
                 height: "48px",
                 paddingInline: "28px",
               }}
@@ -79,11 +79,11 @@ export function Hero() {
                   key={i}
                   src={url}
                   alt="Client Profile"
-                  className="h-9 w-9 rounded-full border-2 border-[#002624] object-cover shadow-md brightness-[0.95] contrast-[1.05]"
+                  className="h-9 w-9 rounded-full border-2 border-[#031224] object-cover shadow-md brightness-[0.95] contrast-[1.05]"
                   loading="lazy"
                 />
               ))}
-              <div className="h-9 w-9 rounded-full border-2 border-[#002624] bg-[#FCE76C] text-[#002624] font-display font-bold text-xs flex items-center justify-center shadow-md">
+              <div className="h-9 w-9 rounded-full border-2 border-[#031224] bg-gradient-brand text-[#031224] font-display font-bold text-xs flex items-center justify-center shadow-md">
                 <Counter to={10} suffix="k+" />
               </div>
             </div>
