@@ -101,17 +101,17 @@ function About() {
               loading="lazy"
             />
             <div className="absolute inset-0 bg-linear-to-tr from-brand/30 via-transparent to-brand-2/30 mix-blend-overlay" />
-            <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
+            <div className="absolute bottom-5 left-5 right-5 grid grid-cols-2 xs:grid-cols-3 gap-2 sm:gap-3">
               {[
                 { v: 12, s: "+", l: "Years" },
                 { v: 600, s: "+", l: "Experts" },
                 { v: 14, s: "", l: "Countries" },
               ].map((m) => (
-                <div key={m.l} className="inner-card p-3 text-white">
-                  <div className="font-display text-xl font-semibold">
+                <div key={m.l} className="inner-card p-2.5 sm:p-3 text-white">
+                  <div className="font-display text-lg sm:text-xl font-semibold">
                     <Counter to={m.v} suffix={m.s} />
                   </div>
-                  <div className="text-[10px] uppercase tracking-wider opacity-80">{m.l}</div>
+                  <div className="text-[9px] sm:text-[10px] uppercase tracking-wider opacity-80">{m.l}</div>
                 </div>
               ))}
             </div>

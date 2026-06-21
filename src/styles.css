@@ -187,6 +187,7 @@
   }
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
   body {
     background-color: var(--color-background);
@@ -194,6 +195,14 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    width: 100%;
+  }
+  img,
+  video,
+  svg,
+  canvas {
+    max-width: 100%;
+    height: auto;
   }
   .dark body {
     background: radial-gradient(

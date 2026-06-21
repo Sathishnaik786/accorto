@@ -149,7 +149,7 @@ export function Hero() {
           
           <motion.div {...parallaxProps} className="relative z-10 inline-block">
             {/* Center Architecture/Dashboard Card */}
-            <PremiumCard hover={false} className="w-[320px] sm:w-[420px] aspect-4/3 p-6 text-left relative z-20">
+            <PremiumCard hover={false} className="w-[280px] min-[360px]:w-[320px] min-[400px]:w-[360px] sm:w-[420px] h-auto sm:aspect-4/3 p-4 sm:p-6 text-left relative z-20">
               <div className="flex items-center gap-1.5 pb-4 border-b border-white/5">
                 <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
                 <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
@@ -181,12 +181,12 @@ export function Hero() {
                 </div>
               </div>
             </PremiumCard>
-
+ 
             {/* Top Right Floating Metric Card */}
-            <div className="absolute right-[-20px] top-[-30px] sm:right-[-40px] sm:top-[-40px] z-30">
-              <GlassMetricCard label="Model Accuracy" value={98} suffix="%" trend="+12% YoY" className="w-[140px] sm:w-[150px]" />
+            <div className="absolute right-[0px] xs:right-[-20px] sm:right-[-40px] top-[-30px] sm:top-[-40px] z-30">
+              <GlassMetricCard label="Model Accuracy" value={98} suffix="%" trend="+12% YoY" className="w-[130px] sm:w-[150px]" />
             </div>
-
+ 
             {/* Right small AI pipeline card */}
             <div className="absolute right-[-30px] top-[120px] sm:right-[-50px] z-30 hidden sm:block">
               <GlassPanel className="p-4 flex flex-col gap-2 w-[150px] sm:w-[160px]">
@@ -200,13 +200,13 @@ export function Hero() {
                 </div>
               </GlassPanel>
             </div>
-
+ 
             {/* Bottom Left Floating Performance Card */}
-            <div className="absolute left-[-20px] bottom-[-30px] sm:left-[-50px] sm:bottom-[-40px] z-30">
+            <div className="absolute left-[0px] xs:left-[-20px] sm:left-[-50px] bottom-[-30px] sm:bottom-[-40px] z-30">
               <motion.div variants={slowFloat} animate="animate">
                 <PremiumCard
                   hover={false}
-                  className="text-white p-5 w-[220px] sm:w-[250px] flex flex-col gap-4 select-none"
+                  className="text-white p-4 sm:p-5 w-[200px] sm:w-[250px] flex flex-col gap-4 select-none"
                 >
                   <div className="flex justify-between items-center w-full">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Performance</span>

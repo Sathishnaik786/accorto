@@ -551,13 +551,13 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
                 className="absolute inset-0 h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-transform duration-700 hover:scale-105"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#1A312C] via-[#1A312C]/30 to-transparent" />
-              <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
+              <div className="absolute bottom-5 left-5 right-5 grid grid-cols-2 xs:grid-cols-3 gap-2 sm:gap-3">
                 {p.results.map(([v, l]) => {
                   const num = parseInt(v);
                   const suffix = v.replace(/[\d.]/g, "");
                   return (
-                    <div key={l} className="inner-card p-3 text-slate-900 dark:text-white">
-                      <div className="font-display text-xl font-semibold">
+                    <div key={l} className="inner-card p-2.5 sm:p-3 text-slate-900 dark:text-white animate-fade-in">
+                      <div className="font-display text-lg sm:text-xl font-semibold">
                         {isNaN(num) ? (
                           v
                         ) : (
@@ -566,7 +566,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
                           </>
                         )}
                       </div>
-                      <div className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1">{l}</div>
+                      <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 leading-tight">{l}</div>
                     </div>
                   );
                 })}

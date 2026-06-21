@@ -219,11 +219,11 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="inner-card p-4 flex flex-col justify-between">
                     <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">ROI Metric</span>
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400 mt-1 block truncate text-sm">{c.roi}</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400 mt-1 block text-sm">{c.roi}</span>
                   </div>
                   <div className="inner-card p-4 flex flex-col justify-between">
                     <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">Outcome Goal</span>
-                    <span className="font-semibold text-slate-900 dark:text-white mt-1 block truncate leading-tight text-xs">{c.outcome}</span>
+                    <span className="font-semibold text-slate-900 dark:text-white mt-1 block leading-tight text-xs">{c.outcome}</span>
                   </div>
                 </div>
               </div>

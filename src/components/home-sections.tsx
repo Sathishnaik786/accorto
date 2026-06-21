@@ -127,11 +127,11 @@ export function ServicesShowcase() {
   const { cardHover, cardHoverTransition } = useMotionSystem();
 
   const bentoSpans = [
-    "lg:col-span-5", // SAP Solutions
-    "lg:col-span-5", // AI & ML
-    "lg:col-span-4", // Digital Transformation
-    "lg:col-span-4", // Cloud Consulting
-    "lg:col-span-4", // Digital Marketing
+    "md:col-span-6 lg:col-span-5", // SAP Solutions
+    "md:col-span-6 lg:col-span-5", // AI & ML
+    "md:col-span-6 lg:col-span-4", // Digital Transformation
+    "md:col-span-6 lg:col-span-4", // Cloud Consulting
+    "md:col-span-12 lg:col-span-4", // Digital Marketing
   ];
 
   return (
@@ -148,7 +148,7 @@ export function ServicesShowcase() {
         />
         <BentoGrid className="mt-16">
           {/* Main Featured Oracle ERP Card */}
-          <BentoGridItem colSpan="lg:col-span-7 lg:row-span-2">
+          <BentoGridItem colSpan="md:col-span-12 lg:col-span-7 lg:row-span-2">
             <Reveal className="h-full">
               <PremiumCard 
                 hover={true}
@@ -501,7 +501,7 @@ export function CaseStudiesPreview() {
             View all case studies <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="mt-12 grid md:grid-cols-3 gap-6">
+        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {cases.map((c, i) => (
             <Reveal key={c.title} delay={i * 0.08}>
               <MotionLink
@@ -576,7 +576,7 @@ export function Testimonials() {
           }
           center
         />
-        <div className="mt-20 grid md:grid-cols-3 gap-8">
+        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {items.map((t, i) => (
             <Reveal key={i} delay={i * 0.1}>
               <PremiumCard
@@ -682,7 +682,7 @@ export function FinalCTA() {
               setIsHovered(false);
               handleMouseLeave();
             }}
-            className="relative overflow-hidden rounded-[32px] bg-[#001a18] border border-white/[0.06] p-16 md:p-28 text-center group shadow-2xl select-none"
+            className="relative overflow-hidden rounded-[32px] bg-[#001a18] border border-white/[0.06] px-6 py-12 sm:p-16 md:p-28 text-center group shadow-2xl select-none"
           >
             {/* Backdrop image overlay */}
             <img 

@@ -35,6 +35,8 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   line-height: 0.95;
   letter-spacing: -0.025em; /* tracking-tight */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 /* Body font sizes & line heights */

@@ -91,7 +91,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
           <div
             key={idx}
             data-step-idx={idx}
-            className="min-h-[50vh] flex items-center justify-center pt-8 first:pt-0"
+            className="min-h-0 lg:min-h-[50vh] flex items-center justify-center pt-8 first:pt-0"
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}

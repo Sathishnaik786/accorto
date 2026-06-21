@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Github, Youtube, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
-import logoImg from "../../logo.jpeg";
+import logoImg from "../../logo.png";
 import { useMotionSystem, EASING } from "../lib/motion-presets";
 
 export function Footer() {

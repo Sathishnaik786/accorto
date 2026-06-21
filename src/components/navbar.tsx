@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import logoImg from "../../logo.jpeg";
+import logoImg from "../../logo.png";
 import { useMotionSystem } from "../lib/motion-presets";
 import { cn } from "../lib/utils";
 import {
@@ -553,9 +553,9 @@ export function Navbar() {
             animate="animate"
             exit="exit"
             onKeyDown={(e) => e.key === "Escape" && setMobile(false)}
-            className="fixed inset-0 z-80 bg-[#002624]/90 backdrop-blur-2xl lg:hidden"
+            className="fixed inset-0 z-80 bg-[#002624]/95 backdrop-blur-2xl lg:hidden flex flex-col"
           >
-            <div className="flex items-center justify-between p-5">
+            <div className="flex items-center justify-between p-5 shrink-0">
               <span className="font-display font-semibold">Menu</span>
               <button
                 onClick={() => setMobile(false)}
@@ -565,7 +565,7 @@ export function Navbar() {
                 <X className="h-4 w-4" />
               </button>
             </div>
-            <div className="px-6 pb-10 space-y-1 text-lg">
+            <div className="flex-1 overflow-y-auto px-6 pb-10 space-y-1 text-lg">
               {[
                 ["Home", "/"],
                 ["Services", "/services"],

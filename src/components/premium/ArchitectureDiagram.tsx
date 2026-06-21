@@ -39,7 +39,7 @@ export function ArchitectureDiagram({ className }: { className?: string }) {
                 </div>
               )}
               {/* Connector line for small screens */}
-              {idx < nodes.length - 1 && (
+              {idx > 0 && (
                 <div className="lg:hidden w-[2px] h-8 bg-white/10 dark:bg-white/5 my-2" />
               )}
               {/* Node Card */}
