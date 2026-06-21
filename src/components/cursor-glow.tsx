@@ -15,12 +15,12 @@ export function CursorGlow() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed z-[55] h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-40 blur-3xl transition-transform duration-200"
+      className="pointer-events-none fixed z-[55] h-[480px] w-[480px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-35 blur-3xl transition-transform duration-200"
       style={{
         left: pos.x,
         top: pos.y,
         background:
-          "radial-gradient(circle, rgba(124,58,237,0.35), rgba(37,99,235,0.2) 40%, transparent 70%)",
+          "radial-gradient(circle, rgba(124,58,237,0.15), rgba(79,70,229,0.08) 40%, transparent 70%)",
       }}
     />
   );

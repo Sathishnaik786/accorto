@@ -157,8 +157,8 @@ function Industries() {
                 onClick={() => setActive(it.id)}
                 className={`group flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-all ${
                   isActive
-                    ? "bg-gradient-brand text-white shadow-lg shadow-brand/30"
-                    : "glass hover:bg-white/10"
+                    ? "bg-gradient-brand text-white shadow-brand hover:shadow-brand-lg scale-105"
+                    : "glass hover:bg-white/10 hover:scale-105"
                 }`}
               >
                 <A className="h-4 w-4" /> {it.name}
@@ -190,17 +190,17 @@ function Industries() {
                 <Card title="Benefits" icon={Target} items={it.benefits} tone="text-emerald-400" />
               </div>
               <div className="lg:col-span-12">
-                <div className="relative overflow-hidden rounded-3xl glass-strong p-8 md:p-10">
-                  <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-gradient-brand opacity-30 blur-3xl" />
-                  <h3 className="text-xs uppercase tracking-widest text-muted-foreground">
+                <div className="relative overflow-hidden rounded-3xl glass-strong p-8 md:p-10 border border-white/10 shadow-lg">
+                  <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-gradient-brand opacity-[0.06] blur-3xl" />
+                  <h3 className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400">
                     Case highlight
                   </h3>
-                  <p className="mt-3 font-display text-2xl md:text-3xl font-semibold max-w-3xl leading-tight">
+                  <p className="mt-3 font-display text-2xl md:text-3xl font-semibold max-w-3xl leading-tight text-slate-900 dark:text-white">
                     {it.highlight}
                   </p>
                   <Link
                     to="/case-studies"
-                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-medium text-white"
+                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all"
                   >
                     Read related case studies <ArrowRight className="h-4 w-4" />
                   </Link>
@@ -228,12 +228,12 @@ function Card({
   tone: string;
 }) {
   return (
-    <div className="h-full rounded-3xl glass p-6">
+    <div className="h-full rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
       <div className="flex items-center gap-2">
         <Icon className={`h-5 w-5 ${tone}`} />
-        <h3 className="font-display font-semibold">{title}</h3>
+        <h3 className="font-display font-semibold text-slate-900 dark:text-white">{title}</h3>
       </div>
-      <ul className="mt-4 space-y-2.5 text-sm">
+      <ul className="mt-4 space-y-2.5 text-sm text-slate-500 dark:text-slate-400">
         {items.map((b) => (
           <li key={b} className="flex gap-2">
             <span

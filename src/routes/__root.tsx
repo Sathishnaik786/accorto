@@ -8,6 +8,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useMotionSystem } from "../lib/motion-presets";
 
 import appCss from "../styles.css?url";
 import { ThemeProvider } from "../components/theme-provider";
@@ -17,8 +19,7 @@ import { ScrollProgress } from "../components/scroll-progress";
 import { BackToTop } from "../components/back-to-top";
 import { CursorGlow } from "../components/cursor-glow";
 import { CommandPalette } from "../components/command-palette";
-import { LoadingScreen } from "../components/loading-screen";
-import { StickyCTA } from "../components/sticky-cta";
+import { FloatingSpotlight } from "../components/premium/FloatingSpotlight";
 
 function NotFoundComponent() {
   return (
@@ -98,7 +99,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Oracle ERP, SAP, AI/ML, Cloud, and Digital Transformation for global enterprises.",
       },
-      { name: "theme-color", content: "#050816" },
+      {
+        name: "theme-color",
+        media: "(prefers-color-scheme: dark)",
+        content: "#1A312C",
+      },
+      {
+        name: "theme-color",
+        media: "(prefers-color-scheme: light)",
+        content: "#F8FAFC",
+      },
       { property: "og:image", content: "https://accorto.tech/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
@@ -162,20 +172,32 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const router = useRouter();
+  const { pageTransition } = useMotionSystem();
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
-        <LoadingScreen />
         <ScrollProgress />
         <CursorGlow />
+        <FloatingSpotlight />
         <CommandPalette />
         <Navbar />
         <main className="pt-0">
-          <Outlet />
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={router.state.location.pathname}
+              variants={pageTransition}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </main>
         <Footer />
         <BackToTop />
-        <StickyCTA />
       </ThemeProvider>
     </QueryClientProvider>
   );

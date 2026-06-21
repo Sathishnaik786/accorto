@@ -4,6 +4,9 @@ import { Reveal, SectionHeading } from "@/components/section";
 import { Counter } from "@/components/counter";
 import { Certifications, FinalCTA } from "@/components/home-sections";
 import { Compass, Telescope, Heart, Globe2, ArrowRight } from "lucide-react";
+import { Timeline } from "@/components/premium/Timeline";
+import { SectionDivider } from "@/components/premium/SectionDivider";
+import { ProcessFlow } from "@/components/premium/ProcessFlow";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -62,7 +65,7 @@ function About() {
         subtitle="We are a global team of strategists, engineers, and designers helping enterprises modernize with Oracle, SAP, AI, and cloud — without slowing the business down."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 grid lg:grid-cols-2 gap-16 items-center">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40 grid lg:grid-cols-2 gap-16 items-center">
         <Reveal>
           <SectionHeading
             tag="Our story"
@@ -90,11 +93,11 @@ function About() {
           </div>
         </Reveal>
         <Reveal delay={0.1}>
-          <div className="relative aspect-4/5 rounded-3xl overflow-hidden glass-strong">
+          <div className="relative aspect-4/5 rounded-[32px] overflow-hidden glass-strong shadow-lg">
             <img
               src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1200&q=80"
               alt="Accorto Technologies consulting team collaborating in a modern office space"
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-transform duration-700 hover:scale-105"
               loading="lazy"
             />
             <div className="absolute inset-0 bg-linear-to-tr from-brand/30 via-transparent to-brand-2/30 mix-blend-overlay" />
@@ -104,7 +107,7 @@ function About() {
                 { v: 600, s: "+", l: "Experts" },
                 { v: 14, s: "", l: "Countries" },
               ].map((m) => (
-                <div key={m.l} className="glass-strong rounded-2xl p-3 text-white">
+                <div key={m.l} className="inner-card p-3 text-white">
                   <div className="font-display text-xl font-semibold">
                     <Counter to={m.v} suffix={m.s} />
                   </div>
@@ -116,7 +119,7 @@ function About() {
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <h2 className="sr-only">Mission & Vision</h2>
         <div className="grid md:grid-cols-2 gap-6">
           {[
@@ -132,18 +135,18 @@ function About() {
             },
           ].map((b, i) => (
             <Reveal key={b.title} delay={i * 0.1}>
-              <div className="relative h-full overflow-hidden rounded-3xl glass-strong p-8">
-                <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gradient-brand opacity-30 blur-3xl" />
-                <b.icon className="h-8 w-8 text-brand" />
-                <h3 className="mt-5 font-display text-2xl font-semibold">{b.title}</h3>
-                <p className="mt-3 text-muted-foreground">{b.desc}</p>
+              <div className="relative h-full overflow-hidden rounded-3xl glass-strong p-8 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+                <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gradient-brand opacity-10 blur-3xl" />
+                <b.icon className="h-8 w-8 text-brand animate-pulse" />
+                <h3 className="mt-5 font-display text-2xl font-semibold text-slate-900 dark:text-white">{b.title}</h3>
+                <p className="mt-3 text-sm text-slate-600 dark:text-slate-300">{b.desc}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <SectionHeading
           tag="Core values"
           title={
@@ -173,17 +176,17 @@ function About() {
             },
           ].map((v, i) => (
             <Reveal key={v.name} delay={i * 0.05}>
-              <div className="glass rounded-2xl p-6 h-full">
+              <div className="glass rounded-3xl p-6 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
                 <Heart className="h-5 w-5 text-brand" />
-                <h3 className="mt-4 font-display text-lg font-semibold">{v.name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{v.desc}</p>
+                <h3 className="mt-4 font-display text-lg font-semibold text-slate-900 dark:text-white">{v.name}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{v.desc}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <SectionHeading
           tag="Leadership"
           title={
@@ -216,18 +219,18 @@ function About() {
             },
           ].map((p, i) => (
             <Reveal key={p.name} delay={i * 0.05}>
-              <div className="group rounded-3xl glass overflow-hidden">
+              <div className="group rounded-[32px] glass overflow-hidden transition-all duration-300 hover:translate-y-[-6px] hover:shadow-2xl">
                 <div className="aspect-4/5 overflow-hidden">
                   <img
                     src={p.img}
                     alt={p.name}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-all duration-700 group-hover:scale-110"
                   />
                 </div>
                 <div className="p-5">
-                  <h3 className="font-display font-semibold text-base">{p.name}</h3>
-                  <div className="text-xs text-muted-foreground mt-0.5">{p.role}</div>
+                  <h3 className="font-display font-semibold text-base text-slate-900 dark:text-white">{p.name}</h3>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{p.role}</div>
                 </div>
               </div>
             </Reveal>
@@ -235,7 +238,15 @@ function About() {
         </div>
       </section>
 
+      <SectionDivider label="02 / METHODOLOGY" />
+
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
+        <ProcessFlow />
+      </section>
+
+      <SectionDivider label="03 / CHRONOLOGY" />
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <SectionHeading
           tag="Timeline"
           title={
@@ -244,43 +255,21 @@ function About() {
             </>
           }
         />
-        <div className="mt-12 relative">
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-linear-to-b from-transparent via-brand to-transparent" />
-          {[
-            { y: "2013", t: "Founded in Bengaluru", d: "Five Oracle veterans, one bold idea." },
-            {
-              y: "2016",
-              t: "First Fortune 500 client",
-              d: "Oracle Cloud ERP for a global manufacturer.",
-            },
-            { y: "2019", t: "Launched SAP & AI practices", d: "Expanded to 150 consultants." },
-            { y: "2022", t: "Offices in Dubai & New York", d: "Global delivery model online." },
-            {
-              y: "2025",
-              t: "600+ experts, 14 countries",
-              d: "Recognized in Gartner mid-market consulting.",
-            },
-          ].map((e, i) => (
-            <Reveal key={e.y} delay={i * 0.05}>
-              <div
-                className={`relative mb-10 md:mb-14 flex flex-col md:flex-row ${i % 2 ? "md:flex-row-reverse" : ""} items-start md:items-center gap-6`}
-              >
-                <div className="md:w-1/2 pl-12 md:pl-0 md:px-10">
-                  <div className="glass rounded-2xl p-5">
-                    <div className="text-xs font-mono text-brand">{e.y}</div>
-                    <div className="font-display text-lg font-semibold mt-1">{e.t}</div>
-                    <p className="text-sm text-muted-foreground mt-1">{e.d}</p>
-                  </div>
-                </div>
-                <div className="absolute left-4 md:left-1/2 md:-translate-x-1/2 top-4 grid h-3 w-3 place-items-center rounded-full bg-gradient-brand ring-4 ring-background" />
-              </div>
-            </Reveal>
-          ))}
+        <div className="mt-12">
+          <Timeline
+            events={[
+              { year: 2013, title: "Founded in Bengaluru", desc: "Five Oracle veterans, one bold idea." },
+              { year: 2016, title: "First Fortune 500 client", desc: "Oracle Cloud ERP for a global manufacturer." },
+              { year: 2019, title: "Launched SAP & AI practices", desc: "Expanded to 150 consultants." },
+              { year: 2022, title: "Offices in Dubai & New York", desc: "Global delivery model online." },
+              { year: 2025, title: "600+ experts, 14 countries", desc: "Recognized in Gartner mid-market consulting." },
+            ]}
+          />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
-        <div className="relative overflow-hidden rounded-3xl glass-strong p-10">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
+        <div className="relative overflow-hidden rounded-3xl glass-strong p-10 border border-white/10 shadow-xl bg-radial-subtle">
           <Globe2 className="h-8 w-8 text-brand" />
           <SectionHeading
             tag="Global presence"
@@ -296,12 +285,12 @@ function About() {
               { city: "Dubai, UAE", role: "Middle East & Africa Hub" },
               { city: "New York, US", role: "Americas Hub" },
             ].map((o) => (
-              <div key={o.city} className="glass rounded-2xl p-5">
-                <div className="font-display font-semibold">{o.city}</div>
-                <div className="text-xs text-muted-foreground mt-1">{o.role}</div>
+              <div key={o.city} className="glass rounded-2xl p-5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
+                <div className="font-display font-semibold text-slate-900 dark:text-white">{o.city}</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">{o.role}</div>
                 <Link
                   to="/contact"
-                  className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-brand"
+                  className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-brand hover:underline"
                 >
                   Visit office <ArrowRight className="h-3 w-3" />
                 </Link>

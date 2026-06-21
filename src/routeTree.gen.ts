@@ -18,6 +18,18 @@ import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as InsightsIndexRouteImport } from './routes/insights.index'
+import { Route as AcademyIndexRouteImport } from './routes/academy/index'
+import { Route as InsightsSlugRouteImport } from './routes/insights.$slug'
+import { Route as AcademyRagRouteImport } from './routes/academy/rag'
+import { Route as AcademyPythonForAiRouteImport } from './routes/academy/python-for-ai'
+import { Route as AcademyPromptEngineeringRouteImport } from './routes/academy/prompt-engineering'
+import { Route as AcademyMcpRouteImport } from './routes/academy/mcp'
+import { Route as AcademyGenerativeAiRouteImport } from './routes/academy/generative-ai'
+import { Route as AcademyDeepLearningRouteImport } from './routes/academy/deep-learning'
+import { Route as AcademyCorporateTrainingRouteImport } from './routes/academy/corporate-training'
+import { Route as AcademyAiTrainingRouteImport } from './routes/academy/ai-training'
+import { Route as AcademyAiAgentsRouteImport } from './routes/academy/ai-agents'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -64,6 +76,68 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InsightsIndexRoute = InsightsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => InsightsRoute,
+} as any)
+const AcademyIndexRoute = AcademyIndexRouteImport.update({
+  id: '/academy/',
+  path: '/academy/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsSlugRoute = InsightsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => InsightsRoute,
+} as any)
+const AcademyRagRoute = AcademyRagRouteImport.update({
+  id: '/academy/rag',
+  path: '/academy/rag',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyPythonForAiRoute = AcademyPythonForAiRouteImport.update({
+  id: '/academy/python-for-ai',
+  path: '/academy/python-for-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyPromptEngineeringRoute =
+  AcademyPromptEngineeringRouteImport.update({
+    id: '/academy/prompt-engineering',
+    path: '/academy/prompt-engineering',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AcademyMcpRoute = AcademyMcpRouteImport.update({
+  id: '/academy/mcp',
+  path: '/academy/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyGenerativeAiRoute = AcademyGenerativeAiRouteImport.update({
+  id: '/academy/generative-ai',
+  path: '/academy/generative-ai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyDeepLearningRoute = AcademyDeepLearningRouteImport.update({
+  id: '/academy/deep-learning',
+  path: '/academy/deep-learning',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyCorporateTrainingRoute =
+  AcademyCorporateTrainingRouteImport.update({
+    id: '/academy/corporate-training',
+    path: '/academy/corporate-training',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const AcademyAiTrainingRoute = AcademyAiTrainingRouteImport.update({
+  id: '/academy/ai-training',
+  path: '/academy/ai-training',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademyAiAgentsRoute = AcademyAiAgentsRouteImport.update({
+  id: '/academy/ai-agents',
+  path: '/academy/ai-agents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -72,9 +146,21 @@ export interface FileRoutesByFullPath {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
-  '/insights': typeof InsightsRoute
+  '/insights': typeof InsightsRouteWithChildren
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/academy/ai-agents': typeof AcademyAiAgentsRoute
+  '/academy/ai-training': typeof AcademyAiTrainingRoute
+  '/academy/corporate-training': typeof AcademyCorporateTrainingRoute
+  '/academy/deep-learning': typeof AcademyDeepLearningRoute
+  '/academy/generative-ai': typeof AcademyGenerativeAiRoute
+  '/academy/mcp': typeof AcademyMcpRoute
+  '/academy/prompt-engineering': typeof AcademyPromptEngineeringRoute
+  '/academy/python-for-ai': typeof AcademyPythonForAiRoute
+  '/academy/rag': typeof AcademyRagRoute
+  '/insights/$slug': typeof InsightsSlugRoute
+  '/academy/': typeof AcademyIndexRoute
+  '/insights/': typeof InsightsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -83,9 +169,20 @@ export interface FileRoutesByTo {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
-  '/insights': typeof InsightsRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/academy/ai-agents': typeof AcademyAiAgentsRoute
+  '/academy/ai-training': typeof AcademyAiTrainingRoute
+  '/academy/corporate-training': typeof AcademyCorporateTrainingRoute
+  '/academy/deep-learning': typeof AcademyDeepLearningRoute
+  '/academy/generative-ai': typeof AcademyGenerativeAiRoute
+  '/academy/mcp': typeof AcademyMcpRoute
+  '/academy/prompt-engineering': typeof AcademyPromptEngineeringRoute
+  '/academy/python-for-ai': typeof AcademyPythonForAiRoute
+  '/academy/rag': typeof AcademyRagRoute
+  '/insights/$slug': typeof InsightsSlugRoute
+  '/academy': typeof AcademyIndexRoute
+  '/insights': typeof InsightsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -95,9 +192,21 @@ export interface FileRoutesById {
   '/case-studies': typeof CaseStudiesRoute
   '/contact': typeof ContactRoute
   '/industries': typeof IndustriesRoute
-  '/insights': typeof InsightsRoute
+  '/insights': typeof InsightsRouteWithChildren
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/academy/ai-agents': typeof AcademyAiAgentsRoute
+  '/academy/ai-training': typeof AcademyAiTrainingRoute
+  '/academy/corporate-training': typeof AcademyCorporateTrainingRoute
+  '/academy/deep-learning': typeof AcademyDeepLearningRoute
+  '/academy/generative-ai': typeof AcademyGenerativeAiRoute
+  '/academy/mcp': typeof AcademyMcpRoute
+  '/academy/prompt-engineering': typeof AcademyPromptEngineeringRoute
+  '/academy/python-for-ai': typeof AcademyPythonForAiRoute
+  '/academy/rag': typeof AcademyRagRoute
+  '/insights/$slug': typeof InsightsSlugRoute
+  '/academy/': typeof AcademyIndexRoute
+  '/insights/': typeof InsightsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -111,6 +220,18 @@ export interface FileRouteTypes {
     | '/insights'
     | '/services'
     | '/sitemap.xml'
+    | '/academy/ai-agents'
+    | '/academy/ai-training'
+    | '/academy/corporate-training'
+    | '/academy/deep-learning'
+    | '/academy/generative-ai'
+    | '/academy/mcp'
+    | '/academy/prompt-engineering'
+    | '/academy/python-for-ai'
+    | '/academy/rag'
+    | '/insights/$slug'
+    | '/academy/'
+    | '/insights/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,9 +240,20 @@ export interface FileRouteTypes {
     | '/case-studies'
     | '/contact'
     | '/industries'
-    | '/insights'
     | '/services'
     | '/sitemap.xml'
+    | '/academy/ai-agents'
+    | '/academy/ai-training'
+    | '/academy/corporate-training'
+    | '/academy/deep-learning'
+    | '/academy/generative-ai'
+    | '/academy/mcp'
+    | '/academy/prompt-engineering'
+    | '/academy/python-for-ai'
+    | '/academy/rag'
+    | '/insights/$slug'
+    | '/academy'
+    | '/insights'
   id:
     | '__root__'
     | '/'
@@ -133,6 +265,18 @@ export interface FileRouteTypes {
     | '/insights'
     | '/services'
     | '/sitemap.xml'
+    | '/academy/ai-agents'
+    | '/academy/ai-training'
+    | '/academy/corporate-training'
+    | '/academy/deep-learning'
+    | '/academy/generative-ai'
+    | '/academy/mcp'
+    | '/academy/prompt-engineering'
+    | '/academy/python-for-ai'
+    | '/academy/rag'
+    | '/insights/$slug'
+    | '/academy/'
+    | '/insights/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -142,9 +286,19 @@ export interface RootRouteChildren {
   CaseStudiesRoute: typeof CaseStudiesRoute
   ContactRoute: typeof ContactRoute
   IndustriesRoute: typeof IndustriesRoute
-  InsightsRoute: typeof InsightsRoute
+  InsightsRoute: typeof InsightsRouteWithChildren
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  AcademyAiAgentsRoute: typeof AcademyAiAgentsRoute
+  AcademyAiTrainingRoute: typeof AcademyAiTrainingRoute
+  AcademyCorporateTrainingRoute: typeof AcademyCorporateTrainingRoute
+  AcademyDeepLearningRoute: typeof AcademyDeepLearningRoute
+  AcademyGenerativeAiRoute: typeof AcademyGenerativeAiRoute
+  AcademyMcpRoute: typeof AcademyMcpRoute
+  AcademyPromptEngineeringRoute: typeof AcademyPromptEngineeringRoute
+  AcademyPythonForAiRoute: typeof AcademyPythonForAiRoute
+  AcademyRagRoute: typeof AcademyRagRoute
+  AcademyIndexRoute: typeof AcademyIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -212,8 +366,106 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/insights/': {
+      id: '/insights/'
+      path: '/'
+      fullPath: '/insights/'
+      preLoaderRoute: typeof InsightsIndexRouteImport
+      parentRoute: typeof InsightsRoute
+    }
+    '/academy/': {
+      id: '/academy/'
+      path: '/academy'
+      fullPath: '/academy/'
+      preLoaderRoute: typeof AcademyIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights/$slug': {
+      id: '/insights/$slug'
+      path: '/$slug'
+      fullPath: '/insights/$slug'
+      preLoaderRoute: typeof InsightsSlugRouteImport
+      parentRoute: typeof InsightsRoute
+    }
+    '/academy/rag': {
+      id: '/academy/rag'
+      path: '/academy/rag'
+      fullPath: '/academy/rag'
+      preLoaderRoute: typeof AcademyRagRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/python-for-ai': {
+      id: '/academy/python-for-ai'
+      path: '/academy/python-for-ai'
+      fullPath: '/academy/python-for-ai'
+      preLoaderRoute: typeof AcademyPythonForAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/prompt-engineering': {
+      id: '/academy/prompt-engineering'
+      path: '/academy/prompt-engineering'
+      fullPath: '/academy/prompt-engineering'
+      preLoaderRoute: typeof AcademyPromptEngineeringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/mcp': {
+      id: '/academy/mcp'
+      path: '/academy/mcp'
+      fullPath: '/academy/mcp'
+      preLoaderRoute: typeof AcademyMcpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/generative-ai': {
+      id: '/academy/generative-ai'
+      path: '/academy/generative-ai'
+      fullPath: '/academy/generative-ai'
+      preLoaderRoute: typeof AcademyGenerativeAiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/deep-learning': {
+      id: '/academy/deep-learning'
+      path: '/academy/deep-learning'
+      fullPath: '/academy/deep-learning'
+      preLoaderRoute: typeof AcademyDeepLearningRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/corporate-training': {
+      id: '/academy/corporate-training'
+      path: '/academy/corporate-training'
+      fullPath: '/academy/corporate-training'
+      preLoaderRoute: typeof AcademyCorporateTrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/ai-training': {
+      id: '/academy/ai-training'
+      path: '/academy/ai-training'
+      fullPath: '/academy/ai-training'
+      preLoaderRoute: typeof AcademyAiTrainingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academy/ai-agents': {
+      id: '/academy/ai-agents'
+      path: '/academy/ai-agents'
+      fullPath: '/academy/ai-agents'
+      preLoaderRoute: typeof AcademyAiAgentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
+
+interface InsightsRouteChildren {
+  InsightsSlugRoute: typeof InsightsSlugRoute
+  InsightsIndexRoute: typeof InsightsIndexRoute
+}
+
+const InsightsRouteChildren: InsightsRouteChildren = {
+  InsightsSlugRoute: InsightsSlugRoute,
+  InsightsIndexRoute: InsightsIndexRoute,
+}
+
+const InsightsRouteWithChildren = InsightsRoute._addFileChildren(
+  InsightsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -222,9 +474,19 @@ const rootRouteChildren: RootRouteChildren = {
   CaseStudiesRoute: CaseStudiesRoute,
   ContactRoute: ContactRoute,
   IndustriesRoute: IndustriesRoute,
-  InsightsRoute: InsightsRoute,
+  InsightsRoute: InsightsRouteWithChildren,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  AcademyAiAgentsRoute: AcademyAiAgentsRoute,
+  AcademyAiTrainingRoute: AcademyAiTrainingRoute,
+  AcademyCorporateTrainingRoute: AcademyCorporateTrainingRoute,
+  AcademyDeepLearningRoute: AcademyDeepLearningRoute,
+  AcademyGenerativeAiRoute: AcademyGenerativeAiRoute,
+  AcademyMcpRoute: AcademyMcpRoute,
+  AcademyPromptEngineeringRoute: AcademyPromptEngineeringRoute,
+  AcademyPythonForAiRoute: AcademyPythonForAiRoute,
+  AcademyRagRoute: AcademyRagRoute,
+  AcademyIndexRoute: AcademyIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

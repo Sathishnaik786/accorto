@@ -3,6 +3,9 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal, SectionHeading } from "@/components/section";
 import { Counter } from "@/components/counter";
 import { FinalCTA } from "@/components/home-sections";
+import { StickyStory } from "@/components/premium/StickyStory";
+import { SectionDivider } from "@/components/premium/SectionDivider";
+import { ArchitectureDiagram } from "@/components/premium/ArchitectureDiagram";
 import {
   Database,
   Layers3,
@@ -293,6 +296,129 @@ const PRACTICES = [
 ];
 
 function Services() {
+  const stickySteps = [
+    {
+      title: "Discover",
+      subtitle: "Map systems and bottlenecks",
+      desc: "We audit your existing ledger schemas, system latencies, and human processes to locate operational lag and compile empirical metrics.",
+      visual: (
+        <div className="flex flex-col gap-4 text-left">
+          <div className="flex justify-between items-center">
+            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Discovery Telemetry</span>
+            <span className="text-[8px] bg-amber-400/20 text-amber-400 font-bold px-2 py-0.5 rounded-full">Auditing...</span>
+          </div>
+          <div className="space-y-3">
+            {[
+              { label: "Core Ledgers Profiled", progress: 95 },
+              { label: "API Bottlenecks Located", progress: 78 },
+              { label: "Data Pipeline Sinks", progress: 62 },
+            ].map((p, idx) => (
+              <div key={idx} className="space-y-1.5">
+                <div className="flex justify-between text-xs text-slate-900 dark:text-slate-300 font-semibold">
+                  <span>{p.label}</span>
+                  <span>{p.progress}%</span>
+                </div>
+                <div className="h-1 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden">
+                  <div className="h-full bg-brand rounded-full" style={{ width: `${p.progress}%` }} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Architect",
+      subtitle: "Design scalable blueprints",
+      desc: "Our architects map target schemas, integration layers, and private AI boundary states, securing SOC 2 / GDPR baseline compliance before coding starts.",
+      visual: (
+        <div className="flex flex-col gap-4 text-left">
+          <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Architectural Blueprint</span>
+          <div className="grid grid-cols-3 gap-3 items-center text-center mt-2">
+            <div className="inner-card p-3 text-xs">
+              <span className="text-brand font-bold uppercase text-[9px] block">Source</span>
+              <span className="text-slate-900 dark:text-white mt-1 block font-semibold">ERP / CRM</span>
+            </div>
+            <div className="text-zinc-400 text-xs font-mono font-bold">──▶</div>
+            <div className="inner-card p-3 text-xs">
+              <span className="text-brand-3 font-bold uppercase text-[9px] block">Integration</span>
+              <span className="text-slate-900 dark:text-white mt-1 block font-semibold">Accorto Hub</span>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Build",
+      subtitle: "Develop with velocity",
+      desc: "Accorto engineers deploy modular codebase extensions, certified ledger integrations, and custom neural agents inside private VPC configurations.",
+      visual: (
+        <div className="flex flex-col gap-3 font-mono text-[10px] text-left">
+          <div className="flex justify-between items-center pb-2 border-b border-slate-200/20 dark:border-white/5">
+            <span className="text-[9px] font-bold text-zinc-500 uppercase tracking-widest">Active Compiler</span>
+            <span className="text-emerald-500 font-bold">✓ Ready</span>
+          </div>
+          <div className="space-y-1 text-slate-500 dark:text-slate-400">
+            <p className="text-emerald-600 dark:text-emerald-400">▶ npm run build:prod</p>
+            <p>✓ Loaded 12 custom micro-agents</p>
+            <p>✓ Connected Oracle ERP Fusion client API</p>
+            <p>✓ Hardened SOC 2 Type II audit triggers</p>
+            <p className="text-emerald-600 dark:text-emerald-400">▶ Build completed in 420ms</p>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Deploy",
+      subtitle: "Release with confidence",
+      desc: "Transformations release to multi-region cloud targets under FinOps bounds, managed continuously by site reliability pipelines.",
+      visual: (
+        <div className="flex flex-col gap-4 text-left">
+          <div className="flex justify-between items-center">
+            <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Cloud Cluster Status</span>
+            <span className="flex items-center gap-1 text-[8px] bg-emerald-400/20 text-emerald-600 dark:text-emerald-400 font-bold px-2 py-0.5 rounded-full">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" /> Live
+            </span>
+          </div>
+          <div className="grid grid-cols-2 gap-4 text-xs mt-1">
+            <div className="inner-card p-3">
+              <span className="text-zinc-500 text-[8px] uppercase font-bold">Region</span>
+              <span className="text-slate-900 dark:text-white block mt-0.5 font-semibold">us-east-1</span>
+            </div>
+            <div className="inner-card p-3">
+              <span className="text-zinc-500 text-[8px] uppercase font-bold">Latency</span>
+              <span className="text-slate-900 dark:text-white block mt-0.5 font-semibold">14ms</span>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: "Scale",
+      subtitle: "Optimize and expand",
+      desc: "Our analytics dashboards measure post-launch performance constantly, feeding optimization metrics directly back into the engine.",
+      visual: (
+        <div className="flex flex-col gap-4 text-left">
+          <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Post-Launch ROI</span>
+          <div className="flex items-center justify-between mt-2">
+            <div>
+              <span className="text-zinc-500 text-[9px] uppercase font-bold">Consolidation Gains</span>
+              <div className="font-display text-3xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
+                +47%
+              </div>
+            </div>
+            <div>
+              <span className="text-zinc-500 text-[9px] uppercase font-bold">FinOps Savings</span>
+              <div className="font-display text-3xl font-bold text-emerald-600 dark:text-emerald-400 mt-1">
+                -35%
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
       <PageHero
@@ -321,6 +447,18 @@ function Services() {
         <PracticeSection key={p.id} p={p} flip={i % 2 === 1} />
       ))}
 
+      <SectionDivider label="02 / ENTERPRISE ARCHITECTURE" />
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20">
+        <ArchitectureDiagram />
+      </section>
+
+      <SectionDivider label="03 / IMPLEMENTATION ENGINE" />
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+        <StickyStory steps={stickySteps} />
+      </section>
+
       <FinalCTA />
     </>
   );
@@ -328,24 +466,24 @@ function Services() {
 
 function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boolean }) {
   return (
-    <section id={p.id} className="relative py-24 border-t border-border/40">
+    <section id={p.id} className="relative py-32 lg:py-40 border-t border-border/40 bg-radial-subtle">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div
           className={`grid lg:grid-cols-12 gap-12 items-start ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}
         >
           <Reveal className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 glass rounded-full px-3 py-1 text-xs">
+            <div className="inline-flex items-center gap-2 glass rounded-full px-3 py-1 text-xs text-slate-500 dark:text-slate-400">
               <p.icon className="h-3.5 w-3.5 text-brand" /> Practice
             </div>
-            <h2 className="mt-4 font-display text-4xl md:text-5xl font-semibold">{p.name}</h2>
-            <p className="mt-3 text-lg text-brand">{p.tagline}</p>
-            <p className="mt-5 text-muted-foreground leading-relaxed">{p.overview}</p>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl font-semibold text-slate-900 dark:text-white">{p.name}</h2>
+            <p className="mt-3 text-lg font-medium text-brand">{p.tagline}</p>
+            <p className="mt-5 text-slate-600 dark:text-slate-300 leading-relaxed">{p.overview}</p>
 
             <div className="mt-8 grid sm:grid-cols-2 gap-4">
               <Block title="Key benefits">
                 <ul className="space-y-2 text-sm">
                   {p.benefits.map((b) => (
-                    <li key={b} className="flex items-start gap-2">
+                    <li key={b} className="flex items-start gap-2 text-slate-600 dark:text-slate-300">
                       <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-400 shrink-0" /> {b}
                     </li>
                   ))}
@@ -354,7 +492,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
               <Block title="Capabilities">
                 <ul className="grid grid-cols-2 gap-y-2 text-sm">
                   {p.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2">
+                    <li key={f} className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
                       <span className="h-1 w-1 rounded-full bg-brand" /> {f}
                     </li>
                   ))}
@@ -366,11 +504,11 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
               <Block title="Delivery process">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-1.5">
                   {p.process.map((s, idx) => (
-                    <div key={s} className="relative glass-strong rounded-xl p-3 flex flex-col justify-between min-h-[80px] border border-white/5 hover:border-brand/35 transition-colors group">
+                    <div key={s} className="relative glass rounded-2xl p-3 flex flex-col justify-between min-h-[80px] border border-white/10 hover:border-brand/35 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md group">
                       <span className="text-[10px] font-mono font-bold text-brand bg-brand/10 w-5 h-5 rounded-full flex items-center justify-center">
                         {idx + 1}
                       </span>
-                      <span className="text-xs font-semibold text-foreground mt-2 leading-tight">{s}</span>
+                      <span className="text-xs font-semibold text-slate-900 dark:text-white mt-2 leading-tight">{s}</span>
                     </div>
                   ))}
                 </div>
@@ -381,7 +519,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
               <Block title="Technology stack">
                 <div className="flex flex-wrap gap-2">
                   {p.stack.map((t) => (
-                    <span key={t} className="glass rounded-md px-2.5 py-1 text-xs font-mono hover:bg-brand/10 hover:text-brand transition-colors cursor-default select-none border border-white/5">
+                    <span key={t} className="glass rounded-md px-2.5 py-1 text-xs font-mono text-slate-600 dark:text-slate-300 hover:bg-brand/10 hover:text-brand transition-colors cursor-default select-none border border-white/10">
                       <Boxes className="inline h-3 w-3 mr-1 text-brand" />
                       {t}
                     </span>
@@ -392,12 +530,12 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
 
             <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 border-t border-border/30 pt-6">
               <div>
-                <h4 className="text-sm font-semibold text-foreground">Need Expert Guidance?</h4>
-                <p className="text-xs text-muted-foreground">{"Talk directly to a partner from our "}{p.name}{" practice."}</p>
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Need Expert Guidance?</h4>
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{"Talk directly to a partner from our "}{p.name}{" practice."}</p>
               </div>
               <Link
                 to="/contact"
-                className="sm:ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-medium text-white shadow-lg shadow-brand/20 hover:scale-105 transition-all text-center justify-center whitespace-nowrap"
+                className="sm:ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all text-center justify-center whitespace-nowrap"
               >
                 Book a Consultation <ArrowRight className="h-4 w-4" />
               </Link>
@@ -405,20 +543,20 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
           </Reveal>
 
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <div className="relative aspect-4/5 rounded-3xl overflow-hidden glass-strong">
+            <div className="relative aspect-4/5 rounded-[32px] overflow-hidden glass-strong shadow-lg">
               <img
                 src={p.image}
                 alt={`${p.name} consulting and enterprise solutions`}
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-transform duration-700 hover:scale-105"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-[#050816] via-[#050816]/30 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#1A312C] via-[#1A312C]/30 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 grid grid-cols-3 gap-3">
                 {p.results.map(([v, l]) => {
                   const num = parseInt(v);
                   const suffix = v.replace(/[\d.]/g, "");
                   return (
-                    <div key={l} className="glass-strong rounded-2xl p-3 text-white">
+                    <div key={l} className="inner-card p-3 text-slate-900 dark:text-white">
                       <div className="font-display text-xl font-semibold">
                         {isNaN(num) ? (
                           v
@@ -428,7 +566,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
                           </>
                         )}
                       </div>
-                      <div className="text-[10px] uppercase tracking-wider opacity-80">{l}</div>
+                      <div className="text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1">{l}</div>
                     </div>
                   );
                 })}
@@ -440,10 +578,11 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
     </section>
   );
 }
+
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="glass rounded-2xl p-5 hover:bg-white/[0.03] hover:border-white/15 transition-all duration-300 border border-white/5">
-      <div className="text-xs uppercase tracking-widest text-muted-foreground mb-3">{title}</div>
+    <div className="glass rounded-3xl p-5 hover:bg-white/3 hover:border-white/15 transition-all duration-300 border border-white/10 shadow-lg">
+      <div className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3">{title}</div>
       {children}
     </div>
   );

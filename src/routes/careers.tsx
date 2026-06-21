@@ -76,7 +76,7 @@ function Careers() {
         subtitle="Work on the programs that boards talk about. With operators who've shipped at scale, and a culture that respects your craft."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <h2 className="sr-only">Why choose Accorto</h2>
         <div className="grid md:grid-cols-3 gap-6">
           {[
@@ -97,17 +97,17 @@ function Careers() {
             },
           ].map((b, i) => (
             <Reveal key={b.t} delay={i * 0.05}>
-              <div className="glass rounded-3xl p-7 h-full">
-                <b.icon className="h-7 w-7 text-brand" />
-                <h3 className="mt-4 font-display text-lg font-semibold">{b.t}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{b.d}</p>
+              <div className="glass rounded-3xl p-7 h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
+                <b.icon className="h-7 w-7 text-brand group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="mt-4 font-display text-lg font-semibold text-slate-900 dark:text-white">{b.t}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{b.d}</p>
               </div>
             </Reveal>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <SectionHeading
           tag="Life at Accorto"
           title={
@@ -123,15 +123,15 @@ function Careers() {
             { icon: Coffee, t: "Flexible hybrid" },
             { icon: ShieldCheck, t: "ESOPs for all" },
           ].map((b) => (
-            <div key={b.t} className="glass rounded-2xl p-5 flex items-center gap-3">
+            <div key={b.t} className="glass rounded-2xl p-5 flex items-center gap-3 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
               <b.icon className="h-5 w-5 text-brand" />{" "}
-              <span className="text-sm font-medium">{b.t}</span>
+              <span className="text-sm font-medium text-slate-900 dark:text-white">{b.t}</span>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <SectionHeading
           tag="Hiring process"
           title={
@@ -147,16 +147,16 @@ function Careers() {
             { n: 3, t: "Working session", d: "A real problem, not a brainteaser." },
             { n: 4, t: "Offer", d: "Decision within 7 days. Always." },
           ].map((s) => (
-            <div key={s.n} className="glass rounded-2xl p-5">
+            <div key={s.n} className="glass rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="font-display text-3xl font-semibold text-gradient">{s.n}</div>
-              <h3 className="mt-1 font-semibold text-sm">{s.t}</h3>
-              <p className="text-xs text-muted-foreground mt-1">{s.d}</p>
+              <h3 className="mt-1 font-semibold text-sm text-slate-900 dark:text-white">{s.t}</h3>
+              <p className="text-xs text-slate-600 dark:text-slate-300 mt-1">{s.d}</p>
             </div>
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-32 lg:py-40">
         <SectionHeading
           tag="Open positions"
           title={
@@ -170,19 +170,19 @@ function Careers() {
             <Reveal key={j.title} delay={i * 0.03}>
               <Link
                 to="/contact"
-                className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-2xl glass px-6 py-5 hover:bg-white/5 transition-colors"
+                className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-2xl glass px-6 py-5 hover:bg-white/10 dark:hover:bg-white/8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
               >
                 <div>
-                  <div className="text-xs text-brand uppercase tracking-widest">{j.team}</div>
-                  <h3 className="font-display text-lg font-semibold group-hover:text-brand transition-colors">
+                  <div className="text-xs text-brand uppercase tracking-widest font-semibold">{j.team}</div>
+                  <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand transition-colors">
                     {j.title}
                   </h3>
                 </div>
                 <div className="flex items-center gap-4">
-                  <span className="text-sm text-muted-foreground flex items-center gap-1">
-                    <MapPin className="h-3.5 w-3.5" /> {j.loc}
+                  <span className="text-sm text-slate-600 dark:text-slate-300 flex items-center gap-1">
+                    <MapPin className="h-3.5 w-3.5 text-brand" /> {j.loc}
                   </span>
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4 text-slate-900 dark:text-white group-hover:text-brand group-hover:translate-x-1 transition-all" />
                 </div>
               </Link>
             </Reveal>

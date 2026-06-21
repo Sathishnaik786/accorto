@@ -4,6 +4,12 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
 import { FinalCTA } from "@/components/home-sections";
 import { ArrowRight, TrendingUp } from "lucide-react";
+import { PremiumCard } from "@/components/ui/PremiumCard";
+import { PremiumBadge } from "@/components/ui/PremiumBadge";
+import { motion } from "framer-motion";
+import { useMouseParallax } from "@/lib/motion-presets";
+import { ComparisonCard } from "@/components/premium/ComparisonCard";
+import { SectionDivider } from "@/components/premium/SectionDivider";
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -160,7 +166,88 @@ const CASES = [
     tech: ["Azure Cloud", "Data Analytics"],
   },
 ];
+
 const CATS = ["All", "Oracle", "SAP", "AI", "Cloud"];
+
+function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
+  const { parallaxProps, handleMouseMove, handleMouseLeave } = useMouseParallax(5);
+
+  return (
+    <Reveal delay={delay}>
+      <div 
+        onMouseMove={handleMouseMove} 
+        onMouseLeave={handleMouseLeave} 
+        className="h-full"
+      >
+        <motion.div {...parallaxProps} className="h-full">
+          <PremiumCard className="group h-full flex flex-col relative rounded-[32px]">
+            <div className="absolute inset-0 bg-white/1 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" />
+            <div className="relative aspect-4/3 rounded-[32px] overflow-hidden m-3 shadow-md z-10">
+              <img
+                src={c.img}
+                alt={c.title}
+                loading="lazy"
+                className="h-full w-full object-cover rounded-[32px] brightness-[0.95] contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute top-4 left-4">
+                <PremiumBadge className="px-2.5 py-1 text-[10px] bg-black/40 border-white/10 text-white backdrop-blur-md">
+                  {c.cat}
+                </PremiumBadge>
+              </div>
+              <div className="absolute bottom-4 right-4 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-xs font-semibold flex items-center gap-1 text-white shadow-sm">
+                <TrendingUp className="h-3 w-3 text-emerald-400" /> {c.metric}
+              </div>
+            </div>
+            <div className="p-6 pt-3 flex flex-col flex-1 relative z-10 text-left">
+              <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.18em]">{c.client}</div>
+              <h3 className="mt-2 font-display text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand transition-colors leading-[1.02] tracking-tight">
+                {c.title}
+              </h3>
+              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed flex-1">{c.desc}</p>
+
+              <div className="mt-4 pt-4 border-t border-slate-200/20 dark:border-white/5 space-y-4">
+                <ComparisonCard
+                  title="Transformation Blueprint"
+                  beforeLabel="Legacy State"
+                  beforeVal={c.before}
+                  afterLabel="Modernized State"
+                  afterVal={c.after}
+                  className="p-4 gap-2"
+                />
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="inner-card p-4 flex flex-col justify-between">
+                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">ROI Metric</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400 mt-1 block truncate text-sm">{c.roi}</span>
+                  </div>
+                  <div className="inner-card p-4 flex flex-col justify-between">
+                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">Outcome Goal</span>
+                    <span className="font-semibold text-slate-900 dark:text-white mt-1 block truncate leading-tight text-xs">{c.outcome}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-4 pt-4 flex flex-wrap gap-1.5">
+                <span className="text-[9px] bg-white/5 border border-white/10 text-zinc-400 rounded-md px-2.5 py-0.5 font-semibold">{c.industry}</span>
+                {c.tech.map((t) => (
+                  <span key={t} className="text-[9px] bg-brand/10 text-brand dark:text-brand-3 border border-brand/20 rounded-md px-2.5 py-0.5 font-semibold">{t}</span>
+                ))}
+              </div>
+
+              <Link
+                to="/contact"
+                className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-brand dark:text-brand-3 hover:text-brand-2 transition-all self-start group/link"
+              >
+                Read full story <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1.5" />
+              </Link>
+            </div>
+          </PremiumCard>
+        </motion.div>
+      </div>
+    </Reveal>
+  );
+}
 
 function CaseStudies() {
   const [cat, setCat] = useState("All");
@@ -180,14 +267,18 @@ function CaseStudies() {
         subtitle="Real client outcomes from the last few quarters across our Oracle, SAP, AI and Cloud practices."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-24">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-32">
         <h2 className="sr-only">Client Case Studies</h2>
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-14">
           {CATS.map((c) => (
             <button
               key={c}
               onClick={() => setCat(c)}
-              className={`rounded-full px-4 py-2 text-sm transition-all ${cat === c ? "bg-gradient-brand text-white shadow-lg shadow-brand/30" : "glass hover:bg-white/10"}`}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+                cat === c
+                  ? "bg-gradient-brand text-white shadow-brand hover:scale-105 hover:shadow-brand-lg"
+                  : "glass text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/10 dark:hover:bg-white/8"
+              }`}
             >
               {c}
             </button>
@@ -196,61 +287,7 @@ function CaseStudies() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.04}>
-              <div className="group h-full overflow-hidden rounded-3xl glass">
-                <div className="relative aspect-4/3 overflow-hidden">
-                  <img
-                    src={c.img}
-                    alt={c.title}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-linear-to-t from-[#050816] via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 glass-strong rounded-full px-3 py-1 text-xs font-medium">
-                    {c.cat}
-                  </div>
-                  <div className="absolute bottom-4 right-4 glass-strong rounded-full px-3 py-1 text-xs font-semibold flex items-center gap-1">
-                    <TrendingUp className="h-3 w-3 text-emerald-400" /> {c.metric}
-                  </div>
-                </div>
-                <div className="p-6">
-                  <div className="text-xs text-muted-foreground">{c.client}</div>
-                  <h3 className="mt-1 font-display text-lg font-semibold group-hover:text-brand transition-colors">
-                    {c.title}
-                  </h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
-
-                  <div className="mt-4 pt-4 border-t border-white/5 grid grid-cols-2 gap-x-2 gap-y-3 text-[11px] leading-relaxed">
-                    <div>
-                      <span className="text-[9px] text-muted-foreground block uppercase tracking-wider">Before / After</span>
-                      <span className="font-medium text-foreground">{c.before} → {c.after}</span>
-                    </div>
-                    <div>
-                      <span className="text-[9px] text-muted-foreground block uppercase tracking-wider">ROI Indicator</span>
-                      <span className="font-medium text-emerald-400">{c.roi}</span>
-                    </div>
-                    <div className="col-span-2">
-                      <span className="text-[9px] text-muted-foreground block uppercase tracking-wider">Business Outcome</span>
-                      <span className="font-medium text-foreground">{c.outcome}</span>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 pt-2 flex flex-wrap gap-1.5">
-                    <span className="text-[9px] bg-white/5 rounded-md px-2 py-0.5 text-muted-foreground">{c.industry}</span>
-                    {c.tech.map((t) => (
-                      <span key={t} className="text-[9px] bg-brand/10 text-brand rounded-md px-2 py-0.5">{t}</span>
-                    ))}
-                  </div>
-
-                  <Link
-                    to="/contact"
-                    className="mt-5 inline-flex items-center gap-1 text-xs font-medium"
-                  >
-                    Read full story <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-              </div>
-            </Reveal>
+            <CaseCard key={c.title} c={c} delay={i * 0.04} />
           ))}
         </div>
       </section>

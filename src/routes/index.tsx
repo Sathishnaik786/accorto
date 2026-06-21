@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Hero } from "@/components/hero";
 import {
   ClientLogos,
-  TechEcosystem,
   ServicesShowcase,
   Industries,
   Journey,
@@ -12,6 +11,7 @@ import {
   Certifications,
   FinalCTA,
 } from "@/components/home-sections";
+import { EcosystemSection } from "@/components/ecosystem/EcosystemSection";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -50,7 +50,7 @@ function Index() {
     <>
       <Hero />
       <ClientLogos />
-      <TechEcosystem />
+      <EcosystemSection />
       <ServicesShowcase />
       <Industries />
       <Journey />
@@ -62,3 +62,4 @@ function Index() {
     </>
   );
 }
+

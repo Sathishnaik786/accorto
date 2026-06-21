@@ -1,21 +1,42 @@
 import { motion } from "framer-motion";
 import { ReactNode } from "react";
+import { useMotionSystem } from "../lib/motion-presets";
 
 export function Reveal({
   children,
   delay = 0,
+  staggerChildren,
+  delayChildren,
   className = "",
 }: {
   children: ReactNode;
   delay?: number;
+  staggerChildren?: number;
+  delayChildren?: number;
   className?: string;
 }) {
+  const { viewportReveal, viewportConfig } = useMotionSystem();
+  
+  // Dynamic variants to support stagger / delay configurations
+  const rawVariants = viewportReveal(delay);
+  const variants = {
+    initial: rawVariants.initial,
+    animate: {
+      ...rawVariants.animate,
+      transition: {
+        ...rawVariants.animate?.transition,
+        ...(staggerChildren !== undefined && { staggerChildren }),
+        ...(delayChildren !== undefined && { delayChildren }),
+      },
+    },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
+      variants={variants}
+      initial="initial"
+      whileInView="animate"
+      viewport={viewportConfig}
       className={className}
     >
       {children}

@@ -1,0 +1,177 @@
+:root {
+  --card-bg: rgba(255, 255, 255, 0.03);
+
+  --card-border: rgba(137, 215, 183, 0.12);
+  --card-hover-border: rgba(137, 215, 183, 0.24);
+
+  --glass-bg: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.05);
+
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 25px 70px rgba(0, 0, 0, 0.22);
+
+  --primary-glow: rgba(79, 70, 229, 0.04);
+  --secondary-glow: rgba(6, 182, 212, 0.03);
+  --green-glow: rgba(16, 185, 129, 0.02);
+
+  --section-radius: 40px;
+  --card-radius: 32px;
+  --button-radius: 18px;
+
+  /* Typography Colors */
+  --body-text-color: #52525b; /* zinc-600 in light mode */
+  --label-text-color: #71717a; /* zinc-500 in light mode */
+}
+
+.dark {
+  --body-text-color: #a1a1aa; /* zinc-400 in dark mode */
+  --label-text-color: #71717a; /* zinc-500 in dark mode */
+}
+
+/* ==========================================
+   GLOBAL TYPOGRAPHY STANDARDIZATION
+   ========================================== */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.025em; /* tracking-tight */
+}
+
+/* Body font sizes & line heights */
+p, .body-text {
+  line-height: 2rem; /* leading-8 */
+}
+
+/* Dynamic body paragraph colors preserving explicit overrides */
+p:not([class*="text-"]):not([class*="text-gradient"]):not([class*="text-brand"]) {
+  color: var(--body-text-color);
+}
+
+/* Global labels & tags tracking */
+.label-text, label, .premium-label {
+  text-transform: uppercase;
+  letter-spacing: 0.18em; /* tracking-[0.18em] */
+  color: var(--label-text-color);
+  font-size: 10px; /* text-[10px] */
+}
+
+/* Atmospheric Noise Texture overlay */
+.glass-noise {
+  position: relative;
+}
+
+.glass-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.012;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  z-index: 1;
+}
+
+/* ==========================================
+   GLOBAL SHADOW & GLOW STANDARDIZATION
+   ========================================== */
+.shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl, .shadow-2xl {
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.hover\:shadow-md:hover, .hover\:shadow-lg:hover, .hover\:shadow-xl:hover, .hover\:shadow-2xl:hover {
+  box-shadow: var(--shadow-hover) !important;
+}
+
+/* ==========================================
+   GLOBAL CORNER RADIUS STANDARDIZATION
+   ========================================== */
+/* All cards, glass layouts, and showcases to follow 32px standard */
+.glass, .glass-strong, .premium-card {
+  border-radius: var(--card-radius) !important;
+  border-color: var(--card-border) !important;
+}
+
+/* Hover dynamics for premium cards & glass */
+.glass:hover, .glass-strong:hover, .premium-card:hover {
+  border-color: var(--card-hover-border) !important;
+  box-shadow: var(--shadow-hover) !important;
+  transform: translateY(-6px) !important;
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================
+   INNER CARD STANDARDIZATION (LEVEL 2 NESTED)
+   ========================================== */
+.inner-card {
+  background: rgba(255, 255, 255, 0.025) !important;
+  border: 1px solid rgba(255, 255, 255, 0.07) !important;
+  border-radius: 20px !important;
+  backdrop-filter: blur(18px) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), background 0.5s, border-color 0.5s !important;
+}
+
+.inner-card:hover {
+  transform: translateY(-2px) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border-color: rgba(137, 215, 183, 0.15) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* ==========================================
+   CINEMATIC KEYFRAMES & ANIMATIONS
+   ========================================== */
+@keyframes border-shine {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes radial-drift {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.08);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes float-slow-oscillation {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.015);
+  }
+}
+
+.animate-border-shine {
+  animation: border-shine 8s linear infinite;
+}
+
+.animate-radial-drift {
+  animation: radial-drift 30s linear infinite;
+  transform-origin: center center;
+}
+
+.animate-float-slow-oscillation {
+  animation: float-slow-oscillation 16s ease-in-out infinite;
+}
+
+/* Respect reduced motion requests */
+@media (prefers-reduced-motion: reduce) {
+  .animate-border-shine,
+  .animate-radial-drift,
+  .animate-float-slow-oscillation {
+    animation: none !important;
+    transform: none !important;
+  }
+}

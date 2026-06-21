@@ -1,5 +1,16 @@
+import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { Reveal, SectionHeading } from "./section";
+import { useMotionSystem, useMouseParallax } from "../lib/motion-presets";
+import { PremiumCard } from "./ui/PremiumCard";
+import { GlassPanel } from "./ui/GlassPanel";
+import { PremiumBadge } from "./ui/PremiumBadge";
+import { cn } from "../lib/utils";
+import { BentoGrid, BentoGridItem } from "./premium/BentoGrid";
+import { StatsCluster } from "./premium/StatsCluster";
+
+const MotionLink = motion(Link);
 import {
   Database,
   Layers3,
@@ -28,7 +39,6 @@ import {
   ArrowRight,
   CheckCircle2,
 } from "lucide-react";
-import { Link } from "@tanstack/react-router";
 import { Counter } from "./counter";
 
 /* ---------- Client logos marquee ---------- */
@@ -43,7 +53,7 @@ export function ClientLogos() {
   ];
   const doubled = [...logos, ...logos, ...logos, ...logos];
   return (
-    <section className="py-16 border-y border-border/50">
+    <section className="py-32 lg:py-40 border-y border-border/50">
       <Reveal>
         <p className="text-center text-xs uppercase tracking-[0.3em] text-muted-foreground mb-8">
           Trusted by industry leaders worldwide
@@ -60,119 +70,8 @@ export function ClientLogos() {
             </div>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent" />
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Technology Ecosystem ---------- */
-export function TechEcosystem() {
-  const techs = [
-    { name: "Oracle", angle: 0 },
-    { name: "SAP", angle: 51 },
-    { name: "AWS", angle: 102 },
-    { name: "Azure", angle: 153 },
-    { name: "Google Cloud", angle: 204 },
-    { name: "OpenAI", angle: 255 },
-    { name: "Power BI", angle: 306 },
-  ];
-  return (
-    <section className="relative py-28 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading
-          tag="Technology Ecosystem"
-          title={
-            <>
-              One partner. <span className="text-gradient">Every platform.</span>
-            </>
-          }
-          subtitle="We orchestrate the world's most powerful enterprise platforms into a single, intelligent operating fabric for your business."
-          center
-        />
-        <div className="relative mt-20 mx-auto h-[440px] md:h-[520px] max-w-3xl">
-          <svg className="absolute inset-0 h-full w-full" viewBox="0 0 500 500">
-            <defs>
-              <radialGradient id="g1">
-                <stop offset="0%" stopColor="#7C3AED" stopOpacity=".5" />
-                <stop offset="100%" stopColor="#7C3AED" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            {[140, 200, 240].map((r) => (
-              <circle
-                key={r}
-                cx="250"
-                cy="250"
-                r={r}
-                fill="none"
-                stroke="currentColor"
-                strokeOpacity=".15"
-                strokeDasharray="4 6"
-                className="text-foreground"
-              />
-            ))}
-            {techs.map((t, i) => {
-              const rad = (t.angle * Math.PI) / 180;
-              const x = 250 + Math.cos(rad) * 220;
-              const y = 250 + Math.sin(rad) * 220;
-              return (
-                <motion.line
-                  key={i}
-                  x1="250"
-                  y1="250"
-                  x2={x}
-                  y2={y}
-                  stroke="url(#g1)"
-                  strokeWidth="1.5"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.2, delay: i * 0.1 }}
-                />
-              );
-            })}
-          </svg>
-          <motion.div
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ type: "spring", stiffness: 120 }}
-            className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-          >
-            <div className="relative">
-              <div className="absolute inset-0 rounded-full bg-gradient-brand blur-2xl opacity-70" />
-              <div className="relative grid h-32 w-32 place-items-center rounded-full bg-gradient-brand text-white text-center">
-                <div>
-                  <div className="font-display font-bold text-lg">ACCORTO</div>
-                  <div className="text-[10px] opacity-90">Intelligence Layer</div>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-          {techs.map((t, i) => {
-            const rad = (t.angle * Math.PI) / 180;
-            return (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, scale: 0 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 + i * 0.08, type: "spring" }}
-                className="absolute"
-                style={{
-                  left: `calc(50% + ${Math.cos(rad) * 44}%)`,
-                  top: `calc(50% + ${Math.sin(rad) * 44}%)`,
-                  transform: "translate(-50%, -50%)",
-                }}
-              >
-                <div className="glass-strong rounded-2xl px-4 py-2.5 font-display font-semibold whitespace-nowrap text-sm shadow-lg">
-                  {t.name}
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-linear-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-linear-to-l from-background to-transparent" />
       </div>
     </section>
   );
@@ -225,8 +124,18 @@ const SERVICES = [
 ];
 
 export function ServicesShowcase() {
+  const { cardHover, cardHoverTransition } = useMotionSystem();
+
+  const bentoSpans = [
+    "lg:col-span-5", // SAP Solutions
+    "lg:col-span-5", // AI & ML
+    "lg:col-span-4", // Digital Transformation
+    "lg:col-span-4", // Cloud Consulting
+    "lg:col-span-4", // Digital Marketing
+  ];
+
   return (
-    <section className="relative py-28">
+    <section className="relative py-32 lg:py-40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="What we do"
@@ -237,95 +146,95 @@ export function ServicesShowcase() {
           }
           subtitle="From core ERP to applied AI, our practices are built around measurable business results, not slideware."
         />
-        <div className="mt-16 grid lg:grid-cols-12 gap-6">
-          <Reveal className="lg:col-span-7 lg:row-span-2">
-            <div className="relative h-full overflow-hidden rounded-3xl glass-strong p-8 md:p-10 group">
-              <div className="absolute -top-32 -right-32 h-80 w-80 rounded-full bg-gradient-brand opacity-30 blur-3xl group-hover:opacity-50 transition-opacity" />
-              <div className="relative">
-                <div className="inline-flex items-center gap-2 glass rounded-full px-3 py-1 text-xs">
-                  <Star className="h-3 w-3 text-amber-400" /> Featured Practice
+        <BentoGrid className="mt-16">
+          {/* Main Featured Oracle ERP Card */}
+          <BentoGridItem colSpan="lg:col-span-7 lg:row-span-2">
+            <Reveal className="h-full">
+              <PremiumCard 
+                hover={true}
+                className="relative h-full p-8 md:p-10 group transition-all duration-500 ease-out rounded-[32px]"
+              >
+                <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 bg-white/5 rounded-full px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300">
+                    <Star className="h-3 w-3 text-amber-400 animate-pulse" /> Featured Practice
+                  </div>
+                  <h3 className="mt-5 font-display text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white leading-[0.95] tracking-tight">
+                    Oracle ERP Cloud, end-to-end
+                  </h3>
+                  <p className="mt-4 text-zinc-400 leading-8 max-w-xl text-sm">
+                    From discovery through hypercare, our certified Oracle practice has delivered 60+
+                    ERP programs across Finance, SCM, HCM and EPM. We accelerate value with reusable
+                    accelerators, prebuilt analytics, and a global delivery pod.
+                  </p>
+                  <div className="mt-6 grid sm:grid-cols-2 gap-3">
+                    {[
+                      "Oracle Cloud ERP",
+                      "Fusion HCM",
+                      "EPM Cloud",
+                      "SCM Cloud",
+                      "Oracle Analytics",
+                      "Integration Cloud",
+                    ].map((p) => (
+                      <div key={p} className="flex items-center gap-2 text-sm text-zinc-400 leading-8">
+                        <CheckCircle2 className="h-4 w-4 text-emerald-400" /> {p}
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-8 grid grid-cols-3 gap-6 max-w-md">
+                    <Stat
+                      label="ERP go-lives"
+                      value={
+                        <>
+                          <Counter to={60} suffix="+" />
+                        </>
+                      }
+                    />
+                    <Stat
+                      label="Avg ROI"
+                      value={
+                        <>
+                          <Counter to={312} suffix="%" />
+                        </>
+                      }
+                    />
+                    <Stat
+                      label="Faster close"
+                      value={
+                        <>
+                          <Counter to={47} suffix="%" />
+                        </>
+                      }
+                    />
+                  </div>
+                  <Link
+                    to="/services"
+                    className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-slate-900 dark:text-white hover:text-brand transition-colors"
+                  >
+                    Explore Oracle practice <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <h3 className="mt-5 font-display text-3xl md:text-4xl font-semibold">
-                  Oracle ERP Cloud, end-to-end
-                </h3>
-                <p className="mt-4 text-muted-foreground max-w-xl">
-                  From discovery through hypercare, our certified Oracle practice has delivered 60+
-                  ERP programs across Finance, SCM, HCM and EPM. We accelerate value with reusable
-                  accelerators, prebuilt analytics, and a global delivery pod.
-                </p>
-                <div className="mt-6 grid sm:grid-cols-2 gap-3">
-                  {[
-                    "Oracle Cloud ERP",
-                    "Fusion HCM",
-                    "EPM Cloud",
-                    "SCM Cloud",
-                    "Oracle Analytics",
-                    "Integration Cloud",
-                  ].map((p) => (
-                    <div key={p} className="flex items-center gap-2 text-sm">
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400" /> {p}
-                    </div>
-                  ))}
-                </div>
-                <div className="mt-8 grid grid-cols-3 gap-4 max-w-md">
-                  <Stat
-                    label="ERP go-lives"
-                    value={
-                      <>
-                        <Counter to={60} suffix="+" />
-                      </>
-                    }
-                  />
-                  <Stat
-                    label="Avg ROI"
-                    value={
-                      <>
-                        <Counter to={312} suffix="%" />
-                      </>
-                    }
-                  />
-                  <Stat
-                    label="Faster close"
-                    value={
-                      <>
-                        <Counter to={47} suffix="%" />
-                      </>
-                    }
-                  />
-                </div>
-                <Link
-                  to="/services"
-                  className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-foreground hover:text-brand transition-colors"
-                >
-                  Explore Oracle practice <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            </div>
-          </Reveal>
-
-          {SERVICES.slice(1, 5).map((s, i) => (
-            <Reveal
-              key={s.name}
-              delay={i * 0.05}
-              className="lg:col-span-5 lg:[&:nth-child(2)]:col-span-5"
-            >
-              <ServiceCard {...s} />
+              </PremiumCard>
             </Reveal>
-          ))}
+          </BentoGridItem>
 
-          <Reveal className="lg:col-span-12">
-            <ServiceCard {...SERVICES[5]} wide />
-          </Reveal>
-        </div>
+          {/* Remaining items mapping */}
+          {SERVICES.slice(1).map((s, idx) => (
+            <BentoGridItem key={s.name} colSpan={bentoSpans[idx]}>
+              <Reveal className="h-full" delay={idx * 0.06}>
+                <ServiceCard {...s} />
+              </Reveal>
+            </BentoGridItem>
+          ))}
+        </BentoGrid>
       </div>
     </section>
   );
 }
 function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
-    <div>
-      <div className="font-display text-2xl font-semibold text-gradient">{value}</div>
-      <div className="text-xs text-muted-foreground">{label}</div>
+    <div className="flex flex-col gap-1">
+      <div className="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight leading-[0.95]">{value}</div>
+      <div className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold mt-1.5">{label}</div>
     </div>
   );
 }
@@ -340,37 +249,43 @@ interface ServiceCardProps {
 
 function ServiceCard({ icon: Icon, name, color, desc, points, wide = false }: ServiceCardProps) {
   return (
-    <div
-      className={`group relative overflow-hidden rounded-3xl glass p-6 md:p-7 h-full hover:bg-white/[0.04] transition-colors ${wide ? "md:flex md:items-center md:gap-10" : ""}`}
+    <PremiumCard
+      hover={true}
+      className={cn(
+        "group relative p-6 md:p-8 h-full flex flex-col justify-between gap-8 transition-all duration-500 ease-out z-10 rounded-[32px]",
+        wide ? "md:flex-row md:items-center md:gap-10" : ""
+      )}
     >
-      <div
-        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br ${color} mix-blend-overlay`}
-        style={{ filter: "blur(40px)" }}
-      />
-      <div className={wide ? "md:flex-1" : ""}>
+      <div className={cn("flex flex-col gap-4 relative z-10", wide ? "md:flex-1" : "")}>
         <div
-          className={`inline-grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br ${color} text-white`}
+          className="inline-grid h-12 w-12 place-items-center rounded-[18px] bg-white/5 border border-white/10 text-brand dark:text-brand-3 shadow-md md:group-hover:scale-105 transition-all duration-500 ease-out"
         >
-          <Icon className="h-5 w-5" />
+          <Icon className="h-6 w-6" />
         </div>
-        <h3 className="mt-4 font-display text-xl font-semibold">{name}</h3>
-        <p className="mt-2 text-sm text-muted-foreground">{desc}</p>
+        <div>
+          <h3 className="font-display text-xl font-semibold text-slate-900 dark:text-white leading-[0.95] tracking-tight">{name}</h3>
+          <p className="mt-2 text-sm text-zinc-400 leading-8">{desc}</p>
+        </div>
       </div>
       <div
-        className={`mt-4 grid grid-cols-2 gap-2 text-xs text-muted-foreground ${wide ? "md:mt-0 md:flex-1" : ""}`}
+        className={cn(
+          "grid grid-cols-2 gap-3 text-xs text-zinc-400 leading-8 relative z-10",
+          wide ? "md:mt-0 md:flex-1" : ""
+        )}
       >
         {points.map((p: string) => (
-          <div key={p} className="flex items-center gap-1.5">
-            <span className="h-1 w-1 rounded-full bg-brand" /> {p}
+          <div key={p} className="flex items-center gap-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand animate-pulse" /> {p}
           </div>
         ))}
       </div>
-    </div>
+    </PremiumCard>
   );
 }
 
 /* ---------- Industries ---------- */
 export function Industries() {
+  const { cardHover, cardHoverTransition } = useMotionSystem();
   const items = [
     {
       icon: GraduationCap,
@@ -404,7 +319,7 @@ export function Industries() {
     },
   ];
   return (
-    <section className="py-28 relative">
+    <section className="py-32 lg:py-40 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="Industries"
@@ -417,21 +332,25 @@ export function Industries() {
         />
         <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {items.map((it, i) => (
-            <Reveal key={it.name} delay={i * 0.05}>
-              <div className="group relative h-full overflow-hidden rounded-2xl glass p-6 hover:bg-white/[0.05] transition-colors">
-                <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 group-hover:opacity-30 transition-opacity blur-2xl" />
+            <Reveal key={it.name} delay={i * 0.08}>
+              <motion.div
+                whileHover={cardHover}
+                transition={cardHoverTransition}
+                className="group relative h-full overflow-hidden rounded-3xl glass p-6 border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
+              >
+                <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 group-hover:opacity-10 transition-opacity blur-2xl" />
                 <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand-soft text-brand">
                   <it.icon className="h-6 w-6" />
                 </div>
-                <h3 className="mt-5 font-display text-xl font-semibold">{it.name}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{it.desc}</p>
+                <h3 className="mt-5 font-display text-xl font-semibold text-slate-900 dark:text-white">{it.name}</h3>
+                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{it.desc}</p>
                 <Link
                   to="/industries"
-                  className="mt-5 inline-flex items-center gap-1 text-xs font-medium text-foreground/80 hover:text-brand"
+                  className="mt-5 inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-brand transition-colors"
                 >
                   Explore solutions <ArrowRight className="h-3 w-3" />
                 </Link>
-              </div>
+              </motion.div>
             </Reveal>
           ))}
         </div>
@@ -470,7 +389,7 @@ export function Journey() {
     },
   ];
   return (
-    <section className="py-28 relative">
+    <section className="py-32 lg:py-40 relative bg-radial-subtle">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="Our Methodology"
@@ -483,22 +402,22 @@ export function Journey() {
           center
         />
         <div className="relative mt-20">
-          <div className="hidden lg:block absolute top-12 left-[8%] right-[8%] h-px bg-gradient-to-r from-transparent via-brand to-transparent" />
+          <div className="hidden lg:block absolute top-12 left-[8%] right-[8%] h-px bg-linear-to-r from-transparent via-brand to-transparent" />
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
             {steps.map((s, i) => (
               <Reveal key={s.name} delay={i * 0.08}>
                 <div className="text-center group">
                   <div className="relative mx-auto h-24 w-24">
-                    <div className="absolute inset-0 rounded-full bg-gradient-brand opacity-20 blur-xl group-hover:opacity-50 transition-opacity" />
-                    <div className="relative h-24 w-24 grid place-items-center rounded-full glass-strong">
+                    <div className="absolute inset-0 rounded-full bg-gradient-brand opacity-[0.06] blur-xl group-hover:opacity-10 transition-opacity" />
+                    <div className="relative h-24 w-24 grid place-items-center rounded-full glass">
                       <s.icon className="h-9 w-9 text-brand" />
                     </div>
                     <div className="absolute -top-2 -right-2 grid h-7 w-7 place-items-center rounded-full bg-gradient-brand text-white text-xs font-bold">
                       {i + 1}
                     </div>
                   </div>
-                  <h3 className="mt-5 font-display text-lg font-semibold">{s.name}</h3>
-                  <p className="mt-2 text-sm text-muted-foreground">{s.desc}</p>
+                  <h3 className="mt-5 font-display text-lg font-semibold text-slate-900 dark:text-white">{s.name}</h3>
+                  <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{s.desc}</p>
                 </div>
               </Reveal>
             ))}
@@ -512,35 +431,27 @@ export function Journey() {
 /* ---------- Metrics ---------- */
 export function Metrics() {
   const items = [
-    { v: 100, s: "+", l: "Projects Delivered", sub: "Across 14 countries" },
-    { v: 50, s: "+", l: "Enterprise Clients", sub: "Fortune 500 companies" },
-    { v: 98, s: "%", l: "Client Satisfaction", sub: "Audited net promoter score" },
-    { v: 24, s: "/7", l: "Support Coverage", sub: "Three follow-the-sun hubs" },
+    { v: 60, s: "+", l: "ERP Programs" },
+    { v: 312, s: "%", l: "Average ROI" },
+    { v: 47, s: "%", l: "Faster Close" },
+    { v: 18, s: "", l: "Countries" },
   ];
   return (
-    <section className="relative py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-brand p-10 md:p-16 text-white">
-          <div
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage:
-                "radial-gradient(circle at 20% 20%, rgba(255,255,255,.4), transparent 40%), radial-gradient(circle at 80% 60%, rgba(255,255,255,.3), transparent 50%)",
-            }}
-          />
-          <div className="relative grid md:grid-cols-4 gap-10">
-            {items.map((m, i) => (
-              <Reveal key={m.l} delay={i * 0.08}>
-                <div>
-                  <div className="font-display text-5xl md:text-6xl font-semibold">
-                    <Counter to={m.v} suffix={m.s} />
-                  </div>
-                  <div className="mt-2 text-sm font-medium opacity-95">{m.l}</div>
-                  <div className="text-xs opacity-80">{m.sub}</div>
+    <section className="relative py-32 lg:py-48 bg-[#002624]">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+          {items.map((m, i) => (
+            <Reveal key={m.l} delay={i * 0.08}>
+              <div className="flex flex-col items-center gap-3">
+                <div className="font-display text-6xl sm:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[0.95]">
+                  <Counter to={m.v} suffix={m.s} />
                 </div>
-              </Reveal>
-            ))}
-          </div>
+                <div className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-bold mt-2">
+                  {m.l}
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -549,6 +460,7 @@ export function Metrics() {
 
 /* ---------- Case Studies Preview ---------- */
 export function CaseStudiesPreview() {
+  const { cardHover, cardHoverTransition } = useMotionSystem();
   const cases = [
     {
       tag: "Oracle ERP",
@@ -570,7 +482,7 @@ export function CaseStudiesPreview() {
     },
   ];
   return (
-    <section className="py-28">
+    <section className="py-32 lg:py-40">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="flex items-end justify-between flex-wrap gap-6">
           <SectionHeading
@@ -592,31 +504,36 @@ export function CaseStudiesPreview() {
         <div className="mt-12 grid md:grid-cols-3 gap-6">
           {cases.map((c, i) => (
             <Reveal key={c.title} delay={i * 0.08}>
-              <Link to="/case-studies" className="group block overflow-hidden rounded-3xl glass">
-                <div className="relative aspect-[4/3] overflow-hidden">
+              <MotionLink
+                to="/case-studies"
+                whileHover={cardHover}
+                transition={cardHoverTransition}
+                className="group block overflow-hidden rounded-[32px] glass border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
+              >
+                <div className="relative aspect-4/3 overflow-hidden m-3 rounded-[24px] shadow-sm">
                   <img
                     src={c.image}
                     alt={c.title}
                     loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="h-full w-full object-cover brightness-[0.95] contrast-[1.05] transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#050816] via-transparent to-transparent" />
-                  <div className="absolute top-4 left-4 glass-strong rounded-full px-3 py-1 text-xs font-medium">
+                  <div className="absolute inset-0 bg-linear-to-t from-[#1A312C]/80 via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 glass-strong rounded-full px-3 py-1 text-xs font-medium text-white">
                     {c.tag}
                   </div>
-                  <div className="absolute bottom-4 right-4 glass-strong rounded-full px-3 py-1 text-xs font-semibold">
+                  <div className="absolute bottom-4 right-4 glass-strong rounded-full px-3 py-1 text-xs font-semibold text-white">
                     {c.metric}
                   </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="font-display text-lg font-semibold group-hover:text-brand transition-colors">
+                  <h3 className="font-display text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand transition-colors">
                     {c.title}
                   </h3>
-                  <div className="mt-3 inline-flex items-center gap-1 text-xs text-muted-foreground">
+                  <div className="mt-3 inline-flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
                     Read case study <ArrowRight className="h-3 w-3" />
                   </div>
                 </div>
-              </Link>
+              </MotionLink>
             </Reveal>
           ))}
         </div>
@@ -648,8 +565,8 @@ export function Testimonials() {
     },
   ];
   return (
-    <section className="py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section className="py-32 lg:py-48 bg-[#002624]">
+      <div className="mx-auto max-w-7xl px-6">
         <SectionHeading
           tag="Client Voices"
           title={
@@ -659,25 +576,33 @@ export function Testimonials() {
           }
           center
         />
-        <div className="mt-14 grid md:grid-cols-3 gap-5">
+        <div className="mt-20 grid md:grid-cols-3 gap-8">
           {items.map((t, i) => (
-            <Reveal key={i} delay={i * 0.08}>
-              <div className="h-full rounded-3xl glass p-7">
-                <Quote className="h-7 w-7 text-brand" />
-                <p className="mt-4 text-foreground/90 leading-relaxed">"{t.quote}"</p>
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-gradient-brand" />
-                  <div>
-                    <div className="text-sm font-semibold">{t.name}</div>
-                    <div className="text-xs text-muted-foreground">{t.role}</div>
-                  </div>
-                  <div className="ml-auto flex gap-0.5">
+            <Reveal key={i} delay={i * 0.1}>
+              <PremiumCard
+                hover={true}
+                className="h-full p-8 md:p-10 flex flex-col justify-between gap-8 rounded-[32px]"
+              >
+                <div className="space-y-6 text-left">
+                  <div className="flex gap-1 text-amber-400">
                     {Array.from({ length: 5 }).map((_, k) => (
-                      <Star key={k} className="h-3 w-3 fill-amber-400 text-amber-400" />
+                      <Star key={k} className="h-3.5 w-3.5 fill-current" />
                     ))}
                   </div>
+                  <p className="text-base text-zinc-300 leading-relaxed italic font-medium">
+                    "{t.quote}"
+                  </p>
                 </div>
-              </div>
+                <div className="flex items-center gap-4 text-left">
+                  <div className="h-10 w-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white font-semibold text-sm">
+                    {t.name[0]}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-white">{t.name}</div>
+                    <div className="text-xs text-zinc-500 mt-0.5">{t.role}</div>
+                  </div>
+                </div>
+              </PremiumCard>
             </Reveal>
           ))}
         </div>
@@ -688,6 +613,7 @@ export function Testimonials() {
 
 /* ---------- Certifications ---------- */
 export function Certifications() {
+  const { cardHover, cardHoverTransition } = useMotionSystem();
   const items = [
     { icon: Award, name: "Oracle Certified", lvl: "Cloud Solutions Partner" },
     { icon: Award, name: "SAP Expertise", lvl: "Certified Integration Partner" },
@@ -697,21 +623,25 @@ export function Certifications() {
     { icon: ShieldCheck, name: "SOC 2 Type II", lvl: "Audited Operations" },
   ];
   return (
-    <section className="py-20 border-t border-border/50">
+    <section className="py-32 lg:py-40 border-t border-border/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
-          <p className="text-center text-xs uppercase tracking-[0.3em] text-muted-foreground">
+          <p className="text-center text-xs uppercase tracking-[0.3em] text-slate-500 dark:text-slate-400">
             Certifications & Partnerships
           </p>
         </Reveal>
         <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {items.map((i, idx) => (
-            <Reveal key={i.name} delay={idx * 0.05}>
-              <div className="glass rounded-2xl p-5 flex flex-col items-center text-center gap-2 hover:bg-white/5 transition-colors">
+            <Reveal key={i.name} delay={idx * 0.08}>
+              <motion.div
+                whileHover={cardHover}
+                transition={cardHoverTransition}
+                className="glass rounded-3xl p-5 flex flex-col items-center text-center gap-2 border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
+              >
                 <i.icon className="h-6 w-6 text-brand" />
-                <div className="text-sm font-semibold">{i.name}</div>
-                <div className="text-xs text-muted-foreground">{i.lvl}</div>
-              </div>
+                <div className="text-sm font-semibold text-slate-900 dark:text-white">{i.name}</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">{i.lvl}</div>
+              </motion.div>
             </Reveal>
           ))}
         </div>
@@ -722,40 +652,89 @@ export function Certifications() {
 
 /* ---------- Final CTA ---------- */
 export function FinalCTA() {
+  const { buttonTap, buttonTransition } = useMotionSystem();
+  const { parallaxProps, handleMouseMove, handleMouseLeave } = useMouseParallax(8);
+  const cardRef = React.useRef<HTMLDivElement>(null);
+  const [spotlightPos, setSpotlightPos] = React.useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  const handleCardMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    setSpotlightPos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  };
+
   return (
-    <section className="py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section className="py-32">
+      <div className="mx-auto max-w-7xl px-6">
         <Reveal>
-          <div className="relative overflow-hidden rounded-3xl glass-strong border border-brand/35 shadow-2xl p-10 md:p-16 text-center">
-            <div className="absolute inset-0 bg-gradient-brand opacity-25" />
-            <div className="absolute -top-32 left-1/2 -translate-x-1/2 h-80 w-[600px] rounded-full bg-gradient-brand opacity-45 blur-3xl" />
-            <div className="relative">
-              <SectionHeading
-                tag="Let's build"
-                title={
-                  <>
-                    Ready to ship the next era of{" "}
-                    <span className="text-gradient">your enterprise?</span>
-                  </>
-                }
-                subtitle="Talk to an enterprise architect. 30 minutes, zero obligation, immediate value."
-                center
+          <div
+            ref={cardRef}
+            onMouseMove={(e) => {
+              handleCardMouseMove(e);
+              handleMouseMove(e);
+            }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={(e) => {
+              setIsHovered(false);
+              handleMouseLeave();
+            }}
+            className="relative overflow-hidden rounded-[32px] bg-[#001a18] border border-white/[0.06] p-16 md:p-28 text-center group shadow-2xl select-none"
+          >
+            {/* Backdrop image overlay */}
+            <img 
+              src="/card_1.jpg" 
+              alt="" 
+              className="absolute inset-0 w-full h-full object-cover brightness-[0.7] contrast-[1.05] z-0 pointer-events-none transition-transform duration-2000 group-hover:scale-105"
+            />
+            {/* Dark gradient layer */}
+            <div className="absolute inset-0 bg-black/45 pointer-events-none z-10" />
+
+            {/* Interactive Spotlight layer */}
+            {isHovered && (
+              <div
+                className="absolute inset-0 z-15 pointer-events-none transition-opacity duration-500 opacity-100"
+                style={{
+                  background: `radial-gradient(circle 400px at ${spotlightPos.x}px ${spotlightPos.y}px, rgba(255, 255, 255, 0.05), transparent 80%)`,
+                }}
               />
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Link
+            )}
+
+            {/* Subtle noise layer */}
+            <div className="absolute inset-0 opacity-[0.008] pointer-events-none mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E')] z-10" />
+
+            <motion.div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center justify-center gap-6" {...parallaxProps}>
+              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[0.95] max-w-3xl">
+                Ready to ship the next era of your enterprise?
+              </h2>
+              <p className="text-zinc-300 text-sm sm:text-base leading-8 max-w-xl">
+                Talk to an enterprise architect. 30 minutes, zero obligation, immediate value.
+              </p>
+              
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                <MotionLink
                   to="/contact"
-                  className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-medium text-white shadow-lg shadow-brand/30 hover:scale-105 transition-transform"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={buttonTap}
+                  transition={buttonTransition}
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-sm font-bold text-[#002624] hover:bg-slate-100 transition-all duration-200 shadow-md"
                 >
-                  Book Free Consultation <ArrowRight className="h-4 w-4" />
-                </Link>
-                <Link
+                  Book Free Consultation
+                </MotionLink>
+                <MotionLink
                   to="/case-studies"
-                  className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium hover:scale-105 transition-transform"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={buttonTap}
+                  transition={buttonTransition}
+                  className="w-full sm:w-auto inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition-all duration-200"
                 >
                   See client results
-                </Link>
+                </MotionLink>
               </div>
-            </div>
+            </motion.div>
           </div>
         </Reveal>
       </div>
