@@ -16,18 +16,18 @@ export function Hero() {
 
   return (
     <section
-      className="relative min-h-screen lg:h-screen w-full flex flex-col justify-end overflow-hidden pt-20 pb-6 lg:pt-24 lg:pb-10 bg-[#031224]"
+      className="relative h-screen w-full flex flex-col justify-end overflow-hidden pt-20 pb-8 lg:pt-24 lg:pb-10 bg-[#031224]"
       style={{
         background: "#031224",
       }}
     >
-      {/* Background Video */}
+      {/* Background Video — object-cover fills the frame on all screen sizes */}
       <video
         autoPlay
         muted
         loop
         playsInline
-        className="absolute inset-0 w-full h-full object-contain lg:object-cover z-0 pointer-events-none"
+        className="absolute inset-0 !w-full !h-full !max-w-none object-cover z-0 pointer-events-none"
       >
         <source src="/videos/Hero_video.mp4" type="video/mp4" />
       </video>
