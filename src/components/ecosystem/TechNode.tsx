@@ -30,6 +30,13 @@ export const TechNode = React.memo(
   }: TechNodeProps) => {
     const shouldReduceMotion = useReducedMotion();
 
+    // Derive sizes from node width for responsive scaling
+    const isSmall = width <= 110;
+    const iconSize = isSmall ? 28 : 52;
+    const fontSize = isSmall ? 11 : 16;
+    const px = isSmall ? 10 : 20;
+    const gap = isSmall ? 6 : 12;
+
     const handleKeyDown = (e: React.KeyboardEvent) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -39,12 +46,12 @@ export const TechNode = React.memo(
 
     return (
       <div
-        className="absolute z-30 cursor-pointer pointer-events-auto select-none rounded-full outline-none bg-transparent p-3 group"
+        className="absolute z-30 cursor-pointer pointer-events-auto select-none rounded-full outline-none bg-transparent p-1 group"
         style={{
           left: x,
           top: y,
-          minWidth: width + 24,
-          height: height + 24,
+          minWidth: width + 8,
+          height: height + 8,
           transform: "translate(-50%, -50%)",
           boxSizing: "border-box",
         }}
@@ -76,10 +83,12 @@ export const TechNode = React.memo(
 
           {/* The Card Body */}
           <div
-            className={`relative flex items-center h-full w-full px-[20px] rounded-full border transition-all duration-300 gap-[12px] whitespace-nowrap
+            className={`relative flex items-center h-full w-full rounded-full border transition-all duration-300 whitespace-nowrap
               group-focus-visible:ring-2 group-focus-visible:ring-primary group-focus-visible:ring-offset-2 group-focus-visible:ring-offset-eco-bg
               ${isActive ? "ring-2 ring-primary ring-offset-2 ring-offset-eco-bg" : ""}`}
             style={{
+              paddingInline: px,
+              gap,
               backgroundColor: "var(--eco-card-bg)",
               borderColor: isHovered ? partner.glowColor : "var(--color-border)",
               boxShadow: isHovered
@@ -91,18 +100,15 @@ export const TechNode = React.memo(
             {/* Brand Icon wrapper */}
             <div
               className="shrink-0 flex items-center justify-center rounded-full overflow-hidden"
-              style={{ width: 52, height: 52 }}
+              style={{ width: iconSize, height: iconSize }}
             >
-              <BrandIcon name={partner.name} color={partner.glowColor} size={52} />
+              <BrandIcon name={partner.name} color={partner.glowColor} size={iconSize} />
             </div>
 
             {/* Partner Text - WCAG contrast compliant */}
             <span
               className="font-display font-semibold select-none text-[#0F172A] dark:text-white"
-              style={{
-                fontSize: "16px",
-                opacity: 1.0,
-              }}
+              style={{ fontSize }}
             >
               {partner.name}
             </span>

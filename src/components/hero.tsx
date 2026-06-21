@@ -33,21 +33,21 @@ export function Hero() {
       }}
     >
       {/* Main Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-12 lg:gap-16 items-center my-auto">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center my-auto">
         
         {/* Left Column - 45% (scaled to 5 cols) */}
-        <div className="lg:col-span-5 flex flex-col items-start text-left space-y-10">
+        <div className="lg:col-span-5 flex flex-col items-start text-left space-y-6 sm:space-y-10">
           {/* Headline */}
           <motion.h1
             initial="initial"
             animate="animate"
             className="font-display font-bold tracking-tight text-white leading-[0.95] flex flex-col items-start"
             style={{
-              fontSize: "clamp(2.8rem, 6vw, 4.6rem)",
+              fontSize: "clamp(2.2rem, 6vw, 4.6rem)",
               letterSpacing: "-0.03em",
             }}
           >
-            <span className="block sm:whitespace-nowrap">
+            <span className="block">
               {firstLineWords.map((word, idx) => (
                 <motion.span
                   key={idx}
@@ -58,7 +58,7 @@ export function Hero() {
                 </motion.span>
               ))}
             </span>
-            <span className="block sm:whitespace-nowrap">
+            <span className="block">
               {secondLineWords.map((word, idx) => (
                 <motion.span
                   key={idx}
@@ -140,7 +140,7 @@ export function Hero() {
 
         {/* Right Column - 55% (scaled to 7 cols) */}
         <div 
-          className="lg:col-span-7 flex items-center justify-center relative w-full mt-10 lg:mt-0 px-4 sm:px-0"
+          className="lg:col-span-7 flex items-center justify-center relative w-full mt-6 lg:mt-0 px-2 sm:px-0"
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
         >
@@ -183,8 +183,8 @@ export function Hero() {
             </PremiumCard>
  
             {/* Top Right Floating Metric Card */}
-            <div className="absolute right-[0px] xs:right-[-20px] sm:right-[-40px] top-[-30px] sm:top-[-40px] z-30">
-              <GlassMetricCard label="Model Accuracy" value={98} suffix="%" trend="+12% YoY" className="w-[130px] sm:w-[150px]" />
+            <div className="absolute right-0 sm:right-[-40px] top-[-30px] sm:top-[-40px] z-30">
+              <GlassMetricCard label="Model Accuracy" value={98} suffix="%" trend="+12% YoY" className="w-[120px] sm:w-[150px]" />
             </div>
  
             {/* Right small AI pipeline card */}
@@ -202,11 +202,11 @@ export function Hero() {
             </div>
  
             {/* Bottom Left Floating Performance Card */}
-            <div className="absolute left-[0px] xs:left-[-20px] sm:left-[-50px] bottom-[-30px] sm:bottom-[-40px] z-30">
+            <div className="absolute left-0 sm:left-[-50px] bottom-[-20px] sm:bottom-[-40px] z-30">
               <motion.div variants={slowFloat} animate="animate">
                 <PremiumCard
                   hover={false}
-                  className="text-white p-4 sm:p-5 w-[200px] sm:w-[250px] flex flex-col gap-4 select-none"
+                  className="text-white p-3 sm:p-5 w-[170px] sm:w-[250px] flex flex-col gap-3 sm:gap-4 select-none"
                 >
                   <div className="flex justify-between items-center w-full">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Performance</span>

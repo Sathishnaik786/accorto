@@ -34,14 +34,14 @@ export function ProcessFlow({ className }: { className?: string }) {
       
       <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 sm:gap-6 min-h-0">
         {/* Desktop horizontal connector line */}
-        <div className="hidden lg:block absolute left-[5%] right-[5%] top-[50%] -translate-y-1/2 h-[2px] bg-white/[0.05] z-0 overflow-hidden">
+        <div className="hidden lg:block absolute left-[5%] right-[5%] top-[50%] -translate-y-1/2 h-[2px] bg-white/5 z-0 overflow-hidden">
           <div className="w-full h-full relative">
             <div className="absolute top-0 bottom-0 left-0 w-32 bg-linear-to-r from-transparent via-brand to-transparent animate-border-shine" style={{ animationDuration: "4s" }} />
           </div>
         </div>
 
         {/* Mobile vertical connector line */}
-        <div className="sm:hidden absolute left-[19px] top-6 bottom-6 w-[2px] bg-white/[0.05] z-0 overflow-hidden">
+        <div className="sm:hidden absolute left-[19px] top-6 bottom-6 w-[2px] bg-white/5 z-0 overflow-hidden">
           <div className="h-full w-full relative">
             <div className="absolute left-0 right-0 top-0 h-24 bg-linear-to-b from-transparent via-brand to-transparent animate-border-shine" style={{ animationDuration: "3s" }} />
           </div>

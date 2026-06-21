@@ -146,19 +146,19 @@ export function ServicesShowcase() {
           }
           subtitle="From core ERP to applied AI, our practices are built around measurable business results, not slideware."
         />
-        <BentoGrid className="mt-16">
+        <BentoGrid className="mt-10 md:mt-16">
           {/* Main Featured Oracle ERP Card */}
           <BentoGridItem colSpan="md:col-span-12 lg:col-span-7 lg:row-span-2">
             <Reveal className="h-full">
               <PremiumCard 
                 hover={true}
-                className="relative h-full p-8 md:p-10 group transition-all duration-500 ease-out rounded-[32px]"
+                className="relative h-full p-6 sm:p-8 md:p-10 group transition-all duration-500 ease-out rounded-[32px]"
               >
                 <div className="relative z-10">
                   <div className="inline-flex items-center gap-2 bg-white/5 rounded-full px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-300">
                     <Star className="h-3 w-3 text-amber-400 animate-pulse" /> Featured Practice
                   </div>
-                  <h3 className="mt-5 font-display text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white leading-[0.95] tracking-tight">
+                  <h3 className="mt-5 font-display text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900 dark:text-white leading-[1.05] tracking-tight">
                     Oracle ERP Cloud, end-to-end
                   </h3>
                   <p className="mt-4 text-zinc-400 leading-8 max-w-xl text-sm">
@@ -180,7 +180,7 @@ export function ServicesShowcase() {
                       </div>
                     ))}
                   </div>
-                  <div className="mt-8 grid grid-cols-3 gap-6 max-w-md">
+                  <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-3 sm:gap-6 max-w-md">
                     <Stat
                       label="ERP go-lives"
                       value={
@@ -233,8 +233,8 @@ export function ServicesShowcase() {
 function Stat({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-1">
-      <div className="font-display text-4xl sm:text-5xl font-bold text-white tracking-tight leading-[0.95]">{value}</div>
-      <div className="text-[10px] uppercase tracking-widest text-zinc-500 font-bold mt-1.5">{label}</div>
+      <div className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight leading-[0.95]">{value}</div>
+      <div className="text-[9px] sm:text-[10px] uppercase tracking-widest text-zinc-500 font-bold mt-1">{label}</div>
     </div>
   );
 }
@@ -252,7 +252,7 @@ function ServiceCard({ icon: Icon, name, color, desc, points, wide = false }: Se
     <PremiumCard
       hover={true}
       className={cn(
-        "group relative p-6 md:p-8 h-full flex flex-col justify-between gap-8 transition-all duration-500 ease-out z-10 rounded-[32px]",
+        "group relative p-5 sm:p-6 md:p-8 h-full flex flex-col justify-between gap-5 sm:gap-8 transition-all duration-500 ease-out z-10 rounded-[32px]",
         wide ? "md:flex-row md:items-center md:gap-10" : ""
       )}
     >
@@ -330,23 +330,23 @@ export function Industries() {
           }
           subtitle="Tailored solutions built on years of operating inside the world's most complex industries."
         />
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {items.map((it, i) => (
             <Reveal key={it.name} delay={i * 0.08}>
               <motion.div
                 whileHover={cardHover}
                 transition={cardHoverTransition}
-                className="group relative h-full overflow-hidden rounded-3xl glass p-6 border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
+                className="group relative h-full overflow-hidden rounded-2xl sm:rounded-3xl glass p-4 sm:p-6 border border-transparent hover:border-brand/30 dark:hover:border-white/10 shadow-lg hover:shadow-xl transition-all"
               >
                 <div className="absolute -top-12 -right-12 h-40 w-40 rounded-full bg-gradient-brand opacity-0 group-hover:opacity-10 transition-opacity blur-2xl" />
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-brand-soft text-brand">
-                  <it.icon className="h-6 w-6" />
+                <div className="grid h-10 w-10 sm:h-12 sm:w-12 place-items-center rounded-xl bg-gradient-brand-soft text-brand">
+                  <it.icon className="h-5 w-5 sm:h-6 sm:w-6" />
                 </div>
-                <h3 className="mt-5 font-display text-xl font-semibold text-slate-900 dark:text-white">{it.name}</h3>
-                <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{it.desc}</p>
+                <h3 className="mt-3 sm:mt-5 font-display text-base sm:text-xl font-semibold text-slate-900 dark:text-white">{it.name}</h3>
+                <p className="mt-1 sm:mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{it.desc}</p>
                 <Link
                   to="/industries"
-                  className="mt-5 inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-brand transition-colors"
+                  className="mt-3 sm:mt-5 inline-flex items-center gap-1 text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-brand transition-colors"
                 >
                   Explore solutions <ArrowRight className="h-3 w-3" />
                 </Link>
@@ -403,7 +403,7 @@ export function Journey() {
         />
         <div className="relative mt-20">
           <div className="hidden lg:block absolute top-12 left-[8%] right-[8%] h-px bg-linear-to-r from-transparent via-brand to-transparent" />
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 sm:gap-8">
             {steps.map((s, i) => (
               <Reveal key={s.name} delay={i * 0.08}>
                 <div className="text-center group">
@@ -437,16 +437,16 @@ export function Metrics() {
     { v: 18, s: "", l: "Countries" },
   ];
   return (
-    <section className="relative py-32 lg:py-48 bg-[#002624]">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
+    <section className="relative py-16 md:py-24 lg:py-32 bg-[#002624]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12 text-center">
           {items.map((m, i) => (
             <Reveal key={m.l} delay={i * 0.08}>
               <div className="flex flex-col items-center gap-3">
-                <div className="font-display text-6xl sm:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-[0.95]">
+                <div className="font-display text-4xl sm:text-6xl lg:text-8xl font-bold text-white tracking-tight leading-[0.95]">
                   <Counter to={m.v} suffix={m.s} />
                 </div>
-                <div className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-bold mt-2">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold mt-2">
                   {m.l}
                 </div>
               </div>
@@ -565,8 +565,8 @@ export function Testimonials() {
     },
   ];
   return (
-    <section className="py-32 lg:py-48 bg-[#002624]">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="py-16 md:py-24 lg:py-32 bg-[#002624]">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <SectionHeading
           tag="Client Voices"
           title={
@@ -576,14 +576,14 @@ export function Testimonials() {
           }
           center
         />
-        <div className="mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="mt-12 sm:mt-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((t, i) => (
             <Reveal key={i} delay={i * 0.1}>
               <PremiumCard
                 hover={true}
-                className="h-full p-8 md:p-10 flex flex-col justify-between gap-8 rounded-[32px]"
+                className="h-full p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-6 rounded-[32px]"
               >
-                <div className="space-y-6 text-left">
+                <div className="space-y-4 text-left">
                   <div className="flex gap-1 text-amber-400">
                     {Array.from({ length: 5 }).map((_, k) => (
                       <Star key={k} className="h-3.5 w-3.5 fill-current" />
@@ -668,8 +668,8 @@ export function FinalCTA() {
   };
 
   return (
-    <section className="py-32">
-      <div className="mx-auto max-w-7xl px-6">
+    <section className="py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal>
           <div
             ref={cardRef}
@@ -682,7 +682,7 @@ export function FinalCTA() {
               setIsHovered(false);
               handleMouseLeave();
             }}
-            className="relative overflow-hidden rounded-[32px] bg-[#001a18] border border-white/[0.06] px-6 py-12 sm:p-16 md:p-28 text-center group shadow-2xl select-none"
+            className="relative overflow-hidden rounded-[32px] bg-[#001a18] border border-white/6 px-5 py-10 sm:p-16 md:p-28 text-center group shadow-2xl select-none"
           >
             {/* Backdrop image overlay */}
             <img 
@@ -707,14 +707,14 @@ export function FinalCTA() {
             <div className="absolute inset-0 opacity-[0.008] pointer-events-none mix-blend-overlay bg-[url('data:image/svg+xml,%3Csvg viewBox=%270 0 200 200%27 xmlns=%27http://www.w3.org/2000/svg%27%3E%3Cfilter id=%27noiseFilter%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.8%27 numOctaves=%273%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27100%25%27 height=%27100%25%27 filter=%27url(%23noiseFilter)%27/%3E%3C/svg%3E')] z-10" />
 
             <motion.div className="relative z-20 max-w-4xl mx-auto flex flex-col items-center justify-center gap-6" {...parallaxProps}>
-              <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[0.95] max-w-3xl">
+              <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight leading-[1.05] max-w-3xl">
                 Ready to ship the next era of your enterprise?
               </h2>
               <p className="text-zinc-300 text-sm sm:text-base leading-8 max-w-xl">
                 Talk to an enterprise architect. 30 minutes, zero obligation, immediate value.
               </p>
               
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+              <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
                 <MotionLink
                   to="/contact"
                   whileHover={{ scale: 1.03 }}

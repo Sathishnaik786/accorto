@@ -22,17 +22,31 @@ export function useResponsiveRadius() {
 
     const handleResize = () => {
       const w = window.innerWidth;
-      if (w < 768) {
+      if (w < 400) {
+        // Small phone — compact radial diagram
         setDimensions({
-          width: 350,
-          height: 280,
-          radius: 120,
-          centerX: 175,
-          centerY: 90,
-          nodeWidth: 150,
-          nodeHeight: 72,
-          centerNodeSize: 170,
-          isMobile: true,
+          width: 340,
+          height: 340,
+          radius: 122,
+          centerX: 170,
+          centerY: 170,
+          nodeWidth: 100,
+          nodeHeight: 44,
+          centerNodeSize: 110,
+          isMobile: false,
+        });
+      } else if (w < 640) {
+        // Medium phone
+        setDimensions({
+          width: 380,
+          height: 380,
+          radius: 140,
+          centerX: 190,
+          centerY: 190,
+          nodeWidth: 110,
+          nodeHeight: 48,
+          centerNodeSize: 120,
+          isMobile: false,
         });
       } else if (w < 1024) {
         // Tablet

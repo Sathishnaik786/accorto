@@ -45,11 +45,14 @@ export const CenterNode = React.memo(({ size, isAnyNodeHovered = false }: Center
       {/* Texts */}
       <span
         className="font-display font-bold tracking-wide select-none drop-shadow-md leading-none"
-        style={{ fontSize: size === 200 ? "42px" : "32px" }}
+        style={{ fontSize: Math.max(12, Math.round(size * 0.21)) }}
       >
         ACCORTO
       </span>
-      <span className="text-[10px] sm:text-xs font-medium tracking-widest text-slate-100 opacity-80 uppercase mt-1.5 select-none">
+      <span
+        className="font-medium tracking-widest text-slate-100 opacity-80 uppercase mt-1 select-none text-center leading-tight"
+        style={{ fontSize: Math.max(7, Math.round(size * 0.058)), letterSpacing: "0.12em" }}
+      >
         Intelligence Layer
       </span>
     </motion.div>

@@ -50,9 +50,8 @@ export const ConnectionLines = React.memo(
           </filter>
         </defs>
 
+        {/* All partners get a connection line — including OpenAI */}
         {partners.map((partner, index) => {
-          if (partner.id === "openai") return null;
-
           const isHovered = hoveredId === partner.id;
           const angle = (Math.PI * 2 * index) / totalItems - Math.PI / 2;
           const x = centerX + Math.cos(angle) * radius;

@@ -9,7 +9,7 @@ export function BentoGrid({
   className?: string;
 }) {
   return (
-    <div className={cn("grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-fr", className)}>
+    <div className={cn("grid grid-cols-1 md:grid-cols-12 gap-6", className)}>
       {children}
     </div>
   );
