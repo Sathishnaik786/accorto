@@ -1,20 +1,12 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { useMotionSystem, useMouseParallax } from "../lib/motion-presets";
-import { PremiumCard } from "./ui/PremiumCard";
-import { GlassPanel } from "./ui/GlassPanel";
-import { GlassMetricCard } from "./premium/GlassMetricCard";
+import { useMotionSystem } from "../lib/motion-presets";
 import { Counter } from "./counter";
 
 export function Hero() {
   const {
     heroReveal,
-    buttonTap,
-    buttonTransition,
-    slowFloat,
   } = useMotionSystem();
-
-  const { parallaxProps, handleMouseMove, handleMouseLeave } = useMouseParallax(5);
 
   const avatars = [
     "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&fit=crop&q=80",
@@ -22,65 +14,28 @@ export function Hero() {
     "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&fit=crop&q=80",
   ];
 
-  const firstLineWords = "Build and Scale with".split(" ");
-  const secondLineWords = "the Right Systems".split(" ");
-
   return (
     <section
-      className="relative min-h-screen w-full flex flex-col justify-start overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-24 bg-[#002624]"
+      className="relative min-h-screen lg:h-screen w-full flex flex-col justify-end overflow-hidden pt-20 pb-6 lg:pt-24 lg:pb-10 bg-[#002624]"
       style={{
         background: "#002624",
       }}
     >
-      {/* Main Container */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-16 items-center my-auto">
+      {/* Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none"
+      >
+        <source src="/videos/Hero_video.mp4" type="video/mp4" />
+      </video>
+
+      {/* Main Container - Aligned to bottom */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 mt-auto">
         
-        {/* Left Column - 45% (scaled to 5 cols) */}
-        <div className="lg:col-span-5 flex flex-col items-start text-left space-y-6 sm:space-y-10">
-          {/* Headline */}
-          <motion.h1
-            initial="initial"
-            animate="animate"
-            className="font-display font-bold tracking-tight text-white leading-[0.95] flex flex-col items-start"
-            style={{
-              fontSize: "clamp(2.2rem, 6vw, 4.6rem)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            <span className="block">
-              {firstLineWords.map((word, idx) => (
-                <motion.span
-                  key={idx}
-                  variants={heroReveal(0.1 + idx * 0.05)}
-                  className={`inline-block mr-[0.25em] ${idx === 0 ? "pl-2 -ml-2" : ""}`}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </span>
-            <span className="block">
-              {secondLineWords.map((word, idx) => (
-                <motion.span
-                  key={idx}
-                  variants={heroReveal(0.3 + idx * 0.05)}
-                  className={`inline-block mr-[0.25em] text-gradient ${idx === 0 ? "pl-2 -ml-2" : ""}`}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </span>
-          </motion.h1>
-
-          {/* Description */}
-          <motion.p
-            variants={heroReveal(0.5)}
-            initial="initial"
-            animate="animate"
-            className="text-base sm:text-lg text-zinc-400 leading-8 max-w-[500px]"
-          >
-            We design scalable systems that streamline operations, improve efficiency, and support sustainable business growth.
-          </motion.p>
-
+        <div className="flex flex-col items-start text-left space-y-4 sm:space-y-6">
           {/* CTA Buttons */}
           <motion.div
             variants={heroReveal(0.6)}
@@ -116,7 +71,7 @@ export function Hero() {
             variants={heroReveal(0.8)}
             initial="initial"
             animate="animate"
-            className="flex flex-col items-start gap-4 pt-4"
+            className="flex flex-col items-start gap-4 pt-1"
           >
             <div className="flex -space-x-3">
               {avatars.map((url, i) => (
@@ -136,104 +91,6 @@ export function Hero() {
               Trusted by <Counter to={100} suffix="+" /> growing businesses worldwide
             </p>
           </motion.div>
-        </div>
-
-        {/* Right Column - 55% (scaled to 7 cols) */}
-        <div 
-          className="lg:col-span-7 flex items-center justify-center relative w-full mt-6 lg:mt-0 px-2 sm:px-0"
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
-        >
-          {/* Large ambient blur behind visuals */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-brand/10 opacity-30 blur-[120px] pointer-events-none z-0" />
-          
-          <motion.div {...parallaxProps} className="relative z-10 inline-block">
-            {/* Center Architecture/Dashboard Card */}
-            <PremiumCard hover={false} className="w-[280px] min-[360px]:w-[320px] min-[400px]:w-[360px] sm:w-[420px] h-auto sm:aspect-4/3 p-4 sm:p-6 text-left relative z-20">
-              <div className="flex items-center gap-1.5 pb-4 border-b border-white/5">
-                <div className="w-2.5 h-2.5 rounded-full bg-rose-500/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-                <span className="text-[10px] text-zinc-500 font-mono ml-3">accorto-control-plane</span>
-              </div>
-              <div className="mt-4 space-y-4 font-mono text-[10px]">
-                <div className="flex justify-between items-center text-slate-300">
-                  <span>$ accorto run core-pipeline</span>
-                  <span className="text-emerald-400">● LIVE</span>
-                </div>
-                <div className="inner-card p-3.5 space-y-2">
-                  <div className="flex justify-between text-zinc-400">
-                    <span>Oracle Cloud sync</span>
-                    <span className="text-emerald-400">99.9%</span>
-                  </div>
-                  <div className="flex justify-between text-zinc-400">
-                    <span>SAP HANA ledger</span>
-                    <span className="text-emerald-400">14ms latency</span>
-                  </div>
-                  <div className="flex justify-between text-zinc-400">
-                    <span>MLOps optimization</span>
-                    <span className="text-[#FCE76C]">Active</span>
-                  </div>
-                </div>
-                <div className="text-zinc-500 leading-normal">
-                  [system] core agents deployed successfully.<br />
-                  [system] optimization score: 9.4/10.
-                </div>
-              </div>
-            </PremiumCard>
- 
-            {/* Top Right Floating Metric Card */}
-            <div className="absolute right-0 sm:right-[-40px] top-[-30px] sm:top-[-40px] z-30">
-              <GlassMetricCard label="Model Accuracy" value={98} suffix="%" trend="+12% YoY" className="w-[120px] sm:w-[150px]" />
-            </div>
- 
-            {/* Right small AI pipeline card */}
-            <div className="absolute right-[-30px] top-[120px] sm:right-[-50px] z-30 hidden sm:block">
-              <GlassPanel className="p-4 flex flex-col gap-2 w-[150px] sm:w-[160px]">
-                <span className="text-[8px] font-bold text-zinc-500 uppercase tracking-widest">Core MLOps</span>
-                <div className="flex items-center gap-2 text-xs font-semibold text-white">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-ping" />
-                  <span>AI Pipeline</span>
-                </div>
-                <div className="h-1 bg-white/10 rounded-full overflow-hidden mt-1">
-                  <div className="h-full bg-brand w-[85%] rounded-full animate-border-shine" />
-                </div>
-              </GlassPanel>
-            </div>
- 
-            {/* Bottom Left Floating Performance Card */}
-            <div className="absolute left-0 sm:left-[-50px] bottom-[-20px] sm:bottom-[-40px] z-30">
-              <motion.div variants={slowFloat} animate="animate">
-                <PremiumCard
-                  hover={false}
-                  className="text-white p-3 sm:p-5 w-[170px] sm:w-[250px] flex flex-col gap-3 sm:gap-4 select-none"
-                >
-                  <div className="flex justify-between items-center w-full">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Performance</span>
-                    <span className="text-[8px] font-bold bg-white/10 text-emerald-400 rounded-full px-2 py-0.5">+18%</span>
-                  </div>
-                  
-                  {/* SVG Performance Chart */}
-                  <div className="relative h-[55px] w-full flex items-end">
-                    <svg className="w-full h-full overflow-visible z-10" viewBox="0 0 200 80">
-                      <motion.path
-                        initial={{ pathLength: 0 }}
-                        animate={{ pathLength: 1 }}
-                        transition={{ duration: 1.2, delay: 0.7 }}
-                        d="M 15 65 C 40 50, 60 30, 85 55 C 105 75, 125 50, 145 65 C 165 75, 180 50, 195 40"
-                        fill="none"
-                        stroke="#89D7B7"
-                        strokeWidth="4"
-                        strokeLinecap="round"
-                      />
-                      <circle cx="120" cy="57" r="5" fill="#89D7B7" />
-                    </svg>
-                  </div>
-                </PremiumCard>
-              </motion.div>
-            </div>
-          </motion.div>
-          
         </div>
       </div>
     </section>
