@@ -26,6 +26,17 @@ export const ConnectionLines = React.memo(
   }: ConnectionLinesProps) => {
     const shouldReduceMotion = useReducedMotion();
     const totalItems = partners.length;
+    const centerNodeRadius = centerNodeSize / 2;
+
+    // Pre-compute all positions so they can be shared between <defs> and rendering
+    const computed = partners.map((partner, index) => {
+      const angle = (Math.PI * 2 * index) / totalItems - Math.PI / 2;
+      const x = centerX + Math.cos(angle) * radius;
+      const y = centerY + Math.sin(angle) * radius;
+      const startX = centerX + Math.cos(angle) * centerNodeRadius;
+      const startY = centerY + Math.sin(angle) * centerNodeRadius;
+      return { partner, x, y, startX, startY };
+    });
 
     return (
       <svg
@@ -34,13 +45,25 @@ export const ConnectionLines = React.memo(
         style={{ width, height }}
       >
         <defs>
-          {/* Standard brand line gradient */}
-          <linearGradient id="line-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="var(--brand-2)" />
-            <stop offset="100%" stopColor="var(--primary)" />
-          </linearGradient>
+          {/* Per-line gradients using userSpaceOnUse so vertical/horizontal lines render correctly.
+              objectBoundingBox (the SVG default) fails for lines with zero-width bounding boxes
+              (e.g. the perfectly vertical OpenAI line). userSpaceOnUse uses SVG coordinates. */}
+          {computed.map(({ partner, startX, startY, x, y }) => (
+            <linearGradient
+              key={`grad-${partner.id}`}
+              id={`line-grad-${partner.id}`}
+              x1={startX}
+              y1={startY}
+              x2={x}
+              y2={y}
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0%" stopColor="var(--brand-2)" />
+              <stop offset="100%" stopColor="var(--primary)" />
+            </linearGradient>
+          ))}
 
-          {/* Active glow filter for the hovered path */}
+          {/* Active glow filter for hovered path */}
           <filter id="glow-filter" x="-30%" y="-30%" width="160%" height="160%">
             <feGaussianBlur stdDeviation="3" result="blur" />
             <feMerge>
@@ -50,40 +73,28 @@ export const ConnectionLines = React.memo(
           </filter>
         </defs>
 
-        {/* All partners get a connection line — including OpenAI */}
-        {partners.map((partner, index) => {
+        {computed.map(({ partner, x, y, startX, startY }) => {
           const isHovered = hoveredId === partner.id;
-          const angle = (Math.PI * 2 * index) / totalItems - Math.PI / 2;
-          const x = centerX + Math.cos(angle) * radius;
-          const y = centerY + Math.sin(angle) * radius;
-
-          // Compute start position exactly at the edge/circumference of the center circle
-          const centerNodeRadius = centerNodeSize / 2;
-          const startX = centerX + Math.cos(angle) * centerNodeRadius;
-          const startY = centerY + Math.sin(angle) * centerNodeRadius;
-
           const strokeWidth = isHovered ? 4 : 2;
           const opacity = isHovered ? 1.0 : 0.35;
           const filter = isHovered ? "url(#glow-filter)" : undefined;
-
-          // Pulse dot speeds up from 3s to 1.2s when the partner card is hovered
           const dotDuration = isHovered ? 1.2 : 3.0;
 
           return (
             <React.Fragment key={partner.id}>
-              {/* Connection Line starting from center circle edge */}
+              {/* Connection line — each uses its own per-partner gradient */}
               <motion.line
                 x1={startX}
                 y1={startY}
                 x2={x}
                 y2={y}
-                stroke="url(#line-gradient)"
+                stroke={`url(#line-grad-${partner.id})`}
                 animate={{ strokeWidth, opacity }}
                 style={{ filter }}
                 transition={{ duration: 0.25, ease: "easeOut" }}
               />
 
-              {/* Traveling Pulse Dot starting from center circle edge */}
+              {/* Traveling pulse dot */}
               {!shouldReduceMotion && (
                 <motion.circle
                   r="4"
