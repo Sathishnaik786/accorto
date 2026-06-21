@@ -229,6 +229,15 @@
   --eco-ring: rgba(0, 162, 255, 0.08);
 }
 
+@media (min-width: 1024px) {
+  :root {
+    --card-radius: 32px;
+  }
+  .dark {
+    --card-radius: 32px;
+  }
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

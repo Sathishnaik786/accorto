@@ -180,9 +180,9 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
         className="h-full"
       >
         <motion.div {...parallaxProps} className="h-full">
-          <PremiumCard className="group h-full flex flex-col relative rounded-[32px]">
+          <PremiumCard className="group h-full flex flex-col relative rounded-[32px] bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1">
             <div className="absolute inset-0 bg-white/1 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" />
-            <div className="relative aspect-4/3 rounded-[32px] overflow-hidden m-3 shadow-md z-10">
+            <div className="relative aspect-4/3 rounded-[32px] overflow-hidden m-3 shadow-md z-10 border border-slate-200/60 dark:border-transparent">
               <img
                 src={c.img}
                 alt={c.title}
@@ -195,8 +195,8 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
                   {c.cat}
                 </PremiumBadge>
               </div>
-              <div className="absolute bottom-4 right-4 bg-white/10 backdrop-blur-md border border-white/10 rounded-full px-3 py-1 text-xs font-semibold flex items-center gap-1 text-white shadow-sm">
-                <TrendingUp className="h-3 w-3 text-emerald-400" /> {c.metric}
+              <div className="absolute bottom-4 right-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-white/10 rounded-full px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5 text-slate-800 dark:text-white shadow-md transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1.5 group-hover:shadow-xl">
+                <TrendingUp className="h-3 w-3 text-emerald-500 dark:text-emerald-400" /> {c.metric}
               </div>
             </div>
             <div className="p-6 pt-3 flex flex-col flex-1 relative z-10 text-left">
@@ -204,9 +204,9 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
               <h3 className="mt-2 font-display text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand transition-colors leading-[1.02] tracking-tight">
                 {c.title}
               </h3>
-              <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed flex-1">{c.desc}</p>
+              <p className="mt-2 text-sm text-[#64748B] dark:text-zinc-400 leading-relaxed flex-1 font-medium">{c.desc}</p>
 
-              <div className="mt-4 pt-4 border-t border-slate-200/20 dark:border-white/5 space-y-4">
+              <div className="mt-4 pt-4 border-t border-slate-200/40 dark:border-white/5 space-y-4">
                 <ComparisonCard
                   title="Transformation Blueprint"
                   beforeLabel="Legacy State"
@@ -217,11 +217,11 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
                 />
                 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="inner-card p-4 flex flex-col justify-between">
+                  <div className="bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-2xl p-4 flex flex-col justify-between shadow-xs">
                     <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">ROI Metric</span>
                     <span className="font-bold text-emerald-600 dark:text-emerald-400 mt-1 block text-sm">{c.roi}</span>
                   </div>
-                  <div className="inner-card p-4 flex flex-col justify-between">
+                  <div className="bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-2xl p-4 flex flex-col justify-between shadow-xs">
                     <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">Outcome Goal</span>
                     <span className="font-semibold text-slate-900 dark:text-white mt-1 block leading-tight text-xs">{c.outcome}</span>
                   </div>
@@ -229,15 +229,15 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
               </div>
 
               <div className="mt-4 pt-4 flex flex-wrap gap-1.5">
-                <span className="text-[9px] bg-white/5 border border-white/10 text-zinc-400 rounded-md px-2.5 py-0.5 font-semibold">{c.industry}</span>
+                <span className="text-[9px] bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 text-slate-500 dark:text-zinc-400 rounded-md px-2.5 py-0.5 font-semibold shadow-xs">{c.industry}</span>
                 {c.tech.map((t) => (
-                  <span key={t} className="text-[9px] bg-brand/10 text-brand dark:text-brand-3 border border-brand/20 rounded-md px-2.5 py-0.5 font-semibold">{t}</span>
+                  <span key={t} className="text-[9px] bg-brand/10 text-brand dark:text-brand-3 border border-brand/20 rounded-md px-2.5 py-0.5 font-bold">{t}</span>
                 ))}
               </div>
 
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-1.5 text-xs font-semibold text-brand dark:text-brand-3 hover:text-brand-2 transition-all self-start group/link"
+                className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand dark:text-brand-3 hover:text-brand-2 transition-all self-start group/link"
               >
                 Read full story <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1.5" />
               </Link>
@@ -274,10 +274,10 @@ function CaseStudies() {
             <button
               key={c}
               onClick={() => setCat(c)}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+              className={`rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ${
                 cat === c
                   ? "bg-gradient-brand text-white shadow-brand hover:scale-105 hover:shadow-brand-lg"
-                  : "glass text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-white/10 dark:hover:bg-white/8"
+                  : "bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/10 hover:scale-105"
               }`}
             >
               {c}

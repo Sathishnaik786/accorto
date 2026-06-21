@@ -34,7 +34,7 @@ export function Hero() {
             muted
             loop
             playsInline
-            className="w-full h-full object-cover lg:!max-w-none rounded-3xl lg:rounded-none"
+            className="w-full h-full object-cover lg:max-w-none! rounded-3xl lg:rounded-none"
           >
             <source src="/videos/Hero_video.mp4" type="video/mp4" />
           </video>

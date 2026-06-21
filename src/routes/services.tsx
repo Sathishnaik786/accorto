@@ -335,12 +335,12 @@ function Services() {
         <div className="flex flex-col gap-4 text-left">
           <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Architectural Blueprint</span>
           <div className="grid grid-cols-3 gap-3 items-center text-center mt-2">
-            <div className="inner-card p-3 text-xs">
+            <div className="p-3 bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-xl text-xs shadow-xs">
               <span className="text-brand font-bold uppercase text-[9px] block">Source</span>
               <span className="text-slate-900 dark:text-white mt-1 block font-semibold">ERP / CRM</span>
             </div>
             <div className="text-zinc-400 text-xs font-mono font-bold">──▶</div>
-            <div className="inner-card p-3 text-xs">
+            <div className="p-3 bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-xl text-xs shadow-xs">
               <span className="text-brand-3 font-bold uppercase text-[9px] block">Integration</span>
               <span className="text-slate-900 dark:text-white mt-1 block font-semibold">Accorto Hub</span>
             </div>
@@ -381,11 +381,11 @@ function Services() {
             </span>
           </div>
           <div className="grid grid-cols-2 gap-4 text-xs mt-1">
-            <div className="inner-card p-3">
+            <div className="p-3 bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-xl shadow-xs">
               <span className="text-zinc-500 text-[8px] uppercase font-bold">Region</span>
               <span className="text-slate-900 dark:text-white block mt-0.5 font-semibold">us-east-1</span>
             </div>
-            <div className="inner-card p-3">
+            <div className="p-3 bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-xl shadow-xs">
               <span className="text-zinc-500 text-[8px] uppercase font-bold">Latency</span>
               <span className="text-slate-900 dark:text-white block mt-0.5 font-semibold">14ms</span>
             </div>
@@ -435,7 +435,7 @@ function Services() {
             <a
               key={p.id}
               href={`#${p.id}`}
-              className="glass rounded-full px-4 py-2 text-xs font-medium hover:bg-white/10 transition-colors"
+              className="bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300 shadow-xs rounded-full px-4 py-2 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-white/10 hover:scale-105 transition-all duration-300"
             >
               {p.name}
             </a>
@@ -472,27 +472,27 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
           className={`grid lg:grid-cols-12 gap-12 items-start ${flip ? "lg:[&>*:first-child]:order-2" : ""}`}
         >
           <Reveal className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 glass rounded-full px-3 py-1 text-xs text-slate-500 dark:text-slate-400">
+            <div className="inline-flex items-center gap-2 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 rounded-full px-3 py-1 text-xs text-slate-600 dark:text-slate-300 shadow-xs">
               <p.icon className="h-3.5 w-3.5 text-brand" /> Practice
             </div>
             <h2 className="mt-4 font-display text-4xl md:text-5xl font-semibold text-slate-900 dark:text-white">{p.name}</h2>
-            <p className="mt-3 text-lg font-medium text-brand">{p.tagline}</p>
-            <p className="mt-5 text-slate-600 dark:text-slate-300 leading-relaxed">{p.overview}</p>
+            <p className="mt-3 text-lg font-bold text-brand">{p.tagline}</p>
+            <p className="mt-5 text-[#64748B] dark:text-slate-300 leading-relaxed font-medium">{p.overview}</p>
 
             <div className="mt-8 grid sm:grid-cols-2 gap-4">
               <Block title="Key benefits">
-                <ul className="space-y-2 text-sm">
+                <ul className="space-y-2 text-sm font-medium">
                   {p.benefits.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-slate-600 dark:text-slate-300">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 text-emerald-400 shrink-0" /> {b}
+                    <li key={b} className="flex items-start gap-2 text-slate-600 dark:text-slate-300 leading-relaxed">
+                      <CheckCircle2 className="mt-1.5 h-4 w-4 text-emerald-400 shrink-0" /> {b}
                     </li>
                   ))}
                 </ul>
               </Block>
               <Block title="Capabilities">
-                <ul className="grid grid-cols-2 gap-y-2 text-sm">
+                <ul className="grid grid-cols-2 gap-y-2 text-sm font-medium">
                   {p.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
+                    <li key={f} className="flex items-center gap-2 text-slate-600 dark:text-slate-300 leading-relaxed">
                       <span className="h-1 w-1 rounded-full bg-brand" /> {f}
                     </li>
                   ))}
@@ -504,7 +504,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
               <Block title="Delivery process">
                 <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 mt-1.5">
                   {p.process.map((s, idx) => (
-                    <div key={s} className="relative glass rounded-2xl p-3 flex flex-col justify-between min-h-[80px] border border-white/10 hover:border-brand/35 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md group">
+                    <div key={s} className="relative bg-slate-50 dark:bg-[#102947] rounded-2xl p-3 flex flex-col justify-between min-h-[80px] border border-slate-200/60 dark:border-white/5 hover:border-brand/35 transition-all duration-300 hover:-translate-y-0.5 shadow-xs hover:shadow-md group">
                       <span className="text-[10px] font-mono font-bold text-brand bg-brand/10 w-5 h-5 rounded-full flex items-center justify-center">
                         {idx + 1}
                       </span>
@@ -519,7 +519,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
               <Block title="Technology stack">
                 <div className="flex flex-wrap gap-2">
                   {p.stack.map((t) => (
-                    <span key={t} className="glass rounded-md px-2.5 py-1 text-xs font-mono text-slate-600 dark:text-slate-300 hover:bg-brand/10 hover:text-brand transition-colors cursor-default select-none border border-white/10">
+                    <span key={t} className="bg-slate-50 dark:bg-[#102947] rounded-md px-2.5 py-1 text-xs font-mono text-slate-600 dark:text-slate-300 hover:bg-brand/10 hover:text-brand transition-colors cursor-default select-none border border-slate-200/60 dark:border-white/10 shadow-xs">
                       <Boxes className="inline h-3 w-3 mr-1 text-brand" />
                       {t}
                     </span>
@@ -528,14 +528,14 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
               </Block>
             </div>
 
-            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 border-t border-border/30 pt-6">
+            <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 border-t border-slate-200 dark:border-border/30 pt-6">
               <div>
                 <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Need Expert Guidance?</h4>
                 <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{"Talk directly to a partner from our "}{p.name}{" practice."}</p>
               </div>
               <Link
                 to="/contact"
-                className="sm:ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-medium text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all text-center justify-center whitespace-nowrap"
+                className="sm:ml-auto inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-bold text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all text-center justify-center whitespace-nowrap"
               >
                 Book a Consultation <ArrowRight className="h-4 w-4" />
               </Link>
@@ -543,7 +543,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
           </Reveal>
 
           <Reveal className="lg:col-span-5" delay={0.1}>
-            <div className="relative aspect-4/5 rounded-[32px] overflow-hidden glass-strong shadow-lg">
+            <div className="relative aspect-4/5 rounded-[32px] overflow-hidden border border-slate-200/60 dark:border-white/10 shadow-lg">
               <img
                 src={p.image}
                 alt={`${p.name} consulting and enterprise solutions`}
@@ -556,8 +556,8 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
                   const num = parseInt(v);
                   const suffix = v.replace(/[\d.]/g, "");
                   return (
-                    <div key={l} className="inner-card p-2.5 sm:p-3 text-slate-900 dark:text-white animate-fade-in">
-                      <div className="font-display text-lg sm:text-xl font-semibold">
+                    <div key={l} className="p-2.5 sm:p-3 bg-white/90 dark:bg-[#0C223D]/90 border border-slate-200/40 dark:border-white/10 rounded-2xl text-slate-900 dark:text-white shadow-md animate-fade-in">
+                      <div className="font-display text-lg sm:text-xl font-bold">
                         {isNaN(num) ? (
                           v
                         ) : (
@@ -566,7 +566,7 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
                           </>
                         )}
                       </div>
-                      <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-slate-500 dark:text-slate-400 mt-1 leading-tight">{l}</div>
+                      <div className="text-[9px] sm:text-[10px] uppercase tracking-wider text-slate-600 dark:text-slate-400 mt-1 leading-tight font-semibold">{l}</div>
                     </div>
                   );
                 })}
@@ -581,8 +581,8 @@ function PracticeSection({ p, flip }: { p: (typeof PRACTICES)[number]; flip: boo
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="glass rounded-3xl p-5 hover:bg-white/3 hover:border-white/15 transition-all duration-300 border border-white/10 shadow-lg">
-      <div className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3">{title}</div>
+    <div className="bg-white dark:bg-card border border-slate-200/60 dark:border-white/5 rounded-3xl p-5 shadow-xs hover:shadow-md transition-all duration-300">
+      <div className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3 font-bold">{title}</div>
       {children}
     </div>
   );

@@ -50,13 +50,13 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
     >
       {/* Left Sticky Content */}
       <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 select-none z-10 text-left">
-        <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-3 py-1 text-xs text-brand font-semibold shadow-sm">
+        <div className="inline-flex items-center gap-2 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 rounded-full px-3 py-1 text-xs text-brand font-semibold shadow-sm">
           <span className="w-1.5 h-1.5 rounded-full bg-brand animate-pulse" /> Delivery Engine
         </div>
         <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-[1.02] tracking-tight">
           How we work
         </h2>
-        <div className="relative border-l-2 border-white/5 dark:border-white/5 pl-6 py-2 space-y-8">
+        <div className="relative border-l-2 border-slate-200 dark:border-white/5 pl-6 py-2 space-y-8">
           {steps.map((s, idx) => {
             const isActive = activeIdx === idx;
             return (

@@ -61,10 +61,10 @@ function InsightsIndex() {
   );
 
   return (
-    <section className="relative min-h-screen w-full bg-[#031224] text-white pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden">
+    <section className="relative min-h-screen w-full bg-background text-foreground pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden">
       {/* Ambient premium radial glows */}
-      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/10 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-3/5 blur-[120px] pointer-events-none" />
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/5 dark:bg-brand/10 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-3/3 dark:bg-brand-3/5 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
         {/* Featured Section Grid */}
@@ -75,17 +75,17 @@ function InsightsIndex() {
               <Link to="/insights/$slug" params={{ slug: FEATURED.slug }} className="group block">
                 <PremiumCard
                   hover={true}
-                  className="p-0 border border-white/10 hover:border-brand/35 bg-[#0C223D]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
+                  className="p-0 bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1 rounded-[32px] overflow-hidden transition-all duration-500"
                 >
                   {/* Image Container with rounded top corners */}
-                  <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px]">
+                  <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px] border-b border-slate-200/60 dark:border-transparent">
                     <img
                       src={FEATURED.img}
                       alt={FEATURED.title}
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-103 group-hover:brightness-105"
                     />
-                    <div className="absolute inset-0 bg-linear-to-t from-[#031224] via-[#031224]/10 to-transparent pointer-events-none" />
+                    <div className="absolute inset-0 bg-linear-to-t from-background via-background/10 to-transparent pointer-events-none" />
                   </div>
 
                   {/* Card Body */}
@@ -93,13 +93,13 @@ function InsightsIndex() {
                     <span className="inline-block text-xs font-semibold text-brand dark:text-brand-3 uppercase tracking-wider">
                       {FEATURED.cat}
                     </span>
-                    <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-white leading-tight group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-300">
+                    <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-300">
                       {FEATURED.title}
                     </h2>
-                    <p className="text-sm font-semibold text-zinc-400">
+                    <p className="text-sm font-semibold text-slate-500 dark:text-zinc-400">
                       {FEATURED.author} • {FEATURED.date}
                     </p>
-                    <p className="text-zinc-400 leading-relaxed text-sm sm:text-base font-normal max-w-3xl">
+                    <p className="text-[#64748B] dark:text-zinc-400 leading-relaxed text-sm sm:text-base font-medium max-w-3xl">
                       {FEATURED.excerpt}
                     </p>
                   </div>
@@ -111,25 +111,25 @@ function InsightsIndex() {
           {/* Right: Featured Stack (3 list items) */}
           <div className="lg:col-span-4 flex flex-col items-start text-left">
             <Reveal>
-              <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-white mb-8">
+              <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white mb-8">
                 Featured
               </h2>
             </Reveal>
 
-            <div className="w-full divide-y divide-white/10">
+            <div className="w-full divide-y divide-slate-200 dark:divide-white/10">
               {ARTICLES.slice(0, 3).map((a, idx) => (
                 <Reveal key={idx} delay={idx * 0.08}>
                   <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block py-5 first:pt-0 last:pb-0">
                     <div className="flex justify-between items-start gap-4">
                       <div className="space-y-2 flex-1">
-                        <h3 className="font-display text-sm font-semibold text-white group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-200 line-clamp-2 leading-snug">
+                        <h3 className="font-display text-sm font-semibold text-slate-800 dark:text-white group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-200 line-clamp-2 leading-snug">
                           {a.title}
                         </h3>
-                        <p className="text-[11px] font-semibold text-zinc-500 uppercase tracking-wider">
+                        <p className="text-[11px] font-semibold text-slate-500 dark:text-zinc-500 uppercase tracking-wider">
                           {a.author}
                         </p>
                       </div>
-                      <div className="h-16 w-16 rounded-xl overflow-hidden shrink-0 border border-white/5 shadow-md">
+                      <div className="h-16 w-16 rounded-xl overflow-hidden shrink-0 border border-slate-200/60 dark:border-white/5 shadow-sm">
                         <img
                           src={a.img}
                           alt={a.title}
@@ -145,7 +145,7 @@ function InsightsIndex() {
         </div>
 
         {/* Category Scroll Menu */}
-        <div className="border-b border-white/10 mt-16 mb-10">
+        <div className="border-b border-slate-200 dark:border-white/10 mt-16 mb-10">
           <div className="flex items-center gap-8 overflow-x-auto no-scrollbar py-3 scroll-smooth">
             {CATEGORIES.map((cat: string) => {
               const active = selectedCategory === cat;
@@ -154,8 +154,8 @@ function InsightsIndex() {
                   key={cat}
                   onClick={() => setSelectedCategory(cat)}
                   className={cn(
-                    "relative pb-3 text-sm font-semibold whitespace-nowrap transition-colors duration-200 cursor-pointer",
-                    active ? "text-white" : "text-zinc-400 hover:text-white"
+                    "relative pb-3 text-sm font-bold whitespace-nowrap transition-colors duration-200 cursor-pointer",
+                    active ? "text-slate-900 dark:text-white" : "text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white"
                   )}
                 >
                   {cat}
@@ -180,36 +180,36 @@ function InsightsIndex() {
                 <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block h-full">
                   <PremiumCard
                     hover={true}
-                    className="h-full flex flex-col border border-white/10 hover:border-brand/35 bg-[#0C223D]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
+                    className="h-full flex flex-col bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1 rounded-[32px] overflow-hidden transition-all duration-500"
                   >
                     {/* Image at top */}
-                    <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px]">
+                    <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px] border-b border-slate-200/60 dark:border-transparent">
                       <img
                         src={a.img}
                         alt={a.title}
                         loading="lazy"
                         className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103 group-hover:brightness-105"
                       />
-                      <div className="absolute inset-0 bg-linear-to-t from-[#031224] via-[#031224]/20 to-transparent pointer-events-none" />
+                      <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent pointer-events-none" />
                     </div>
 
                     {/* Card Body */}
                     <div className="p-6 flex flex-col grow text-left">
                       <div className="space-y-0.5 mb-3">
-                        <p className="text-[13px] font-medium text-white/90">{a.author}</p>
-                        <p className="text-[12px] text-zinc-400">{a.date}</p>
+                        <p className="text-[13px] font-semibold text-slate-800 dark:text-white/90">{a.author}</p>
+                        <p className="text-[12px] text-slate-500 dark:text-zinc-400 font-medium">{a.date}</p>
                       </div>
 
-                      <h3 className="font-display text-xl font-bold text-white group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-300 leading-snug mb-3">
+                      <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-300 leading-snug mb-3">
                         {a.title}
                       </h3>
 
-                      <p className="text-[13px] text-zinc-400 leading-relaxed line-clamp-3 mb-6 font-normal">
+                      <p className="text-[13px] text-slate-600 dark:text-zinc-400 leading-relaxed line-clamp-3 mb-6 font-medium">
                         {a.excerpt}
                       </p>
 
                       <div className="mt-auto">
-                        <span className="inline-flex items-center text-xs font-semibold text-white/80 group-hover:text-brand-3 transition-colors">
+                        <span className="inline-flex items-center text-xs font-bold text-slate-800 dark:text-white/80 group-hover:text-brand-3 transition-colors">
                           Read post <span className="ml-1 text-[10px] font-sans">↗</span>
                         </span>
                       </div>
@@ -220,37 +220,37 @@ function InsightsIndex() {
             ))}
           </div>
         ) : (
-          <div className="py-20 text-center text-zinc-400">
+          <div className="py-20 text-center text-slate-500 dark:text-zinc-400 font-medium">
             No articles found in this category.
           </div>
         )}
 
         {/* Newsletter Subscription Box */}
         <div className="mt-24">
-          <div className="relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0C223D]/40 backdrop-blur-md p-10 md:p-14 text-center">
+          <div className="relative overflow-hidden rounded-[32px] bg-white dark:bg-[#0C223D]/40 border border-slate-200/60 dark:border-white/10 p-10 md:p-14 text-center shadow-md dark:shadow-none">
             <div className="absolute inset-0 bg-gradient-brand opacity-[0.06] dark:opacity-[0.08]" />
             <div className="relative max-w-2xl mx-auto">
               <Reveal>
                 <span className="inline-block text-xs font-semibold text-brand dark:text-brand-3 uppercase tracking-wider mb-3">
                   Newsletter
                 </span>
-                <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-white mb-4">
+                <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                   Get our <span className="text-gradient">quarterly briefing</span>.
                 </h2>
-                <p className="text-zinc-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto mb-8">
+                <p className="text-slate-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto mb-8 font-medium">
                   Curated research on enterprise AI, ERP and cloud — written by our partners. No fluff.
                 </p>
               </Reveal>
               <Reveal delay={0.1}>
                 <form
-                  className="bg-white/5 border border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl sm:rounded-full p-2 sm:p-1 max-w-md mx-auto gap-2 sm:gap-0"
+                  className="bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 flex flex-col sm:flex-row items-stretch sm:items-center rounded-2xl sm:rounded-full p-2 sm:p-1 max-w-md mx-auto gap-2 sm:gap-0 shadow-xs dark:shadow-none focus-within:border-brand transition-all"
                   onSubmit={(e) => e.preventDefault()}
                 >
                   <input
                     type="email"
                     required
                     placeholder="Work email"
-                    className="flex-1 bg-transparent px-4 py-2.5 text-sm outline-none placeholder:text-zinc-500 text-white"
+                    className="flex-1 bg-transparent px-4 py-2.5 text-sm outline-none placeholder:text-slate-400 dark:placeholder:text-zinc-500 text-slate-900 dark:text-white font-medium"
                   />
                   <input type="hidden" name="form-name" value="newsletter" />
                   <button className="rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white hover:scale-105 hover:shadow-lg transition-all duration-300">

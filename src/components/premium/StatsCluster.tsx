@@ -32,7 +32,7 @@ export function StatsCluster({ className }: { className?: string }) {
               transition: {
                 duration: 5 + idx * 0.8,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: "easeInOut" as const,
               },
             };
 
@@ -44,7 +44,7 @@ export function StatsCluster({ className }: { className?: string }) {
           >
             <PremiumCard
               hover={false}
-              className="p-6 flex flex-col justify-between gap-4 h-full border border-white/10 dark:hover:border-brand-3/20 transition-all duration-500 rounded-[32px] shadow-lg hover:shadow-2xl"
+              className="p-6 flex flex-col justify-between gap-4 h-full border border-slate-200/60 dark:border-white/10 hover:border-brand/25 dark:hover:border-brand-3/20 transition-all duration-500 rounded-[32px] shadow-lg hover:shadow-2xl"
             >
               <div className="flex flex-col gap-2">
                 <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-widest">

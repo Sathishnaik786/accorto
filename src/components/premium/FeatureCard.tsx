@@ -35,21 +35,21 @@ export function FeatureCard({
       <div className={cn("flex flex-col gap-4 relative z-10", wide ? "md:flex-1" : "")}>
         {Icon && (
           <div
-            className="inline-grid h-12 w-12 place-items-center rounded-[18px] bg-white/5 border border-white/10 text-brand dark:text-brand-3 shadow-[0_0_20px_rgba(16,185,129,0.15)] md:group-hover:scale-105 md:group-hover:border-white/20 transition-all duration-800 ease-out"
+            className="inline-grid h-12 w-12 place-items-center rounded-[18px] bg-slate-50 dark:bg-white/5 border border-slate-200/85 dark:border-white/10 text-brand dark:text-brand-3 shadow-[0_0_20px_rgba(16,185,129,0.15)] md:group-hover:scale-105 md:group-hover:border-slate-300 dark:md:group-hover:border-white/20 transition-all duration-800 ease-out"
           >
             <Icon className="h-6 w-6" />
           </div>
         )}
         <div>
           <h3 className="font-display text-xl font-semibold text-slate-900 dark:text-white leading-[1.02] tracking-tight">{name}</h3>
-          <p className="mt-2 text-sm text-zinc-400 leading-8">{desc}</p>
+          <p className="mt-2 text-sm text-slate-600 dark:text-zinc-400 leading-8">{desc}</p>
         </div>
       </div>
 
       {points && points.length > 0 && (
         <div
           className={cn(
-            "grid grid-cols-2 gap-3 text-xs text-zinc-400 leading-8 relative z-10",
+            "grid grid-cols-2 gap-3 text-xs text-slate-600 dark:text-zinc-400 leading-8 relative z-10",
             wide ? "md:mt-0 md:flex-1" : ""
           )}
         >

@@ -97,7 +97,7 @@ function Careers() {
             },
           ].map((b, i) => (
             <Reveal key={b.t} delay={i * 0.05}>
-              <div className="glass rounded-3xl p-7 h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
+              <div className="glass rounded-3xl p-5 sm:p-7 h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-300 group">
                 <b.icon className="h-7 w-7 text-brand group-hover:scale-110 transition-transform duration-300" />
                 <h3 className="mt-4 font-display text-lg font-semibold text-slate-900 dark:text-white">{b.t}</h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{b.d}</p>
@@ -170,7 +170,7 @@ function Careers() {
             <Reveal key={j.title} delay={i * 0.03}>
               <Link
                 to="/contact"
-                className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-2xl glass px-6 py-5 hover:bg-white/10 dark:hover:bg-white/8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
+                className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 rounded-2xl glass px-5 py-4 sm:px-6 sm:py-5 hover:bg-slate-50 dark:hover:bg-white/8 hover:-translate-y-1 hover:shadow-xl transition-all duration-300"
               >
                 <div>
                   <div className="text-xs text-brand uppercase tracking-widest font-semibold">{j.team}</div>

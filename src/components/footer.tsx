@@ -15,10 +15,10 @@ export function Footer() {
   } = useMotionSystem();
 
   return (
-    <footer className="relative mt-16 md:mt-24 lg:mt-32">
+    <footer className="relative mt-16 md:mt-24 lg:mt-32 bg-[#F8FAFB] dark:bg-transparent">
       {/* Flagship top gradient divider */}
-      <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-brand/35 to-transparent dark:via-brand-3/20" />
-      <div className="absolute inset-x-0 top-[-2px] h-[3px] bg-linear-to-r from-transparent via-brand/10 to-transparent blur-xs pointer-events-none" />
+      <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-slate-200 dark:via-brand-3/20 to-transparent" />
+      <div className="absolute inset-x-0 top-[-2px] h-[3px] bg-linear-to-r from-transparent via-slate-200/40 to-transparent blur-xs pointer-events-none" />
       <motion.div
         variants={staggerContainer(0.08)}
         initial="initial"
@@ -26,7 +26,7 @@ export function Footer() {
         viewport={{ once: true, amount: 0.1 }}
         className="mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-10"
       >
-        <div className="glass-strong rounded-3xl p-5 sm:p-8 md:p-12">
+        <div className="bg-white dark:bg-card border border-slate-200/60 dark:border-white/5 rounded-3xl p-5 sm:p-8 md:p-12 shadow-xs dark:shadow-none">
           <div className="grid gap-12 lg:grid-cols-12">
             
             {/* Brand Column */}
@@ -88,7 +88,7 @@ export function Footer() {
                     viewport={{ once: true }}
                     whileHover={socialIconHover}
                     whileTap={{ scale: 0.95 }}
-                    className="relative grid h-10 w-10 place-items-center rounded-full border border-slate-200/40 dark:border-white/10 bg-white/20 dark:bg-white/5 backdrop-blur-md text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-3 hover:border-brand-2/40 transition-all duration-300 group/social shadow-sm hover:shadow-[0_0_20px_rgba(66,132,117,0.2)] dark:hover:shadow-[0_0_20px_rgba(137,215,183,0.15)]"
+                    className="relative grid h-10 w-10 place-items-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-3 transition-all duration-300 group/social shadow-xs dark:shadow-none hover:shadow-md hover:-translate-y-0.5"
                   >
                     {/* Hover indicator glow backdrop */}
                     <div className="absolute inset-0 rounded-full bg-brand/5 dark:bg-brand-3/5 opacity-0 group-hover/social:opacity-100 transition-opacity duration-300" />
@@ -146,7 +146,7 @@ export function Footer() {
                 Quarterly insights on enterprise AI, ERP, and cloud.
               </p>
               <form
-                className="glass flex items-center rounded-full p-1"
+                className="flex items-center rounded-full p-1 bg-white dark:bg-white/5 border border-slate-200 dark:border-white/10 shadow-xs dark:shadow-none focus-within:border-brand transition-all"
                 onSubmit={(e) => e.preventDefault()}
               >
                 <input

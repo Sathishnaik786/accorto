@@ -1,5 +1,6 @@
 import React from "react";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTheme } from "../theme-provider";
 
 interface CenterNodeProps {
   size: number;
@@ -8,6 +9,13 @@ interface CenterNodeProps {
 
 export const CenterNode = React.memo(({ size, isAnyNodeHovered = false }: CenterNodeProps) => {
   const shouldReduceMotion = useReducedMotion();
+  const { theme } = useTheme();
+
+  const isLight = theme === "light";
+  const glowOpacity2 = isLight ? 0.2 : 0.5;
+  const glowOpacityMain = isLight ? 0.16 : 0.4;
+  const hoverGlowOpacity2 = isLight ? 0.3 : 0.75;
+  const hoverGlowOpacityMain = isLight ? 0.24 : 0.6;
 
   const animation = shouldReduceMotion
     ? { scale: 1 }
@@ -30,8 +38,8 @@ export const CenterNode = React.memo(({ size, isAnyNodeHovered = false }: Center
         background: "linear-gradient(135deg, var(--brand-2), var(--brand), var(--brand-3))",
         backdropFilter: "blur(24px)",
         boxShadow: isAnyNodeHovered
-          ? "0 0 160px rgba(var(--brand-2-rgb), 0.75), 0 0 80px rgba(var(--brand-rgb), 0.6)"
-          : "0 0 120px rgba(var(--brand-2-rgb), 0.5), 0 0 60px rgba(var(--brand-rgb), 0.4)",
+          ? `0 0 160px rgba(var(--brand-2-rgb), ${hoverGlowOpacity2}), 0 0 80px rgba(var(--brand-rgb), ${hoverGlowOpacityMain})`
+          : `0 0 120px rgba(var(--brand-2-rgb), ${glowOpacity2}), 0 0 60px rgba(var(--brand-rgb), ${glowOpacityMain})`,
       }}
       animate={animation}
       transition={transition}

@@ -135,7 +135,7 @@ function About() {
             },
           ].map((b, i) => (
             <Reveal key={b.title} delay={i * 0.1}>
-              <div className="relative h-full overflow-hidden rounded-3xl glass-strong p-8 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
+              <div className="relative h-full overflow-hidden rounded-3xl glass-strong p-5 sm:p-8 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300">
                 <div className="absolute -top-20 -right-20 h-60 w-60 rounded-full bg-gradient-brand opacity-10 blur-3xl" />
                 <b.icon className="h-8 w-8 text-brand animate-pulse" />
                 <h3 className="mt-5 font-display text-2xl font-semibold text-slate-900 dark:text-white">{b.title}</h3>
@@ -176,7 +176,7 @@ function About() {
             },
           ].map((v, i) => (
             <Reveal key={v.name} delay={i * 0.05}>
-              <div className="glass rounded-3xl p-6 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
+              <div className="glass rounded-3xl p-5 sm:p-6 h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl">
                 <Heart className="h-5 w-5 text-brand" />
                 <h3 className="mt-4 font-display text-lg font-semibold text-slate-900 dark:text-white">{v.name}</h3>
                 <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{v.desc}</p>
@@ -269,7 +269,7 @@ function About() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
-        <div className="relative overflow-hidden rounded-3xl glass-strong p-10 border border-white/10 shadow-xl bg-radial-subtle">
+        <div className="relative overflow-hidden rounded-3xl glass-strong p-5 sm:p-8 md:p-10 border border-slate-200/60 dark:border-white/10 shadow-xl bg-radial-subtle">
           <Globe2 className="h-8 w-8 text-brand" />
           <SectionHeading
             tag="Global presence"

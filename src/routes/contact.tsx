@@ -249,7 +249,7 @@ function Contact() {
         </div>
 
         <div className="lg:col-span-5 space-y-5">
-          <div className="glass rounded-3xl p-7 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
+          <div className="glass rounded-3xl p-5 sm:p-7 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300">
             <h2 className="font-display text-lg font-bold text-slate-900 dark:text-white">Talk to us</h2>
             <div className="mt-4 space-y-3 text-sm font-semibold text-slate-600 dark:text-slate-300">
               <p className="flex items-center gap-3 hover:text-brand transition-colors">
@@ -280,7 +280,7 @@ function Contact() {
             </div>
           </div>
 
-          <div className="glass rounded-3xl p-7 space-y-4 border border-slate-200 dark:border-white/10 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <div className="glass rounded-3xl p-5 sm:p-7 space-y-4 border border-slate-200 dark:border-white/10 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
             <h2 className="font-display text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-brand" /> What to expect next
             </h2>
@@ -309,7 +309,7 @@ function Contact() {
             </ul>
           </div>
 
-          <div className="relative overflow-hidden rounded-3xl glass p-7 border border-brand/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <div className="relative overflow-hidden rounded-3xl glass p-5 sm:p-7 border border-brand/20 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
             <div className="absolute top-0 right-0 bg-brand/10 text-brand text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-bl-xl border-l border-b border-brand/20">
               Active SLA
             </div>
@@ -335,7 +335,7 @@ function Contact() {
             </div>
           </div>
 
-          <div className="glass rounded-3xl p-7 space-y-5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+          <div className="glass rounded-3xl p-5 sm:p-7 space-y-5 hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
             <h2 className="font-display text-lg font-bold text-slate-900 dark:text-white">Our offices</h2>
             {[
               {
