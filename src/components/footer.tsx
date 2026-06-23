@@ -28,13 +28,13 @@ export function Footer() {
       >
         <div className="bg-white dark:bg-card border border-slate-200/60 dark:border-white/5 rounded-3xl p-5 sm:p-8 md:p-12 shadow-xs dark:shadow-none">
           <div className="grid gap-12 lg:grid-cols-12">
-            
+
             {/* Brand Column */}
             <motion.div variants={footerFadeUp(footerDelays.brand)} className="lg:col-span-4 space-y-5">
               <Link to="/" className="flex flex-col items-start gap-2.5 group/logo relative">
                 {/* Logo Backdrop Glow */}
                 <div className="absolute -left-2 -top-2 w-36 h-20 rounded-full bg-brand/10 dark:bg-brand-3/10 blur-xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700 pointer-events-none" />
-                
+
                 <img
                   src={logoImg}
                   alt="Accorto Logo"
@@ -53,7 +53,7 @@ export function Footer() {
                   <MapPin className="h-4 w-4 text-brand" /> Bengaluru · Dubai · New York
                 </p>
                 <p className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-brand" /> hello@accorto.tech
+                  <Mail className="h-4 w-4 text-brand" /> info@accortotech.com
                 </p>
                 <p className="flex items-center gap-2">
                   <Phone className="h-4 w-4 text-brand" /> +91 80 0000 0000
@@ -176,8 +176,8 @@ export function Footer() {
                 Trust & Compliance Statement
               </div>
               <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                Accorto Technologies Private Limited is committed to enterprise-grade security and compliance. 
-                We are ISO 27001 certified and SOC 2 Type II audited, ensuring industry-standard security 
+                Accorto Technologies Private Limited is committed to enterprise-grade security and compliance.
+                We are ISO 27001 certified and SOC 2 Type II audited, ensuring industry-standard security
                 safeguards across all digital consulting engagements.
               </p>
             </div>
@@ -223,8 +223,8 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
       <ul className="space-y-2 text-sm">
         {links.map(([label, to]) => (
           <li key={label}>
-            <Link 
-              to={to} 
+            <Link
+              to={to}
               activeOptions={{ exact: true }}
               className="relative text-slate-600 dark:text-slate-300 hover:text-brand dark:hover:text-white [&.active]:text-brand dark:[&.active]:text-brand-3 [&.active]:pl-3 transition-all duration-300 font-medium group/footlink flex items-center"
             >

@@ -46,7 +46,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
   return (
     <div
       ref={containerRef}
-      className={cn("relative grid lg:grid-cols-12 gap-12 items-start py-20", className)}
+      className={cn("relative grid lg:grid-cols-12 gap-12 items-start pt-20 pb-0", className)}
     >
       {/* Left Sticky Content */}
       <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 select-none z-10 text-left">
@@ -91,7 +91,10 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
           <div
             key={idx}
             data-step-idx={idx}
-            className="min-h-0 lg:min-h-[50vh] flex items-center justify-center pt-8 first:pt-0"
+            className={cn(
+              "min-h-0 flex items-center justify-center pt-8 first:pt-0",
+              idx === steps.length - 1 ? "lg:min-h-[20vh]" : "lg:min-h-[50vh]"
+            )}
           >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
