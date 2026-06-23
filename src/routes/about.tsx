@@ -83,7 +83,7 @@ function About() {
               measurable outcomes.
             </p>
             <p>
-              What started as a five-person ERP atelier in Bengaluru is today a 600-person
+              What started as a five-person ERP atelier in Hyderabad, India is today a 600-person
               consulting firm running mission-critical programs across 14 countries.
             </p>
             <p>
@@ -258,10 +258,10 @@ function About() {
         <div className="mt-12">
           <Timeline
             events={[
-              { year: 2013, title: "Founded in Bengaluru", desc: "Five Oracle veterans, one bold idea." },
+              { year: 2013, title: "Founded in Hyderabad, India", desc: "Five Oracle veterans, one bold idea." },
               { year: 2016, title: "First Fortune 500 client", desc: "Oracle Cloud ERP for a global manufacturer." },
               { year: 2019, title: "Launched SAP & AI practices", desc: "Expanded to 150 consultants." },
-              { year: 2022, title: "Offices in Dubai & New York", desc: "Global delivery model online." },
+              { year: 2022, title: "Offices in Hyderabad, India & Hyderabad, India", desc: "Global delivery model online." },
               { year: 2025, title: "600+ experts, 14 countries", desc: "Recognized in Gartner mid-market consulting." },
             ]}
           />
@@ -281,9 +281,9 @@ function About() {
           />
           <div className="mt-10 grid sm:grid-cols-3 gap-6">
             {[
-              { city: "Bengaluru, IN", role: "Global HQ & Delivery" },
-              { city: "Dubai, UAE", role: "Middle East & Africa Hub" },
-              { city: "New York, US", role: "Americas Hub" },
+              { city: "Hyderabad, India, IN", role: "Global HQ & Delivery" },
+              { city: "Hyderabad, India, UAE", role: "Middle East & Africa Hub" },
+              { city: "Hyderabad, India, US", role: "Americas Hub" },
             ].map((o) => (
               <div key={o.city} className="glass rounded-2xl p-5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
                 <div className="font-display font-semibold text-slate-900 dark:text-white">{o.city}</div>

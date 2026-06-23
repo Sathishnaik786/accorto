@@ -55,11 +55,11 @@ export const Route = createFileRoute("/careers")({
 });
 
 const JOBS = [
-  { title: "Senior Oracle Cloud ERP Consultant", loc: "Bengaluru · Hybrid", team: "Oracle" },
-  { title: "SAP S/4HANA Solution Architect", loc: "Dubai · On-site", team: "SAP" },
+  { title: "Senior Oracle Cloud ERP Consultant", loc: "Hyderabad, India · Hybrid", team: "Oracle" },
+  { title: "SAP S/4HANA Solution Architect", loc: "Hyderabad, India · On-site", team: "SAP" },
   { title: "Staff ML Engineer (GenAI)", loc: "Remote · Global", team: "AI" },
-  { title: "Cloud Platform Engineer (AWS)", loc: "New York · Hybrid", team: "Cloud" },
-  { title: "Senior Product Designer", loc: "Bengaluru · Hybrid", team: "Design" },
+  { title: "Cloud Platform Engineer (AWS)", loc: "Hyderabad, India · Hybrid", team: "Cloud" },
+  { title: "Senior Product Designer", loc: "Hyderabad, India · Hybrid", team: "Design" },
   { title: "Engagement Manager — Financial Services", loc: "London · Hybrid", team: "Consulting" },
 ];
 
@@ -88,7 +88,7 @@ function Careers() {
             {
               icon: Globe2,
               t: "Global mobility",
-              d: "Hubs in Bengaluru, Dubai and New York. Move where you grow.",
+              d: "Hubs in Hyderabad, India, Hyderabad, India and Hyderabad, India. Move where you grow.",
             },
             {
               icon: Sparkles,

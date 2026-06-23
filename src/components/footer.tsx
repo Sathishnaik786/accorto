@@ -50,7 +50,7 @@ export function Footer() {
               </p>
               <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300 font-semibold">
                 <p className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-brand" /> Bengaluru · Dubai · New York
+                  <MapPin className="h-4 w-4 text-brand" /> Hyderabad, India
                 </p>
                 <p className="flex items-center gap-2">
                   <Mail className="h-4 w-4 text-brand" /> info@accortotech.com
