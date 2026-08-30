@@ -39,7 +39,7 @@ export function ArchitectureDiagram({ className }: { className?: string }) {
             <div key={idx} className="flex flex-col items-center text-center relative group">
               {/* Connector line for large screens */}
               {idx < nodes.length - 1 && (
-                <div className="hidden lg:block absolute left-[calc(50%+45px)] top-[26px] w-[calc(100%-90px)] h-[2px] z-0 overflow-hidden">
+                <div className="hidden lg:block absolute left-[calc(50%+45px)] top-6.5 w-[calc(100%-90px)] h-0.5 z-0 overflow-hidden">
                   <div className="w-full h-full bg-white/10 dark:bg-white/5 relative">
                     {/* Running light indicator */}
                     <div
@@ -51,11 +51,11 @@ export function ArchitectureDiagram({ className }: { className?: string }) {
               )}
               {/* Connector line for small screens */}
               {idx > 0 && (
-                <div className="lg:hidden w-[2px] h-8 bg-white/10 dark:bg-white/5 my-2" />
+                <div className="lg:hidden w-0.5 h-8 bg-white/10 dark:bg-white/5 my-2" />
               )}
               {/* Node Card */}
-              <GlassPanel className="p-5 flex flex-col items-center gap-3 relative z-10 w-full hover:border-brand-2/40 transition-all duration-300">
-                <div className="h-12 w-12 rounded-[18px] bg-white/5 border border-white/10 flex items-center justify-center text-brand dark:text-brand-3 shadow-md group-hover:scale-105 transition-transform duration-300">
+              <GlassPanel className="p-5 flex flex-col items-center gap-3 relative z-10 w-full">
+                <div className="h-12 w-12 rounded-[18px] bg-white/5 border border-white/10 flex items-center justify-center text-brand dark:text-brand-3 shadow-md">
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>

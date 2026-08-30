@@ -65,7 +65,7 @@ export function ImageCard({
     <article
       onClick={onClick}
       className={cn(
-        "group relative h-full flex flex-col justify-between overflow-hidden rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 motion-reduce:hover:translate-y-0 text-left select-none",
+        "group relative h-full flex flex-col justify-between overflow-hidden rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md text-left select-none",
         link && "cursor-pointer",
         className,
       )}
@@ -84,7 +84,7 @@ export function ImageCard({
             loading="lazy"
             onError={() => setHasError(true)}
             style={{ objectPosition }}
-            className="h-full w-full object-cover brightness-[0.96] contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100 motion-reduce:transition-none"
+            className="h-full w-full object-cover brightness-[0.96] contrast-[1.04]"
           />
         ) : null}
 

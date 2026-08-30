@@ -1,10 +1,7 @@
 import { EASING } from "./page";
 
-export const getCardHover = (shouldReduceMotion: boolean) => {
-  if (shouldReduceMotion) return {};
-  return {
-    y: -3,
-  };
+export const getCardHover = (_shouldReduceMotion?: boolean) => {
+  return {};
 };
 
 export const getCardHoverTransition = () => ({

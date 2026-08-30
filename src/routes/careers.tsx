@@ -83,14 +83,19 @@ function Careers() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {[
             {
-              icon: Heart,
-              t: "Engineering-first culture",
-              d: "Senior engineers in every pod. Real ownership from day one.",
+              icon: Compass,
+              t: "Autonomy over micromanagement",
+              d: "Small, senior delivery pods with direct client exposure and architecture ownership.",
             },
             {
-              icon: Globe2,
-              t: "Global mobility",
-              d: "Hubs in Hyderabad, India; London, UK; and San Francisco, USA. Move where you grow.",
+              icon: Zap,
+              t: "Modern stacks, not legacy sludge",
+              d: "Oracle Cloud, Snowflake, Databricks, SAP S/4HANA, OpenAI, edge IoT.",
+            },
+            {
+              icon: Users,
+              t: "Global, distributed, async-first",
+              d: "Teams across North America, APAC, and EMEA. We measure output, not presence.",
             },
             {
               icon: Sparkles,
@@ -99,9 +104,9 @@ function Careers() {
             },
           ].map((b, i) => (
             <Reveal key={b.t} delay={i * 0.05}>
-              <div className="rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 sm:p-8 h-full hover:-translate-y-1 hover:shadow-xl transition-all duration-300 motion-reduce:hover:translate-y-0 group shadow-md text-left">
+              <div className="rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 sm:p-8 h-full group shadow-md text-left">
                 <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand/10 dark:bg-white/5 text-brand mb-5">
-                  <b.icon className="h-6 w-6 text-brand group-hover:scale-110 transition-transform duration-300" aria-hidden="true" />
+                  <b.icon className="h-6 w-6 text-brand" aria-hidden="true" />
                 </div>
                 <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white leading-snug">
                   {b.t}
@@ -138,7 +143,7 @@ function Careers() {
               duration={0.45}
               scale={0.97}
             >
-              <div className="rounded-2xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-5 flex items-center gap-3.5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300 shadow-xs">
+              <div className="rounded-2xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-5 flex items-center gap-3.5 shadow-xs">
                 <div className="grid h-8 w-8 place-items-center rounded-lg bg-brand/10 dark:bg-white/5 text-brand shrink-0">
                   <b.icon className="h-4 w-4" aria-hidden="true" />
                 </div>
@@ -174,7 +179,7 @@ function Careers() {
               duration={0.5}
               scale={0.96}
             >
-              <div className="rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 hover:-translate-y-1 hover:shadow-md transition-all duration-300 shadow-xs text-left">
+              <div className="rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 shadow-xs text-left">
                 <div className="font-display text-3xl font-bold text-gradient">{s.n}</div>
                 <h3 className="mt-2 font-bold text-sm text-slate-900 dark:text-white">{s.t}</h3>
                 <p className="text-xs text-[#64748B] dark:text-slate-300 font-medium mt-1 leading-relaxed">{s.d}</p>
@@ -184,7 +189,7 @@ function Careers() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-16 md:py-24 lg:py-32">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 md:py-16">
         <SectionHeading
           tag="Open positions"
           title={
@@ -206,7 +211,7 @@ function Careers() {
             >
               <Link
                 to="/contact"
-                className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 px-6 py-5 hover:bg-slate-50 dark:hover:bg-white/8 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                className="group flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 px-6 py-5 shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-brand"
               >
                 <div className="text-left">
                   <div className="text-[11px] font-mono font-bold text-brand dark:text-brand-2 uppercase tracking-wider">

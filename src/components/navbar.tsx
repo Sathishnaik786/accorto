@@ -112,7 +112,7 @@ function MegaMenuPanel<T extends string>({
             ========================================================================= */}
         <div className="relative z-10 grid grid-cols-12">
           {/* ── Left: category tabs (3 cols) ── */}
-          <div className="col-span-3 border-r border-slate-200/50 dark:border-white/10 p-3.5 flex flex-col gap-1 bg-slate-50/40 dark:bg-white/[0.02]">
+          <div className="col-span-3 border-r border-slate-200/50 dark:border-white/10 p-3.5 flex flex-col gap-1 bg-slate-50/40 dark:bg-white/2">
             <span className="text-[10px] font-bold tracking-widest text-slate-400 dark:text-slate-500 uppercase mb-1.5 px-3">
               Categories
             </span>
@@ -159,7 +159,7 @@ function MegaMenuPanel<T extends string>({
                   <div className="text-xs sm:text-sm font-semibold text-slate-900 dark:text-white flex items-center gap-1.5">
                     {item.name}
                     {item.badge && (
-                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-0.25 rounded-full bg-brand/15 text-brand border border-brand/25 ml-1">
+                      <span className="text-[9px] font-mono font-bold uppercase tracking-wider px-1.5 py-px rounded-full bg-brand/15 text-brand border border-brand/25 ml-1">
                         {item.badge}
                       </span>
                     )}
@@ -192,7 +192,7 @@ function MegaMenuPanel<T extends string>({
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.97 }}
                 transition={{ duration: 0.15 }}
-                className="relative w-full h-full min-h-[220px] rounded-xl overflow-hidden border border-slate-800/60 dark:border-white/10 shadow-md group/card bg-slate-950 flex flex-col justify-end"
+                className="relative w-full h-full min-h-55 rounded-xl overflow-hidden border border-slate-800/60 dark:border-white/10 shadow-md group/card bg-slate-950 flex flex-col justify-end"
               >
                 {/* Full Background Contextual Image */}
                 {current.image ? (

@@ -86,7 +86,7 @@ function InsightDetail() {
 
         {/* Hero Image */}
         <Reveal delay={0.15}>
-          <div className="relative w-full aspect-video sm:aspect-21/9 overflow-hidden rounded-[32px] border border-white/10 shadow-2xl mb-12">
+          <div className="relative w-full aspect-video sm:aspect-21/9 overflow-hidden rounded-4xl border border-white/10 shadow-2xl mb-12">
             <img src={article.img} alt={article.title} className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-linear-to-t from-[#031224]/40 to-transparent pointer-events-none" />
           </div>
@@ -139,14 +139,13 @@ function InsightDetail() {
             <Reveal key={a.title} delay={idx * 0.08}>
               <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block h-full">
                 <PremiumCard
-                  hover={true}
-                  className="h-full flex flex-col border border-white/10 hover:border-brand/35 bg-[#0C223D]/40 backdrop-blur-md rounded-[32px] overflow-hidden transition-all duration-500"
+                  className="h-full flex flex-col border border-white/10 bg-[#0C223D]/40 backdrop-blur-md rounded-4xl overflow-hidden"
                 >
-                  <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px]">
+                  <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-4xl">
                     <img
                       src={a.img}
                       alt={a.title}
-                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103 group-hover:brightness-105"
+                      className="h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-linear-to-t from-[#031224] via-[#031224]/20 to-transparent pointer-events-none" />
                   </div>

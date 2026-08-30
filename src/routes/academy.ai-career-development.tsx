@@ -4,7 +4,6 @@ import { Reveal, SectionHeading } from "@/components/section";
 import { PremiumCard } from "@/components/ui/PremiumCard";
 import { PremiumBadge } from "@/components/ui/PremiumBadge";
 import { SpecularButton } from "@/components/animations/SpecularButton";
-import { FinalCTA } from "@/components/home";
 import {
   GraduationCap,
   Award,
@@ -208,7 +207,7 @@ function AcademyAiCareerDevelopment() {
         <div className="mt-12 grid lg:grid-cols-3 gap-6">
           {CERTIFICATION_PATHWAYS.map((p, idx) => (
             <Reveal key={p.title} delay={idx * 0.08}>
-              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md">
                 <div>
                   <div className="flex items-center justify-between">
                     <PremiumBadge className="text-[10px] font-mono font-bold uppercase tracking-wider bg-brand/10 text-brand border border-brand/20">
@@ -259,7 +258,7 @@ function AcademyAiCareerDevelopment() {
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {CAREER_TRACKS.map((t, idx) => (
             <Reveal key={t.title} delay={idx * 0.05}>
-              <PremiumCard className="p-6 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <PremiumCard className="p-6 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md">
                 <div>
                   <div className="p-3 rounded-2xl bg-brand/10 text-brand w-fit">
                     <t.icon className="h-6 w-6" />
@@ -318,9 +317,6 @@ function AcademyAiCareerDevelopment() {
           </div>
         </Reveal>
       </section>
-
-      {/* Final CTA */}
-      <FinalCTA />
     </>
   );
 }

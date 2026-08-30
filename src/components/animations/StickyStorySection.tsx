@@ -81,14 +81,14 @@ function StoryStepCard({
     <motion.div
       ref={cardRef}
       style={{ opacity, scale, y }}
-      className="p-6 sm:p-8 md:p-10 rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl transition-all duration-300 group text-left"
+      className="p-6 sm:p-8 md:p-10 rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md group text-left"
     >
       <div className="flex items-center justify-between gap-4 mb-6">
         <span className="font-mono text-xs font-bold text-brand dark:text-brand-2 uppercase tracking-widest">
           PHASE 0{index + 1} / 0{total}
         </span>
         {Icon && (
-          <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 dark:bg-white/5 text-brand group-hover:scale-110 transition-transform duration-300">
+          <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 dark:bg-white/5 text-brand">
             <Icon className="h-5 w-5" />
           </div>
         )}

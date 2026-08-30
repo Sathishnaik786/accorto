@@ -79,8 +79,8 @@ const LEADERSHIP: Executive[] = [
     roleSubtitle: "CHIEF EXECUTIVE OFFICER",
     company: "Accorto Technologies",
     initials: "VG",
-    image: "/images/venu-gaddam.jpg",
-    linkedin: "https://www.linkedin.com/company/accorto-technologies",
+    image: "/images/Venu_Gaddam.jpg",
+    linkedin: "https://www.linkedin.com/in/venugaddam/",
     summary:
       "Nearly three decades of experience across Cloud, Data, AI, enterprise technology, and global digital transformation.",
     shortBio: [
@@ -106,7 +106,7 @@ const LEADERSHIP: Executive[] = [
     roleSubtitle: "CHIEF OPERATING OFFICER",
     company: "Accorto Technologies",
     initials: "VK",
-    image: "/images/vasu-kasireddy.jpg",
+    image: "",
     linkedin: "https://www.linkedin.com/company/accorto-technologies",
     summary:
       "More than 25 years of experience across construction, infrastructure, operations, entrepreneurship, and business management.",
@@ -145,7 +145,7 @@ function ProfilePortrait({ exec }: ProfilePortraitProps) {
           <img
             src={exec.image}
             alt={`${exec.name} — ${exec.role}, ${exec.company}`}
-            className="w-full h-full object-cover object-top filter brightness-[0.94] contrast-[1.04] group-hover:scale-[1.02] group-hover:brightness-100 transition-transform duration-700 ease-out"
+            className="w-full h-full object-cover object-top filter brightness-[0.94] contrast-[1.04]"
             loading="lazy"
             onError={(e) => {
               (e.currentTarget as HTMLElement).style.display = "none";
@@ -161,11 +161,10 @@ function ProfilePortrait({ exec }: ProfilePortraitProps) {
       {/* Abstract Identity Monogram Fallback */}
       <div
         id={`fallback-${exec.id}`}
-        className={`absolute inset-0 flex flex-col items-center justify-center p-8 text-center select-none ${
-          exec.image ? "hidden" : "flex"
-        }`}
+        className={`absolute inset-0 flex flex-col items-center justify-center p-8 text-center select-none ${exec.image ? "hidden" : "flex"
+          }`}
       >
-        <div className="absolute inset-0 bg-radial from-brand/20 via-transparent to-transparent opacity-40 group-hover:opacity-70 transition-opacity duration-700 pointer-events-none" />
+        <div className="absolute inset-0 bg-radial from-brand/20 via-transparent to-transparent opacity-40 pointer-events-none" />
         <div className="absolute -top-28 -left-28 h-56 w-56 rounded-full bg-brand-2/15 blur-3xl pointer-events-none" />
         <div className="absolute -bottom-28 -right-28 h-56 w-56 rounded-full bg-brand/15 blur-3xl pointer-events-none" />
 
@@ -181,7 +180,7 @@ function ProfilePortrait({ exec }: ProfilePortraitProps) {
         <div className="mb-6 font-mono text-[9px] uppercase tracking-[0.3em] text-slate-400/80">
           Accorto Technologies
         </div>
-        <div className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-3xl bg-white/3 border border-white/10 flex items-center justify-center font-display text-4xl sm:text-5xl font-bold text-white shadow-brand backdrop-blur-md group-hover:scale-105 group-hover:border-white/20 transition-all duration-500">
+        <div className="relative h-28 w-28 sm:h-32 sm:w-32 rounded-3xl bg-white/3 border border-white/10 flex items-center justify-center font-display text-4xl sm:text-5xl font-bold text-white shadow-brand backdrop-blur-md">
           {exec.initials}
         </div>
       </div>
@@ -209,9 +208,8 @@ function ExecutiveProfile({ exec, reversed = false, onSelect }: ExecutiveProfile
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 xl:gap-20 items-center">
       {/* Portrait Column */}
       <div
-        className={`lg:col-span-5 ${
-          reversed ? "order-1 lg:order-2" : "order-1 lg:order-1"
-        }`}
+        className={`lg:col-span-5 ${reversed ? "order-1 lg:order-2" : "order-1 lg:order-1"
+          }`}
       >
         <Reveal delay={reversed ? 0.12 : 0.04}>
           <ProfilePortrait exec={exec} />
@@ -220,9 +218,8 @@ function ExecutiveProfile({ exec, reversed = false, onSelect }: ExecutiveProfile
 
       {/* Content Column */}
       <div
-        className={`lg:col-span-7 flex flex-col justify-center space-y-6 max-w-2xl ${
-          reversed ? "order-2 lg:order-1" : "order-2 lg:order-2"
-        }`}
+        className={`lg:col-span-7 flex flex-col justify-center space-y-6 max-w-2xl ${reversed ? "order-2 lg:order-1" : "order-2 lg:order-2"
+          }`}
       >
         {/* Executive Identity Header & Verified Social Link */}
         <Reveal delay={reversed ? 0.04 : 0.08}>

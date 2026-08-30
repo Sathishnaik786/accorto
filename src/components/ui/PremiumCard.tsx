@@ -1,17 +1,10 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-import { BorderGlow } from "../animations/BorderGlow";
 
 export interface PremiumCardProps extends React.HTMLAttributes<HTMLDivElement> {
   hover?: boolean;
   glow?: boolean;
   borderRadius?: number;
-  glowColor?: string;
-  colors?: string[];
-  edgeSensitivity?: number;
-  glowRadius?: number;
-  glowIntensity?: number;
-  coneSpread?: number;
 }
 
 export const PremiumCard = React.forwardRef<HTMLDivElement, PremiumCardProps>(
@@ -19,26 +12,19 @@ export const PremiumCard = React.forwardRef<HTMLDivElement, PremiumCardProps>(
     {
       children,
       className,
-      hover = true,
-      glow = true,
-      borderRadius = 24,
-      glowColor = "185 95 65",
-      colors = ["#00D9FF", "#70FF4A", "#38BDF8"],
-      edgeSensitivity = 30,
-      glowRadius = 36,
-      glowIntensity = 0.85,
-      coneSpread = 25,
       style,
+      hover,
+      glow,
+      borderRadius,
       ...props
     },
     ref,
   ) => {
-    const cardContent = (
+    return (
       <div
         ref={ref}
         className={cn(
-          "premium-card relative overflow-hidden rounded-(--card-radius,24px) bg-white/3 border transition-all duration-600 ease-out",
-          hover && "hover:-translate-y-1.5 hover:bg-white/5 hover:shadow-(--shadow-hover)",
+          "premium-card relative overflow-hidden rounded-(--card-radius,24px) bg-white/3 border",
           className,
         )}
         style={{
@@ -53,23 +39,6 @@ export const PremiumCard = React.forwardRef<HTMLDivElement, PremiumCardProps>(
         {/* Content */}
         <div className="relative z-10 h-full w-full">{children}</div>
       </div>
-    );
-
-    if (!glow) return cardContent;
-
-    return (
-      <BorderGlow
-        borderRadius={borderRadius}
-        glowColor={glowColor}
-        colors={colors}
-        edgeSensitivity={edgeSensitivity}
-        glowRadius={glowRadius}
-        glowIntensity={glowIntensity}
-        coneSpread={coneSpread}
-        className="h-full w-full"
-      >
-        {cardContent}
-      </BorderGlow>
     );
   },
 );

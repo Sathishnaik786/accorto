@@ -68,7 +68,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
                 )}
               >
                 {isActive && (
-                  <div className="absolute left-[-31px] top-1.5 h-3.5 w-3.5 rounded-full bg-gradient-brand ring-4 ring-white/10 dark:ring-black/35 shadow-md transition-all duration-500" />
+                  <div className="absolute -left-7.75 top-1.5 h-3.5 w-3.5 rounded-full bg-gradient-brand ring-4 ring-white/10 dark:ring-black/35 shadow-md transition-all duration-500" />
                 )}
                 <span className="text-[10px] font-mono font-bold text-brand uppercase tracking-wider block">
                   Phase 0{idx + 1}
@@ -101,7 +101,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
               className="w-full"
             >
-              <GlassPanel className="p-8 md:p-12 hover:border-brand/20 transition-all duration-500 select-none shadow-xl text-left">
+              <GlassPanel className="p-8 md:p-12 select-none shadow-xl text-left">
                 {s.visual}
               </GlassPanel>
             </motion.div>

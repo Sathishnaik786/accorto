@@ -22,6 +22,8 @@ import { CommandPalette } from "../components/command-palette";
 import { FloatingSpotlight } from "../components/premium/FloatingSpotlight";
 import { FloatingParticles } from "../components/premium/FloatingParticles";
 
+import { LOCATIONS } from "../data/locations";
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -147,6 +149,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           description:
             "Enterprise consulting in Oracle ERP, SAP, AI, Cloud, and Digital Transformation.",
           sameAs: ["https://www.linkedin.com/company/accorto-technologies"],
+          location: LOCATIONS.map((loc) => ({
+            "@type": "Place",
+            name: `Accorto Technologies — ${loc.name}`,
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: loc.addressLines[0],
+              addressCountry: loc.region,
+            },
+          })),
         }),
       },
     ],

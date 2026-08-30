@@ -91,7 +91,7 @@ function IndustriesPage() {
         subtitle="Industry-aware accelerators, regulatory know-how, and reference architectures built from years of operating inside complex sectors."
       />
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-24">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-6 md:pb-10">
         <h2 className="sr-only">Industry Challenges, Solutions, and Benefits</h2>
         <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Industry sectors">
           {INDUSTRIES.map((it) => {
@@ -183,7 +183,7 @@ function Card({
   tone: string;
 }) {
   return (
-    <div className="h-full rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 sm:p-7 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 motion-reduce:hover:translate-y-0 text-left flex flex-col justify-between">
+    <div className="h-full rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 sm:p-7 shadow-md text-left flex flex-col justify-between">
       <div>
         <div className="flex items-center gap-3">
           <div className="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 dark:bg-white/5 text-brand shrink-0">

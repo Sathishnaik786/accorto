@@ -36,7 +36,7 @@ export function Timeline({ events, className }: TimelineProps) {
               >
                 {/* Visual milestone content block */}
                 <div className="w-full md:w-1/2 pl-12 md:pl-0 md:px-10">
-                  <GlassPanel className="p-6 transition-all duration-300 hover:translate-y-[-2px] hover:shadow-lg border border-slate-200/60 dark:border-white/10 hover:border-brand-2/40">
+                  <GlassPanel className="p-6 border border-slate-200/60 dark:border-white/10">
                     <div className="text-xs font-mono text-brand font-bold uppercase tracking-wider">
                       {yearDisplay}
                     </div>

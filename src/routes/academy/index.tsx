@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
-import { FinalCTA } from "@/components/home";
 import { SpecularButton } from "@/components/animations/SpecularButton";
 import { BorderGlow } from "@/components/animations/BorderGlow";
 import { ShinyText } from "@/components/animations/ShinyText";
@@ -288,7 +287,7 @@ function AcademyLanding() {
             { value: "100%", label: "Hands-on Practical" },
           ].map((stat, i) => (
             <Reveal key={i} delay={i * 0.05}>
-              <div className="glass rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 h-full flex flex-col justify-center shadow-xs hover:shadow-md">
+              <div className="glass rounded-2xl p-6 text-center h-full flex flex-col justify-center shadow-xs">
                 <div className="font-display text-3xl font-bold text-gradient">{stat.value}</div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-semibold">
                   {stat.label}
@@ -364,11 +363,11 @@ function AcademyLanding() {
             const cardContent = (
               <Link
                 to={prog.link}
-                className="group relative flex flex-col justify-between h-full rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border hover:border-brand/40"
+                className="group relative flex flex-col justify-between h-full rounded-3xl glass p-6 border"
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 border border-border text-slate-700 dark:text-slate-300 transition-transform duration-300 group-hover:scale-105">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 border border-border text-slate-700 dark:text-slate-300">
                       <Icon className="h-5 w-5 text-brand" />
                     </div>
                     {prog.badge && (
@@ -508,8 +507,6 @@ function AcademyLanding() {
           })}
         </div>
       </section>
-
-      <FinalCTA />
     </>
   );
 }

@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
-import { FinalCTA } from "@/components/home-sections";
 import { Users, Award, ShieldCheck, Mail, ArrowRight } from "lucide-react";
 import { SpecularButton } from "@/components/animations/SpecularButton";
 import { BorderGlow } from "@/components/animations/BorderGlow";
@@ -72,12 +71,12 @@ function CorporateTraining() {
       />
 
       {/* Services Grid */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-24">
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-8 md:pb-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {SERVICES.map((s, idx) => (
             <Reveal key={idx}>
               <BorderGlow borderRadius={24} className="h-full">
-                <div className="glass rounded-3xl p-6 h-full flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all border border-border/50">
+                <div className="glass rounded-3xl p-6 h-full flex flex-col justify-between border border-border/50">
                   <div>
                     <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/5 border border-border">
                       <ShieldCheck className="h-4 w-4 text-brand" />
@@ -123,8 +122,6 @@ function CorporateTraining() {
           </BorderGlow>
         </Reveal>
       </section>
-
-      <FinalCTA />
     </>
   );
 }

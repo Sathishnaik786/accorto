@@ -40,8 +40,8 @@ export function Testimonials() {
           {items.map((t, i) => (
             <Reveal key={i} delay={i * 0.1}>
               <PremiumCard
-                hover={true}
-                className="h-full p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-6 rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1"
+                hover={false}
+                className="h-full p-6 sm:p-8 md:p-10 flex flex-col justify-between gap-6 rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none"
               >
                 <div className="space-y-4 text-left">
                   <div className="flex gap-1 text-amber-400">

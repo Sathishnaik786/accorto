@@ -57,16 +57,16 @@ interface ServiceCardProps {
 function ServiceCard({ icon: Icon, name, desc, points, link, badge, wide = false }: ServiceCardProps) {
   return (
     <PremiumCard
-      hover={true}
+      hover={false}
       glow={false}
       className={cn(
-        "group relative p-5 sm:p-6 md:p-8 h-full flex flex-col justify-between gap-5 sm:gap-8 transition-all duration-300 ease-out z-10 rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1",
+        "group relative p-5 sm:p-6 md:p-8 h-full flex flex-col justify-between gap-5 sm:gap-8 z-10 rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none",
         wide ? "md:flex-row md:items-center md:gap-10" : "",
       )}
     >
       <div className={cn("flex flex-col gap-4 relative z-10", wide ? "md:flex-1" : "")}>
         <div className="flex items-center justify-between">
-          <div className="inline-grid h-12 w-12 place-items-center rounded-[18px] bg-brand/8 dark:bg-white/5 border border-brand/15 dark:border-white/10 text-brand shadow-xs transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-0.5">
+          <div className="inline-grid h-12 w-12 place-items-center rounded-[18px] bg-brand/8 dark:bg-white/5 border border-brand/15 dark:border-white/10 text-brand shadow-xs">
             <Icon className="h-6 w-6" />
           </div>
           {badge && (
@@ -138,8 +138,8 @@ export function ServicesShowcase() {
           <BentoGridItem colSpan="md:col-span-12 lg:col-span-7 lg:row-span-2">
             <Reveal className="h-full">
               <PremiumCard
-                hover={true}
-                className="relative h-full p-6 sm:p-8 md:p-10 group transition-all duration-500 ease-out rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1"
+                hover={false}
+                className="relative h-full p-6 sm:p-8 md:p-10 group rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none"
               >
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 flex-wrap">

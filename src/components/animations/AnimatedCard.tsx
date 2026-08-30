@@ -21,8 +21,8 @@ export function AnimatedCard({
   children,
   className = "",
   delay = 0,
-  hoverElevation = ANIMATION_DISTANCES.cardHover,
-  hoverScale = 1.01,
+  hoverElevation = 0,
+  hoverScale = 1,
   onClick,
   duration = ANIMATION_DURATIONS.normal,
 }: AnimatedCardProps) {
@@ -39,15 +39,6 @@ export function AnimatedCard({
         y: 0,
       }}
       viewport={DEFAULT_VIEWPORT_CONFIG}
-      whileHover={
-        shouldReduceMotion
-          ? undefined
-          : {
-              y: hoverElevation,
-              scale: hoverScale,
-              transition: { duration: 0.2, ease: EASING },
-            }
-      }
       whileTap={
         shouldReduceMotion
           ? undefined

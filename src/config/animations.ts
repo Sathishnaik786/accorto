@@ -46,7 +46,7 @@ export const ANIMATION_DISTANCES = {
   page: 12,
   container: 16,
   card: 12,
-  cardHover: -3,
+  cardHover: 0,
   badge: 6,
   dropdown: 4,
   iconTranslate: 3,

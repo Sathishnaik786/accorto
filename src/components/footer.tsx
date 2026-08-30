@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Linkedin, Twitter, Github, Youtube, Mail, MapPin, Phone, ArrowRight } from "lucide-react";
 import logoImg from "../../logo_1.png";
 import { useMotionSystem, EASING } from "../lib/motion-presets";
+import { LOCATIONS } from "@/data/locations";
 
 export function Footer() {
   const {
@@ -14,7 +15,7 @@ export function Footer() {
   } = useMotionSystem();
 
   return (
-    <footer className="relative mt-16 md:mt-24 lg:mt-32 bg-[#F8FAFB] dark:bg-transparent">
+    <footer className="relative mt-6 sm:mt-10 bg-[#F8FAFB] dark:bg-transparent">
       {/* Flagship top gradient divider */}
       <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-slate-200 dark:via-brand-3/20 to-transparent" />
       <div className="absolute inset-x-0 -top-0.5 h-0.75 bg-linear-to-r from-transparent via-slate-200/40 to-transparent blur-xs pointer-events-none" />
@@ -23,7 +24,7 @@ export function Footer() {
         initial="initial"
         whileInView="animate"
         viewport={{ once: true, amount: 0.1 }}
-        className="mx-auto max-w-7xl px-4 sm:px-6 pt-20 pb-10"
+        className="mx-auto max-w-7xl px-4 sm:px-6 pt-6 sm:pt-8 pb-10"
       >
         <div className="bg-white dark:bg-card border border-slate-200/60 dark:border-white/5 rounded-3xl p-5 sm:p-8 md:p-12 shadow-xs dark:shadow-none">
           <div className="grid gap-12 lg:grid-cols-12">
@@ -51,13 +52,10 @@ export function Footer() {
               </p>
               <div className="space-y-2 text-sm text-slate-600 dark:text-slate-300 font-semibold">
                 <p className="flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-brand" /> Hyderabad, India
+                  <Mail className="h-4 w-4 text-brand shrink-0" /> info@accortotech.com
                 </p>
                 <p className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-brand" /> info@accortotech.com
-                </p>
-                <p className="flex items-center gap-2">
-                  <Phone className="h-4 w-4 text-brand" /> +91 80 0000 0000
+                  <Phone className="h-4 w-4 text-brand shrink-0" /> +1 (408) 338-8935
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -175,6 +173,32 @@ export function Footer() {
                 Enterprise Grade · Global Delivery
               </div>
             </motion.div>
+          </div>
+
+          {/* Offices Section */}
+          <div className="mt-10 border-t border-slate-200/60 dark:border-white/10 pt-8">
+            <h4 className="text-xs font-mono font-bold uppercase tracking-widest text-slate-900 dark:text-white mb-4">
+              Offices
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              {LOCATIONS.map((loc) => (
+                <div key={loc.id} className="space-y-1 text-left">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-4 w-4 text-brand shrink-0" aria-hidden="true" />
+                    <h5 className="font-display font-semibold text-sm text-slate-900 dark:text-white">
+                      {loc.name}
+                    </h5>
+                  </div>
+                  <address className="not-italic text-xs text-slate-600 dark:text-slate-300 font-normal leading-relaxed pl-6">
+                    {loc.addressLines.map((line, idx) => (
+                      <span key={idx} className="block">
+                        {line}
+                      </span>
+                    ))}
+                  </address>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="mt-10 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-white/10 pt-6 text-xs text-slate-500 dark:text-slate-400 font-semibold">

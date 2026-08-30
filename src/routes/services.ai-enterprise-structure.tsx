@@ -237,7 +237,7 @@ function ServiceAiEnterpriseStructure() {
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           {PLATFORMS.map((p, idx) => (
             <Reveal key={p.name} delay={idx * 0.06}>
-              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md">
                 <div>
                   <div className="flex items-center justify-between">
                     <div className="text-2xl font-display font-bold text-slate-900 dark:text-white">

@@ -2,7 +2,6 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
-import { FinalCTA } from "@/components/home-sections";
 import {
   Calendar,
   Layers,
@@ -385,7 +384,7 @@ function AIEngineeringCourse() {
           {PROJECTS.map((proj, idx) => (
             <div
               key={idx}
-              className="glass rounded-3xl p-6 flex flex-col justify-between hover:-translate-y-1 hover:shadow-xl transition-all border border-border hover:border-brand/35"
+              className="glass rounded-3xl p-6 flex flex-col justify-between border border-border"
             >
               <div>
                 <div className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-slate-100 dark:bg-white/5 border border-border">
@@ -488,10 +487,10 @@ function AIEngineeringCourse() {
           {TECHS.map((tech) => (
             <div
               key={tech.name}
-              className="glass rounded-xl p-4 flex items-center justify-center min-h-16 transition-all duration-300 group cursor-default select-none border border-border hover:border-brand/20 hover:-translate-y-0.5"
+              className="glass rounded-xl p-4 flex items-center justify-center min-h-16 group cursor-default select-none border border-border"
             >
               <span
-                className={`font-display font-bold text-xs tracking-wider text-slate-400 dark:text-slate-500 group-hover:scale-105 transition-all ${tech.glow}`}
+                className="font-display font-bold text-xs tracking-wider text-slate-400 dark:text-slate-500"
               >
                 {tech.name}
               </span>
@@ -499,8 +498,6 @@ function AIEngineeringCourse() {
           ))}
         </div>
       </section>
-
-      <FinalCTA />
     </>
   );
 }

@@ -28,7 +28,7 @@ const ICON_MAP: Record<string, React.ComponentType<{ className?: string }>> = {
 
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div className="bg-white dark:bg-card border border-slate-200/60 dark:border-white/5 rounded-3xl p-5 shadow-xs hover:shadow-md transition-all duration-300">
+    <div className="bg-white dark:bg-card border border-slate-200/60 dark:border-white/5 rounded-3xl p-5 shadow-xs">
       <div className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 mb-3 font-bold">
         {title}
       </div>
@@ -103,7 +103,7 @@ export function PracticeSection({ p, flip }: { p: ServicePractice; flip: boolean
                       duration={0.45}
                       scale={0.97}
                     >
-                      <div className="relative bg-slate-50 dark:bg-[#102947] rounded-2xl p-3 flex flex-col justify-between min-h-20 border border-slate-200/60 dark:border-white/5 hover:border-brand/35 transition-all duration-300 hover:-translate-y-0.5 shadow-xs hover:shadow-md group">
+                      <div className="relative bg-slate-50 dark:bg-[#102947] rounded-2xl p-3 flex flex-col justify-between min-h-20 border border-slate-200/60 dark:border-white/5 shadow-xs">
                         <span className="text-[10px] font-mono font-bold text-brand bg-brand/10 w-5 h-5 rounded-full flex items-center justify-center">
                           {idx + 1}
                         </span>

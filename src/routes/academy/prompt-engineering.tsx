@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
-import { FinalCTA } from "@/components/home-sections";
 import { Terminal, Award } from "lucide-react";
 import { SpecularButton } from "@/components/animations/SpecularButton";
 import { BorderGlow } from "@/components/animations/BorderGlow";
@@ -36,7 +35,7 @@ function PromptEngineeringCourse() {
         subtitle="Move beyond raw text generation. Master advanced reasoning chains, JSON schema guarantees, dynamic function calls, and red-teaming."
       />
 
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 pb-24">
+      <section className="mx-auto max-w-4xl px-4 sm:px-6 pb-8 md:pb-12">
         <Reveal>
           <div className="glass-strong rounded-3xl p-8 border border-white/10 shadow-lg space-y-6">
             <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -90,8 +89,6 @@ function PromptEngineeringCourse() {
           </div>
         </Reveal>
       </section>
-
-      <FinalCTA />
     </>
   );
 }

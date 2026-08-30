@@ -25,17 +25,15 @@ export function Certifications() {
         <div className="mt-6 md:mt-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {items.map((i, idx) => (
             <Reveal key={i.name} delay={idx * 0.08}>
-              <motion.div
-                whileHover={cardHover}
-                transition={cardHoverTransition}
-                className="bg-white dark:bg-card border border-slate-100 dark:border-white/5 rounded-3xl p-5 flex flex-col items-center text-center gap-2 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              <div
+                className="bg-white dark:bg-card border border-slate-100 dark:border-white/5 rounded-3xl p-5 flex flex-col items-center text-center gap-2 shadow-md"
               >
                 <i.icon className="h-6 w-6 text-brand" />
                 <div className="text-sm font-semibold text-slate-900 dark:text-white">{i.name}</div>
                 <div className="text-xs text-[#64748B] dark:text-slate-400 font-medium">
                   {i.lvl}
                 </div>
-              </motion.div>
+              </div>
             </Reveal>
           ))}
         </div>

@@ -243,7 +243,7 @@ function ServiceAiIot() {
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {DELIVERED_MONITORS.map((m, idx) => (
             <Reveal key={m.name} delay={idx * 0.05}>
-              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md">
                 <div>
                   <div className="flex items-center justify-between">
                     <div className={`p-3 rounded-2xl ${m.bg} ${m.color}`}>
@@ -394,7 +394,7 @@ function ServiceAiIot() {
         <div className="mt-12 grid lg:grid-cols-3 gap-6">
           {FUTURE_VISION_PILLARS.map((p, idx) => (
             <Reveal key={p.title} delay={idx * 0.08}>
-              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md hover:border-brand/40 transition-all duration-300">
+              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md">
                 <div>
                   <div className="flex items-center justify-between">
                     <div className="p-3 rounded-2xl bg-brand/10 text-brand">

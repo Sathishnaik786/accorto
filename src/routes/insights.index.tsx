@@ -93,21 +93,21 @@ function InsightsIndex() {
           <div className="lg:col-span-8 flex flex-col gap-6">
             <Reveal>
               <CardContainer className="w-full">
-                <CardBody className="p-0 bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl rounded-4xl overflow-hidden">
+                <CardBody className="p-0 bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md rounded-4xl overflow-hidden">
                   <Link
                     to="/insights/$slug"
                     params={{ slug: FEATURED.slug }}
                     aria-label={`${FEATURED.title} — Read featured story`}
                     className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-4xl"
                   >
-                    {/* Image Container with 3D Depth */}
-                    <CardItem translateZ={30} className="w-full">
+                    {/* Image Container */}
+                    <CardItem className="w-full">
                       <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-4xl border-b border-slate-200/50 dark:border-white/5 bg-slate-100 dark:bg-white/5">
                         <img
                           src={FEATURED.img}
                           alt={FEATURED.title}
                           loading="lazy"
-                          className="h-full w-full object-cover brightness-[0.96] contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                          className="h-full w-full object-cover brightness-[0.96] contrast-[1.04]"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" aria-hidden="true" />
                       </div>
@@ -181,7 +181,7 @@ function InsightsIndex() {
                           <img
                             src={a.img}
                             alt={a.title}
-                            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="h-full w-full object-cover"
                           />
                         </div>
                       </div>
@@ -231,8 +231,8 @@ function InsightsIndex() {
                 <Reveal key={a.title} delay={idx * 0.05}>
                   <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-4xl">
                     <PremiumCard
-                      hover={true}
-                      className="h-full flex flex-col bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 rounded-4xl overflow-hidden transition-all duration-300 motion-reduce:hover:translate-y-0"
+                      hover={false}
+                      className="h-full flex flex-col bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md rounded-4xl overflow-hidden"
                     >
                       {/* Image at top */}
                       <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-4xl border-b border-slate-200/50 dark:border-white/5 bg-slate-100 dark:bg-white/5">
@@ -240,7 +240,7 @@ function InsightsIndex() {
                           src={a.img}
                           alt={a.title}
                           loading="lazy"
-                          className="h-full w-full object-cover brightness-[0.96] contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100 motion-reduce:transition-none"
+                          className="h-full w-full object-cover brightness-[0.96] contrast-[1.04]"
                         />
                         <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" aria-hidden="true" />
                       </div>

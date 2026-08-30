@@ -2,14 +2,14 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "@/components/page-hero";
 import { Reveal, SectionHeading } from "@/components/section";
-import { Send, ChevronDown, ShieldCheck, CheckCircle2 } from "lucide-react";
+import { Send, ChevronDown, ShieldCheck, CheckCircle2, MapPin, ArrowRight } from "lucide-react";
 import { SpecularButton } from "@/components/animations/SpecularButton";
 import { FadeContent } from "@/components/animations/FadeContent";
 import { GhostFibers } from "@/components/animations/GhostFibers";
 import { AnimatedContent } from "@/components/animations/AnimatedContent";
 import { CinematicSection } from "@/components/animations/CinematicSection";
-
-
+import { LOCATIONS } from "@/data/locations";
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -18,7 +18,7 @@ export const Route = createFileRoute("/contact")({
       {
         name: "description",
         content:
-          "Speak directly with our enterprise consulting architects. Fill out our contact form to kick off your program today.",
+          "Speak directly with our enterprise consulting architects. Connect with our Hyderabad and US offices to kick off your program today.",
       },
       { property: "og:title", content: "Contact Accorto" },
       { property: "og:description", content: "Get in touch with our consulting team." },
@@ -46,6 +46,21 @@ export const Route = createFileRoute("/contact")({
                 item: "https://accorto.tech/contact",
               },
             ],
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "Accorto Technologies",
+            url: "https://accorto.tech",
+            location: LOCATIONS.map((loc) => ({
+              "@type": "Place",
+              name: `Accorto Technologies — ${loc.name}`,
+              address: {
+                "@type": "PostalAddress",
+                streetAddress: loc.addressLines[0],
+                addressCountry: loc.region,
+              },
+            })),
           },
           {
             "@context": "https://schema.org",
@@ -80,7 +95,7 @@ export const Route = createFileRoute("/contact")({
                 name: "Where are your teams based?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Global delivery hubs in Hyderabad, India; London, UK; and San Francisco, USA. Follow-the-sun coverage.",
+                  text: "Global delivery hubs in Hyderabad, India and US Branch in Pleasanton, CA. Follow-the-sun coverage.",
                 },
               },
             ],
@@ -107,13 +122,15 @@ const FAQS = [
   },
   {
     q: "Where are your teams based?",
-    a: "Global delivery hubs in Hyderabad, India; London, UK; and San Francisco, USA. Follow-the-sun coverage.",
+    a: "Global delivery hubs in Hyderabad, India and US Branch in Pleasanton, CA. Follow-the-sun coverage.",
   },
 ];
 
 function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedOffice, setSelectedOffice] = useState<string>("india");
+  const currentOffice = LOCATIONS.find((l) => l.id === selectedOffice) || LOCATIONS[0];
   const [form, setForm] = useState({
     fullname: "",
     email: "",
@@ -330,18 +347,91 @@ function Contact() {
           </div>
         </form>
 
-        <div className="glass rounded-3xl overflow-hidden shadow-xl aspect-video w-full border border-slate-200 dark:border-white/10 p-2">
-          <iframe
-            src="https://maps.google.com/maps?q=Asian%20Sun%20City%20Hyderabad&z=15&output=embed"
-            width="100%"
-            height="100%"
-            style={{ border: 0, borderRadius: "1.25rem" }}
-            allowFullScreen={true}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Accorto Technologies Office Location"
-            className="w-full h-full transition-all duration-300"
-          />
+        {/* Our Offices Section */}
+        <div className="space-y-6 pt-6">
+          <div className="text-left">
+            <div className="text-xs font-mono font-bold uppercase tracking-widest text-brand dark:text-brand-3">
+              Locations
+            </div>
+            <h2 className="font-display text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mt-1.5">
+              Our Offices
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {LOCATIONS.map((loc) => {
+              const isSelected = selectedOffice === loc.id;
+              return (
+                <div
+                  key={loc.id}
+                  className={cn(
+                    "glass rounded-3xl p-6 sm:p-7 border text-left flex flex-col justify-between shadow-xs transition-colors duration-200",
+                    isSelected
+                      ? "border-brand/40 bg-white dark:bg-card"
+                      : "border-slate-200/60 dark:border-white/10"
+                  )}
+                >
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <div className="grid h-10 w-10 place-items-center rounded-xl bg-brand/10 dark:bg-white/5 text-brand shrink-0">
+                        <MapPin className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setSelectedOffice(loc.id)}
+                        className={cn(
+                          "text-xs font-mono font-semibold px-3 py-1 rounded-full border transition-colors cursor-pointer",
+                          isSelected
+                            ? "bg-brand text-white border-brand shadow-xs"
+                            : "bg-slate-100 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-border hover:border-brand/30 hover:text-brand"
+                        )}
+                      >
+                        {isSelected ? "Active Map" : "View Map"}
+                      </button>
+                    </div>
+                    <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white mt-4 leading-snug">
+                      {loc.name}
+                    </h3>
+                    <address className="not-italic text-xs sm:text-sm text-[#64748B] dark:text-slate-300 font-medium mt-2.5 leading-relaxed">
+                      {loc.addressLines.map((line, idx) => (
+                        <span key={idx} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </address>
+                  </div>
+
+                  <div className="mt-6 pt-4 border-t border-slate-200/60 dark:border-white/10">
+                    <a
+                      href={loc.directionsUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={loc.ariaLabel}
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand hover:text-brand-dark dark:hover:text-brand-2 transition-colors group/dir"
+                    >
+                      <span>Get directions</span>
+                      <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/dir:translate-x-1" aria-hidden="true" />
+                    </a>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="glass rounded-3xl overflow-hidden shadow-xl aspect-video w-full border border-slate-200 dark:border-white/10 p-2">
+            <iframe
+              key={currentOffice.id}
+              src={currentOffice.mapEmbedUrl}
+              width="100%"
+              height="100%"
+              style={{ border: 0, borderRadius: "1.25rem" }}
+              allowFullScreen={true}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title={`Accorto Technologies Office Location — ${currentOffice.name}`}
+              className="w-full h-full"
+            />
+          </div>
         </div>
       </CinematicSection>
 
@@ -366,7 +456,7 @@ function Contact() {
               duration={0.4}
               scale={0.99}
             >
-              <details className="group glass rounded-2xl px-6 py-5 hover:-translate-y-0.5 hover:shadow-md transition-all duration-300">
+              <details className="group glass rounded-2xl px-6 py-5">
                 <summary className="flex cursor-pointer items-center justify-between font-display text-base font-bold text-slate-900 dark:text-white list-none">
                   {f.q}
                   <ChevronDown className="h-4 w-4 text-brand transition-transform group-open:rotate-180" />

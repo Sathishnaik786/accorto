@@ -225,7 +225,7 @@ function ServiceAiEnterpriseData() {
         <div className="mt-12 grid md:grid-cols-2 gap-6">
           {PLATFORM_CARDS.map((p, idx) => (
             <Reveal key={p.name} delay={idx * 0.08}>
-              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <PremiumCard className="p-6 sm:p-8 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md">
                 <div>
                   <div className="flex items-center justify-between">
                     <h3 className="font-display text-2xl font-bold text-slate-900 dark:text-white">
@@ -275,7 +275,7 @@ function ServiceAiEnterpriseData() {
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {DELIVERABLES.map((d, idx) => (
             <Reveal key={d.title} delay={idx * 0.05}>
-              <PremiumCard className="p-6 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+              <PremiumCard className="p-6 h-full flex flex-col justify-between rounded-3xl bg-white dark:bg-card border border-slate-200/80 dark:border-white/5 shadow-md">
                 <div>
                   <div className="p-3 rounded-2xl bg-brand/10 text-brand w-fit">
                     <d.icon className="h-6 w-6" />
