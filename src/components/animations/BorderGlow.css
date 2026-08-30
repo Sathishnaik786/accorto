@@ -76,7 +76,7 @@
       black calc(var(--cone-spread) * 1%),
       transparent calc((var(--cone-spread) + 15) * 1%),
       transparent calc((100 - var(--cone-spread) - 15) * 1%),
-      black calc((100 - var(--cone-spread)) * 1%)\
+      black calc((100 - var(--cone-spread)) * 1%)
     );
 }
 
