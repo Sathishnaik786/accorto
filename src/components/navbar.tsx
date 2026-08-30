@@ -19,7 +19,6 @@ import {
   BookOpen,
   Users,
 } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
 import { SpecularButton } from "./animations/SpecularButton";
 import {
   servicesTabs,
@@ -273,11 +272,15 @@ export function Navbar() {
 
   useEffect(() => {
     if (!mobile) return;
+    document.body.style.overflow = "hidden";
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === "Escape") setMobile(false);
     };
     window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleEsc);
+    };
   }, [mobile]);
 
   // Route-aware active link helper
@@ -293,7 +296,7 @@ export function Navbar() {
       variants={navbarEntrance}
       initial="initial"
       animate="animate"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2 opacity-95" : "py-5 opacity-100"}`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "py-2 opacity-95" : "py-4 sm:py-5 opacity-100"}`}
     >
       {/* ── Desktop mega-menu backdrop occlusion overlay ── */}
       <AnimatePresence>
@@ -310,30 +313,30 @@ export function Navbar() {
         )}
       </AnimatePresence>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 relative z-10">
+      <div className="mx-auto max-w-7xl px-3 sm:px-6 relative z-10">
         <nav
           className={cn(
             "relative flex items-center justify-between transition-all duration-500 rounded-2xl border",
             scrolled
-              ? "px-4 py-2 bg-white/75 dark:bg-[#031224]/65 border-slate-200/60 dark:border-white/6 shadow-[0_10px_30px_rgba(15,23,42,0.08)] dark:shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-[20px] dark:backdrop-blur-[30px]"
-              : "px-6 py-3 bg-white/40 dark:bg-[#061B33]/75 border-slate-200/20 dark:border-white/5 shadow-xs dark:shadow-sm backdrop-blur-xl",
+              ? "px-3 sm:px-4 py-2 bg-[#031224]/85 border-white/8 shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-[30px]"
+              : "px-3.5 sm:px-6 py-2 sm:py-3 bg-[#061B33]/85 border-white/8 shadow-md backdrop-blur-xl",
           )}
           onMouseLeave={closeMenu}
         >
           {/* Top reflection highlight */}
-          <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-slate-200/40 dark:via-white/20 to-transparent pointer-events-none" />
+          <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
 
           {/* Logo */}
-          <Link to="/" className="flex items-center group shrink-0 relative z-10 py-1">
+          <Link to="/" className="flex items-center group shrink min-w-0 relative z-10 py-0.5 sm:py-1">
             {/* Logo Backdrop Glow */}
             <div className="absolute -inset-y-2.5 -inset-x-3.75 bg-gradient-brand blur-md opacity-0 group-hover:opacity-25 transition-opacity rounded-lg pointer-events-none" />
 
             {/* Height-constrained wrapper to prevent stretching navbar */}
-            <div className="relative h-9 flex items-center overflow-visible">
+            <div className="relative h-8 sm:h-9 flex items-center overflow-visible">
               <img
                 src={logoImg}
                 alt="Accorto Logo"
-                className="h-22 w-auto max-w-none object-contain"
+                className="h-16 sm:h-20 md:h-22 w-auto max-w-[125px] sm:max-w-none object-contain"
               />
             </div>
           </Link>
@@ -468,38 +471,42 @@ export function Navbar() {
           </div>
 
           {/* Right actions */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+            {/* Desktop Search Button */}
             <button
               onClick={() => {
                 const ev = new KeyboardEvent("keydown", { key: "k", ctrlKey: true });
                 window.dispatchEvent(ev);
               }}
-              className="hidden md:flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-slate-600 dark:text-slate-300 font-semibold hover:text-slate-900 dark:hover:text-white hover:-translate-y-0.5 transition-all duration-300 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-xs dark:shadow-none hover:shadow-md cursor-pointer"
+              className="hidden lg:flex items-center gap-2 rounded-full px-3 py-1.5 text-xs text-slate-300 font-semibold hover:text-white hover:-translate-y-0.5 transition-all duration-300 bg-white/5 border border-white/10 shadow-none hover:shadow-md cursor-pointer"
               aria-label="Search navigation and content"
             >
               <Search className="h-3.5 w-3.5 text-brand" /> Search
-              <kbd className="ml-1 rounded border border-slate-200 dark:border-white/10 px-1 text-[10px] bg-slate-50 dark:bg-white/5">
+              <kbd className="ml-1 rounded border border-white/10 px-1 text-[10px] bg-white/5">
                 ⌘K
               </kbd>
             </button>
-            <ThemeToggle />
+
+            {/* Get Started CTA Button */}
             <SpecularButton
               to={NAV_CTA.href}
               size="sm"
               variant="brand"
-              className="hidden md:inline-flex shadow-brand hover:shadow-brand-lg"
+              className="inline-flex items-center justify-center text-xs sm:text-sm px-2.5 sm:px-4 py-1.5 sm:py-2 shadow-brand hover:shadow-brand-lg shrink-0"
             >
-              {NAV_CTA.label}{" "}
-              <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              <span>{NAV_CTA.label}</span>
+              <ArrowRight className="h-3.5 w-3.5 ml-1 transition-transform group-hover:translate-x-0.5 shrink-0" />
             </SpecularButton>
+
+            {/* Mobile Menu Hamburger Button */}
             <button
               onClick={() => setMobile(true)}
-              className="lg:hidden grid h-9 w-9 place-items-center rounded-full transition-all duration-300 bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-xs dark:shadow-none hover:bg-slate-50 dark:hover:bg-white/10 hover:shadow-sm cursor-pointer"
+              className="lg:hidden grid h-9 w-9 sm:h-10 sm:w-10 place-items-center rounded-full transition-all duration-300 bg-white/5 border border-white/10 text-white hover:bg-white/10 hover:shadow-sm cursor-pointer shrink-0"
               aria-label="Open menu"
               aria-expanded={mobile}
               aria-controls="mobile-menu"
             >
-              <Menu className="h-4 w-4" />
+              <Menu className="h-4.5 w-4.5 text-white" />
             </button>
           </div>
 
@@ -565,13 +572,13 @@ export function Navbar() {
             animate="animate"
             exit="exit"
             onKeyDown={(e) => e.key === "Escape" && setMobile(false)}
-            className="fixed inset-0 z-80 bg-[#031224]/95 backdrop-blur-2xl lg:hidden flex flex-col"
+            className="fixed inset-0 z-80 bg-[#031224]/98 backdrop-blur-2xl lg:hidden flex flex-col"
           >
-            <div className="flex items-center justify-between p-5 shrink-0">
+            <div className="flex items-center justify-between p-5 shrink-0 border-b border-white/8">
               <span className="font-display font-semibold text-white">Menu</span>
               <button
                 onClick={() => setMobile(false)}
-                className="glass grid h-9 w-9 place-items-center rounded-full cursor-pointer"
+                className="grid h-9 w-9 place-items-center rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-colors cursor-pointer"
                 aria-label="Close menu"
               >
                 <X className="h-4 w-4 text-white" />
@@ -586,7 +593,7 @@ export function Navbar() {
                   className={`block rounded-xl px-4 py-3 transition-colors ${
                     isItemActive(item.href)
                       ? "text-brand font-semibold bg-white/5"
-                      : "text-foreground hover:bg-white/5"
+                      : "text-slate-200 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   {item.label}
