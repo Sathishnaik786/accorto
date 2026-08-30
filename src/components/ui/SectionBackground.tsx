@@ -15,12 +15,13 @@ export function SectionBackground() {
           `,
         }}
       />
-      
+
       {/* Center spotlight gradient to increase vertical contrast */}
-      <div 
-        className="absolute inset-0 z-10 opacity-30" 
+      <div
+        className="absolute inset-0 z-10 opacity-30"
         style={{
-          background: "radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.04), transparent 70%)"
+          background:
+            "radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.04), transparent 70%)",
         }}
       />
 

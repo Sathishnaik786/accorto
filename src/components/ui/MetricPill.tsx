@@ -20,14 +20,14 @@ export const MetricPill = React.forwardRef<HTMLSpanElement, MetricPillProps>(
         className={cn(
           "inline-flex items-center rounded-full border border-white/10 backdrop-blur-md px-3 py-1 text-xs font-medium shadow-sm transition-all duration-300",
           variantStyles[variant],
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </span>
     );
-  }
+  },
 );
 
 MetricPill.displayName = "MetricPill";

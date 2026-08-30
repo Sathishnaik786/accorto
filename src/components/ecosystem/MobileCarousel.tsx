@@ -13,13 +13,7 @@ interface MobileCarouselProps {
 }
 
 export const MobileCarousel = React.memo(
-  ({
-    partners,
-    activeIndex,
-    onChange,
-    nodeWidth,
-    nodeHeight,
-  }: MobileCarouselProps) => {
+  ({ partners, activeIndex, onChange, nodeWidth, nodeHeight }: MobileCarouselProps) => {
     const shouldReduceMotion = useReducedMotion();
     const [direction, setDirection] = useState(0);
 
@@ -65,10 +59,7 @@ export const MobileCarousel = React.memo(
               transition={{ type: "spring", stiffness: 300, damping: 26 }}
               className="absolute inset-0 flex items-center justify-center"
             >
-              <div
-                className="relative"
-                style={{ width: nodeWidth, height: nodeHeight }}
-              >
+              <div className="relative" style={{ width: nodeWidth, height: nodeHeight }}>
                 <TechNode
                   partner={activePartner}
                   x={nodeWidth / 2}
@@ -96,11 +87,7 @@ export const MobileCarousel = React.memo(
           </button>
 
           {/* Dots Indicator */}
-          <div
-            className="flex gap-1.5"
-            role="tablist"
-            aria-label="Integration partners switcher"
-          >
+          <div className="flex gap-1.5" role="tablist" aria-label="Integration partners switcher">
             {partners.map((partner, idx) => (
               <button
                 key={partner.id}
@@ -115,9 +102,7 @@ export const MobileCarousel = React.memo(
                 style={{
                   width: idx === activeIndex ? "20px" : "8px",
                   backgroundColor:
-                    idx === activeIndex
-                      ? activePartner.glowColor
-                      : "rgba(148,163,184,0.4)",
+                    idx === activeIndex ? activePartner.glowColor : "rgba(148,163,184,0.4)",
                 }}
               />
             ))}
@@ -133,7 +118,7 @@ export const MobileCarousel = React.memo(
         </div>
       </div>
     );
-  }
+  },
 );
 
 MobileCarousel.displayName = "MobileCarousel";

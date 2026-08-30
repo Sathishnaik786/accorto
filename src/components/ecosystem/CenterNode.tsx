@@ -17,9 +17,7 @@ export const CenterNode = React.memo(({ size, isAnyNodeHovered = false }: Center
   const hoverGlowOpacity2 = isLight ? 0.3 : 0.75;
   const hoverGlowOpacityMain = isLight ? 0.24 : 0.6;
 
-  const animation = shouldReduceMotion
-    ? { scale: 1 }
-    : { scale: [1, 1.02, 1] };
+  const animation = shouldReduceMotion ? { scale: 1 } : { scale: [1, 1.02, 1] };
 
   const transition = shouldReduceMotion
     ? {}

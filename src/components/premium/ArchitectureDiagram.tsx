@@ -11,8 +11,16 @@ interface Node {
 
 export function ArchitectureDiagram({ className }: { className?: string }) {
   const nodes: Node[] = [
-    { icon: Database, label: "Business Problem", desc: "Identify operational bottlenecks & metrics." },
-    { icon: GitBranch, label: "Data Pipeline", desc: "Unify ERP, CRM, and cloud ledger structures." },
+    {
+      icon: Database,
+      label: "Business Problem",
+      desc: "Identify operational bottlenecks & metrics.",
+    },
+    {
+      icon: GitBranch,
+      label: "Data Pipeline",
+      desc: "Unify ERP, CRM, and cloud ledger structures.",
+    },
     { icon: Cpu, label: "AI Models", desc: "Fine-tuned LLMs & neural prediction networks." },
     { icon: Terminal, label: "Automation Layer", desc: "Orchestrate agentic workflows & APIs." },
     { icon: LineChart, label: "Deployment", desc: "Hardened MLOps server pipelines." },
@@ -34,7 +42,10 @@ export function ArchitectureDiagram({ className }: { className?: string }) {
                 <div className="hidden lg:block absolute left-[calc(50%+45px)] top-[26px] w-[calc(100%-90px)] h-[2px] z-0 overflow-hidden">
                   <div className="w-full h-full bg-white/10 dark:bg-white/5 relative">
                     {/* Running light indicator */}
-                    <div className="absolute top-0 bottom-0 left-0 w-8 bg-linear-to-r from-transparent via-brand to-transparent animate-border-shine" style={{ animationDuration: "3s" }} />
+                    <div
+                      className="absolute top-0 bottom-0 left-0 w-8 bg-linear-to-r from-transparent via-brand to-transparent animate-border-shine"
+                      style={{ animationDuration: "3s" }}
+                    />
                   </div>
                 </div>
               )}
@@ -48,8 +59,12 @@ export function ArchitectureDiagram({ className }: { className?: string }) {
                   <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-bold text-slate-900 dark:text-white block truncate">{n.label}</span>
-                  <p className="text-[10px] text-zinc-500 mt-1 leading-normal font-medium">{n.desc}</p>
+                  <span className="text-xs font-bold text-slate-900 dark:text-white block truncate">
+                    {n.label}
+                  </span>
+                  <p className="text-[10px] text-zinc-500 mt-1 leading-normal font-medium">
+                    {n.desc}
+                  </p>
                 </div>
               </GlassPanel>
             </div>

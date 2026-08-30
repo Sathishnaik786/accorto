@@ -83,7 +83,8 @@ export const ARTICLES: Article[] = [
     date: "December 23, 2025",
     read: "12 min read",
     img: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1600&q=80",
-    excerpt: "Most enterprise AI gets stuck in pilot purgatory. We unpack the operating model that helps teams move from prototype to platform — and what changes when GenAI enters the room.",
+    excerpt:
+      "Most enterprise AI gets stuck in pilot purgatory. We unpack the operating model that helps teams move from prototype to platform — and what changes when GenAI enters the room.",
     blocks: FEATURED.blocks,
   },
   {
@@ -94,7 +95,8 @@ export const ARTICLES: Article[] = [
     date: "December 23, 2025",
     read: "8 min read",
     img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80",
-    excerpt: "How to de-risk your cloud ERP journey with structured transition sprints and proven delivery frameworks.",
+    excerpt:
+      "How to de-risk your cloud ERP journey with structured transition sprints and proven delivery frameworks.",
     blocks: [
       {
         type: "p",
@@ -134,7 +136,8 @@ export const ARTICLES: Article[] = [
     date: "December 23, 2025",
     read: "10 min read",
     img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=900&q=80",
-    excerpt: "Why selective data migration keeps your historical custom modules and compliance records intact.",
+    excerpt:
+      "Why selective data migration keeps your historical custom modules and compliance records intact.",
     blocks: [
       {
         type: "p",
@@ -174,7 +177,8 @@ export const ARTICLES: Article[] = [
     date: "December 23, 2025",
     read: "6 min read",
     img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80",
-    excerpt: "Practical telemetry patterns for managing dynamic multi-cloud server budgets and cloud architectures.",
+    excerpt:
+      "Practical telemetry patterns for managing dynamic multi-cloud server budgets and cloud architectures.",
     blocks: [
       {
         type: "p",
@@ -211,7 +215,8 @@ export const ARTICLES: Article[] = [
     date: "December 23, 2025",
     read: "9 min read",
     img: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=900&q=80",
-    excerpt: "Move past prompt templates to production workflows, multi-agent coordination, and custom evaluation.",
+    excerpt:
+      "Move past prompt templates to production workflows, multi-agent coordination, and custom evaluation.",
     blocks: [
       {
         type: "p",
@@ -247,7 +252,8 @@ export const ARTICLES: Article[] = [
     date: "December 23, 2025",
     read: "7 min read",
     img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80",
-    excerpt: "Unlocking operational data vectors and bottleneck intelligence using graph-based telemetry systems.",
+    excerpt:
+      "Unlocking operational data vectors and bottleneck intelligence using graph-based telemetry systems.",
     blocks: [
       {
         type: "p",
@@ -283,7 +289,8 @@ export const ARTICLES: Article[] = [
     date: "December 23, 2025",
     read: "5 min read",
     img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=900&q=80",
-    excerpt: "Why custom composable micro-frontends yield higher marketing automation ROI than all-in-one suite systems.",
+    excerpt:
+      "Why custom composable micro-frontends yield higher marketing automation ROI than all-in-one suite systems.",
     blocks: [
       {
         type: "p",
@@ -313,12 +320,4 @@ export const ARTICLES: Article[] = [
   },
 ];
 
-export const CATEGORIES = [
-  "View All",
-  "Oracle",
-  "SAP",
-  "AI",
-  "Cloud",
-  "DX",
-  "Marketing",
-];
+export const CATEGORIES = ["View All", "Oracle", "SAP", "AI", "Cloud", "DX", "Marketing"];

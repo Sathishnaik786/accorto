@@ -20,7 +20,9 @@ export function MetricPanel({ metrics, className }: MetricPanelProps) {
           key={i}
           className="flex flex-col justify-center gap-2 border-r last:border-0 border-white/5 pr-4 last:pr-0"
         >
-          <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">{m.label}</span>
+          <span className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">
+            {m.label}
+          </span>
           <div className="font-display text-2xl font-bold text-slate-900 dark:text-white mt-1">
             {m.value}
           </div>

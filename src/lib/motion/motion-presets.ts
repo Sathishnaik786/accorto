@@ -73,10 +73,13 @@ export function useMouseParallax(maxOffset = 5) {
   };
 
   return {
-    parallaxProps: shouldReduceMotion || isMobile ? {} : {
-      animate: coords,
-      transition: { type: "spring" as const, stiffness: 100, damping: 25 },
-    },
+    parallaxProps:
+      shouldReduceMotion || isMobile
+        ? {}
+        : {
+            animate: coords,
+            transition: { type: "spring" as const, stiffness: 100, damping: 25 },
+          },
     handleMouseMove,
     handleMouseLeave,
   };
@@ -112,20 +115,20 @@ export function useMotionSystem() {
   return {
     shouldReduceMotion,
     isMobile,
-    
+
     // Core curves
     easing: EASING,
-    
+
     // Page Transitions
     pageTransition: getPageTransition(shouldReduceMotion),
-    
+
     // Directional Fades
-    fadeUp: getFadeUp(shouldReduceMotion, 0.7, 0, motionY(40)), // standard 40px reveal
-    fadeDown: getFadeDown(shouldReduceMotion, 0.5, 0, motionY(-24)),
-    fadeLeft: getFadeLeft(shouldReduceMotion, 0.5, 0, motionX(24)),
-    fadeRight: getFadeRight(shouldReduceMotion, 0.5, 0, motionX(-24)),
-    fadeScale: getFadeScale(shouldReduceMotion, 0.5, 0, motionScale),
-    
+    fadeUp: getFadeUp(shouldReduceMotion, 0.5, 0, motionY(20)),
+    fadeDown: getFadeDown(shouldReduceMotion, 0.4, 0, motionY(-16)),
+    fadeLeft: getFadeLeft(shouldReduceMotion, 0.4, 0, motionX(16)),
+    fadeRight: getFadeRight(shouldReduceMotion, 0.4, 0, motionX(-16)),
+    fadeScale: getFadeScale(shouldReduceMotion, 0.4, 0, motionScale),
+
     // Custom Presets
     scaleIn: getScaleIn(shouldReduceMotion),
     glassReveal: getGlassReveal(shouldReduceMotion),
@@ -134,37 +137,38 @@ export function useMotionSystem() {
     // Staggers
     staggerContainer: getStaggerContainer,
     getCardDelay,
-    
+
     // Hero Delays and reveal sequences
     heroDelays: HERO_DELAYS,
-    heroReveal: (delay = 0) => getHeroReveal(shouldReduceMotion, delay, 0.6),
+    heroReveal: (delay = 0) => getHeroReveal(shouldReduceMotion, delay, 0.55),
     heroVideo: getHeroVideo(shouldReduceMotion),
-    
+
     // Card Hovers
     cardHover: getCardHover(shouldReduceMotion),
     cardHoverTransition: getCardHoverTransition(),
-    
+
     // Button Interactions
     buttonHover: getButtonHover(shouldReduceMotion),
     buttonTap: getButtonTap(shouldReduceMotion),
     buttonTransition: getButtonTransition(),
-    
+
     // Navbar Transitions
     navbarEntrance: getNavbarEntrance(shouldReduceMotion),
     navbarDropdown: getNavbarDropdown(shouldReduceMotion),
     mobileMenu: getMobileMenu(shouldReduceMotion),
-    
+
     // Footer Transitions
     footerDelays: FOOTER_DELAYS,
     footerFadeUp: (delay = 0) => getFooterFadeUp(shouldReduceMotion, delay),
     socialIconHover: getSocialIconHover(shouldReduceMotion),
-    
+
     // Scroll reveals
-    viewportReveal: (delay = 0) => getViewportReveal(shouldReduceMotion, delay, motionY(40)),
+    viewportReveal: (delay = 0) => getViewportReveal(shouldReduceMotion, delay, motionY(20)),
     viewportConfig: VIEWPORT_CONFIG,
-    
+
     // Generic hovers
-    genericHover: (scale = 1.05, y = 0) => getGenericHover(shouldReduceMotion, scale, y),
+    genericHover: (scale = 1.02, y = 0) => getGenericHover(shouldReduceMotion, scale, y),
     hoverTransition: getHoverTransition,
   };
 }
+

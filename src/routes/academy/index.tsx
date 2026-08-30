@@ -2,7 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
-import { FinalCTA } from "@/components/home-sections";
+import { FinalCTA } from "@/components/home";
+import { SpecularButton } from "@/components/animations/SpecularButton";
+import { BorderGlow } from "@/components/animations/BorderGlow";
+import { ShinyText } from "@/components/animations/ShinyText";
+import { ScrollVelocity } from "@/components/animations/ScrollVelocity";
+import { ScrollWordReveal } from "@/components/animations/ScrollWordReveal";
+
+
 import {
   GraduationCap,
   Brain,
@@ -18,6 +25,7 @@ import {
   ShieldCheck,
   ChevronDown,
   LineChart,
+  ArrowRight,
 } from "lucide-react";
 
 export const Route = createFileRoute("/academy/")({
@@ -32,7 +40,8 @@ export const Route = createFileRoute("/academy/")({
       { property: "og:title", content: "Accorto Academy — Enterprise AI Training" },
       {
         property: "og:description",
-        content: "Master AI engineering and advanced software development with certified consulting engineers.",
+        content:
+          "Master AI engineering and advanced software development with certified consulting engineers.",
       },
       { property: "og:url", content: "https://accorto.tech/academy" },
     ],
@@ -193,11 +202,36 @@ const FAQS = [
 ];
 
 const LMS_TABS = [
-  { id: "dashboard", label: "Dashboard", title: "LMS Learner Portal", desc: "Verifiable credentials, certifications trackers, module timelines, and grading dashboards." },
-  { id: "recorded", label: "Recorded Classes", title: "Video on Demand", desc: "Lifetime access to HD recording sessions, code repository references, and structured transcripts." },
-  { id: "live", label: "Live Classes", title: "Interactive Lectures", desc: "Weekly live sessions, screen-sharing reviews, and direct Q&A cycles with enterprise consultants." },
-  { id: "assessment", label: "Assessments", title: "Skill Evaluations", desc: "Automated test suites, model evaluation runs, grading metrics, and instant test feedbacks." },
-  { id: "community", label: "Community", title: "Collaborative Forums", desc: "Private developer channels, peer hackathons, collaborative projects, and shared resources portals." },
+  {
+    id: "dashboard",
+    label: "Dashboard",
+    title: "LMS Learner Portal",
+    desc: "Verifiable credentials, certifications trackers, module timelines, and grading dashboards.",
+  },
+  {
+    id: "recorded",
+    label: "Recorded Classes",
+    title: "Video on Demand",
+    desc: "Lifetime access to HD recording sessions, code repository references, and structured transcripts.",
+  },
+  {
+    id: "live",
+    label: "Live Classes",
+    title: "Interactive Lectures",
+    desc: "Weekly live sessions, screen-sharing reviews, and direct Q&A cycles with enterprise consultants.",
+  },
+  {
+    id: "assessment",
+    label: "Assessments",
+    title: "Skill Evaluations",
+    desc: "Automated test suites, model evaluation runs, grading metrics, and instant test feedbacks.",
+  },
+  {
+    id: "community",
+    label: "Community",
+    title: "Collaborative Forums",
+    desc: "Private developer channels, peer hackathons, collaborative projects, and shared resources portals.",
+  },
 ];
 
 function AcademyLanding() {
@@ -210,7 +244,7 @@ function AcademyLanding() {
 
   return (
     <>
-      {/* Page Hero */}
+      {/* Page Hero with integrated CTAs */}
       <PageHero
         tag="Accorto Academy"
         title={
@@ -219,17 +253,16 @@ function AcademyLanding() {
           </>
         }
         subtitle="Industry-ready training programs designed and delivered by active enterprise engineers and consultants. Step into the future of enterprise software."
-      />
-
-      {/* Hero CTAs & Statistics */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-20 -mt-10">
+      >
         <div className="flex flex-wrap items-center justify-center gap-3">
-          <a
+          <SpecularButton
             href="#programs"
-            className="inline-flex items-center gap-2 rounded-full bg-gradient-brand px-6 py-3 text-sm font-semibold text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all"
+            size="md"
+            variant="brand"
+            className="shadow-brand hover:shadow-brand-lg"
           >
             Explore Programs
-          </a>
+          </SpecularButton>
           <Link
             to="/contact"
             className="glass inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-slate-900 dark:text-white hover:scale-105 hover:bg-white/10 transition-all"
@@ -243,78 +276,139 @@ function AcademyLanding() {
             Download Curriculum
           </Link>
         </div>
+      </PageHero>
 
-        {/* Statistics Grid */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+      {/* Next Section: Statistics Grid */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 md:py-16">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           {[
             { value: "500+", label: "Learners Trained" },
             { value: "20+", label: "Production Projects" },
             { value: "10+", label: "Target Certifications" },
             { value: "100%", label: "Hands-on Practical" },
           ].map((stat, i) => (
-            <div
-              key={i}
-              className="glass rounded-2xl p-6 text-center transition-transform hover:-translate-y-1"
-            >
-              <div className="font-display text-3xl font-bold text-gradient">{stat.value}</div>
-              <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-semibold">
-                {stat.label}
+            <Reveal key={i} delay={i * 0.05}>
+              <div className="glass rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand/30 h-full flex flex-col justify-center shadow-xs hover:shadow-md">
+                <div className="font-display text-3xl font-bold text-gradient">{stat.value}</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-semibold">
+                  {stat.label}
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
+      {/* Horizontal Scrolling Typography Marquee */}
+      <div className="py-6 sm:py-10 border-y border-border/20 overflow-hidden bg-slate-50/50 dark:bg-card/30 backdrop-blur-xs">
+        <ScrollVelocity
+          items={[
+            "LEARN",
+            "BUILD",
+            "SHIP",
+            "SCALE",
+            "LEAD",
+            "CERTIFY",
+          ]}
+          direction="left"
+          defaultVelocity={1.6}
+        />
+      </div>
+
       {/* Programs Catalog */}
-      <section id="programs" className="mx-auto max-w-7xl px-4 sm:px-6 py-20 border-t border-border/10">
+      <section
+        id="programs"
+        className="mx-auto max-w-7xl px-4 sm:px-6 py-20 border-t border-border/10"
+      >
+        {/* Featured Career Development Track Banner */}
+        <div className="mb-14">
+          <Reveal>
+            <div className="relative overflow-hidden rounded-3xl bg-linear-to-r from-brand/15 via-brand-2/10 to-transparent border border-brand/25 p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+              <div className="space-y-1.5 max-w-2xl">
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-brand px-2.5 py-0.5 rounded-full bg-brand/10 border border-brand/20">
+                  New Track · Claude Pathways
+                </span>
+                <h3 className="font-display text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
+                  AI Career Development &amp; Certification Pathways
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
+                  Structured learning pathways for consultants, developers, and enterprise architects preparing for verified AI engineering roles.
+                </p>
+              </div>
+              <Link
+                to="/academy/ai-career-development"
+                className="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-brand text-[#031224] font-bold text-xs hover:opacity-95 transition-opacity"
+              >
+                Explore Certification Tracks <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+          </Reveal>
+        </div>
+
         <div className="text-center max-w-3xl mx-auto mb-16">
           <span className="inline-flex items-center rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-3 py-1 text-xs font-semibold text-brand">
             Curriculum Paths
           </span>
           <h2 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-4 tracking-tight">
-            Specialized AI Training & Cohorts
+            Specialized AI Training &amp; Cohorts
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-normal">
             Acquire role-based qualifications vetted by systems integrators.
           </p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {PROGRAMS.map((prog) => {
+          {PROGRAMS.map((prog, idx) => {
             const Icon = prog.icon;
-            return (
-              <Reveal key={prog.id}>
-                <Link
-                  to={prog.link}
-                  className="group relative flex flex-col justify-between h-full rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl border hover:border-brand/40"
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 border border-border text-slate-700 dark:text-slate-300">
-                        <Icon className="h-5 w-5 text-brand" />
-                      </div>
-                      {prog.badge && (
-                        <span className="inline-flex items-center rounded-full bg-brand/10 px-2.5 py-0.5 text-xs font-semibold text-brand">
-                          {prog.badge}
-                        </span>
-                      )}
+            const isFeatured = !!prog.badge;
+            const cardContent = (
+              <Link
+                to={prog.link}
+                className="group relative flex flex-col justify-between h-full rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl border hover:border-brand/40"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-slate-100 dark:bg-white/5 border border-border text-slate-700 dark:text-slate-300 transition-transform duration-300 group-hover:scale-105">
+                      <Icon className="h-5 w-5 text-brand" />
                     </div>
-                    <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white mt-5">
-                      {prog.name}
-                    </h3>
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">
-                      {prog.desc}
-                    </p>
+                    {prog.badge && (
+                      <span className="inline-flex items-center rounded-full bg-brand/10 px-2.5 py-0.5 text-xs font-semibold text-brand">
+                        {prog.badge}
+                      </span>
+                    )}
                   </div>
-                  <div className="mt-6 flex items-center gap-1 text-xs font-bold text-brand group-hover:gap-1.5 transition-all">
-                    Explore curriculum <ChevronRight className="h-3.5 w-3.5" />
-                  </div>
-                </Link>
+                  <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white mt-5">
+                    {prog.name}
+                  </h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-normal leading-relaxed">
+                    {prog.desc}
+                  </p>
+                </div>
+
+                <div className="mt-8 flex items-center text-xs font-bold text-brand group-hover:text-brand-3 group-hover:gap-2 transition-all">
+                  <span>View Curriculum</span>
+                  <ChevronRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                </div>
+              </Link>
+            );
+
+            return (
+              <Reveal key={prog.id} delay={idx * 0.04}>
+                {isFeatured ? (
+                  <BorderGlow borderRadius={24} className="h-full">
+                    {cardContent}
+                  </BorderGlow>
+                ) : (
+                  <div className="h-full">{cardContent}</div>
+                )}
+
               </Reveal>
+
             );
           })}
         </div>
       </section>
+
 
       {/* Future-Ready LMS Tabs Showcase */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 py-20 border-t border-border/10 bg-radial-subtle">
@@ -325,7 +419,7 @@ function AcademyLanding() {
           <h2 className="font-display text-3xl font-bold text-slate-900 dark:text-white mt-4 tracking-tight">
             Accorto Learning Platform Mockup
           </h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-medium">
+          <p className="text-sm text-slate-500 dark:text-slate-400 mt-2 font-normal">
             Explore features that will integrate into our future dashboard and learning portal.
           </p>
         </div>
@@ -358,11 +452,13 @@ function AcademyLanding() {
                 <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white">
                   {tab.title}
                 </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-medium">
-                  {tab.desc} Fully integrated system mockups including mock profiles, dashboard interfaces, recorded video repositories, sandbox sandboxes, and calendar schedules.
+                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed font-normal">
+                  {tab.desc} Fully integrated system mockups including mock profiles, dashboard
+                  interfaces, recorded video repositories, sandbox sandboxes, and calendar
+                  schedules.
                 </p>
               </div>
-              <div className="flex-1 w-full bg-slate-100 dark:bg-white/5 rounded-2xl p-6 border border-border flex flex-col justify-between min-h-[160px] relative overflow-hidden">
+              <div className="flex-1 w-full bg-slate-100 dark:bg-white/5 rounded-2xl p-6 border border-border flex flex-col justify-between min-h-40 relative overflow-hidden">
                 <div className="absolute top-2 right-2 text-[8px] bg-brand/10 text-brand px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
                   Proto UI
                 </div>
@@ -390,10 +486,7 @@ function AcademyLanding() {
           {FAQS.map((faq, idx) => {
             const isOpen = openFaq === idx;
             return (
-              <div
-                key={idx}
-                className="glass rounded-2xl overflow-hidden border border-border/50"
-              >
+              <div key={idx} className="glass rounded-2xl overflow-hidden border border-border/50">
                 <button
                   onClick={() => toggleFaq(idx)}
                   className="w-full flex items-center justify-between p-5 text-left font-display font-semibold text-sm sm:text-base text-slate-900 dark:text-white outline-none focus-visible:ring-1 focus-visible:ring-primary"
@@ -406,7 +499,7 @@ function AcademyLanding() {
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-medium border-t border-border/20 pt-3">
+                  <div className="px-5 pb-5 text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed font-normal border-t border-border/20 pt-3">
                     {faq.a}
                   </div>
                 )}

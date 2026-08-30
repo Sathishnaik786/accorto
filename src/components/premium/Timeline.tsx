@@ -31,7 +31,7 @@ export function Timeline({ events, className }: TimelineProps) {
               <div
                 className={cn(
                   "relative flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-0",
-                  i % 2 === 1 ? "md:flex-row-reverse" : ""
+                  i % 2 === 1 ? "md:flex-row-reverse" : "",
                 )}
               >
                 {/* Visual milestone content block */}

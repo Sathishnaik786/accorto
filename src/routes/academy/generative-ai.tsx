@@ -3,6 +3,8 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
 import { FinalCTA } from "@/components/home-sections";
 import { Sparkles, Brain, Award } from "lucide-react";
+import { SpecularButton } from "@/components/animations/SpecularButton";
+import { BorderGlow } from "@/components/animations/BorderGlow";
 
 export const Route = createFileRoute("/academy/generative-ai")({
   head: () => ({
@@ -10,7 +12,8 @@ export const Route = createFileRoute("/academy/generative-ai")({
       { title: "Generative AI Course & LLM Architectures — Accorto Academy" },
       {
         name: "description",
-        content: "Master Large Language Models, embeddings, and fine-tuning configurations. Hands-on Generative AI course led by industry consultants.",
+        content:
+          "Master Large Language Models, embeddings, and fine-tuning configurations. Hands-on Generative AI course led by industry consultants.",
       },
       { property: "og:title", content: "Generative AI Course — Accorto Academy" },
       { property: "og:url", content: "https://accorto.tech/academy/generative-ai" },
@@ -30,7 +33,7 @@ function GenerativeAICourse() {
             Generative AI & <span className="text-gradient">LLM Architectures</span>
           </>
         }
-        subtitle="Master Large Language Models, tokenization, embeddings, vector search systems, and supervised fine-tuning loops."
+        subtitle="Master Transformers from the ground up. Fine-tune local open-weight models (Llama 3, Mistral), deploy embedding vectors, and scale GPU inference endpoints."
       />
 
       <section className="mx-auto max-w-4xl px-4 sm:px-6 pb-24">
@@ -41,15 +44,33 @@ function GenerativeAICourse() {
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: "Syllabus 1: LLM Core", desc: "Transformers architecture, tokenizers, self-attention mechanisms, and parameters scaling." },
-                { title: "Syllabus 2: Fine-Tuning", desc: "Supervised Fine-Tuning (SFT), LoRA, QLoRA, and optimization loops on GPUs." },
-                { title: "Syllabus 3: Embeddings", desc: "Generating vector representations, cosine similarity metrics, and dimensional reductions." },
-                { title: "Syllabus 4: LLMOps", desc: "Model serving endpoints, Docker containerization, cloud resource management, and model quantizations." },
+                {
+                  title: "Syllabus 1: LLM Core",
+                  desc: "Transformers architecture, tokenizers, self-attention mechanisms, and parameters scaling.",
+                },
+                {
+                  title: "Syllabus 2: Fine-Tuning",
+                  desc: "Supervised Fine-Tuning (SFT), LoRA, QLoRA, and optimization loops on GPUs.",
+                },
+                {
+                  title: "Syllabus 3: Embeddings",
+                  desc: "Generating vector representations, cosine similarity metrics, and dimensional reductions.",
+                },
+                {
+                  title: "Syllabus 4: LLMOps",
+                  desc: "Model serving endpoints, Docker containerization, cloud resource management, and model quantizations.",
+                },
               ].map((item, idx) => (
-                <div key={idx} className="glass rounded-2xl p-5">
-                  <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">{item.title}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">{item.desc}</p>
-                </div>
+                <BorderGlow key={idx} borderRadius={16} className="h-full">
+                  <div className="glass rounded-2xl p-5 h-full">
+                    <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </BorderGlow>
               ))}
             </div>
 
@@ -57,12 +78,14 @@ function GenerativeAICourse() {
               <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                 Duration: 6 Weeks · Level: Intermediate
               </div>
-              <Link
+              <SpecularButton
                 to="/contact"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
+                size="sm"
+                variant="brand"
+                className="shadow-brand hover:shadow-brand-lg"
               >
                 Enroll Now <Award className="h-4 w-4" />
-              </Link>
+              </SpecularButton>
             </div>
           </div>
         </Reveal>

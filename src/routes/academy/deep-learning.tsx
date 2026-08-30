@@ -3,6 +3,8 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
 import { FinalCTA } from "@/components/home-sections";
 import { GraduationCap, Award } from "lucide-react";
+import { SpecularButton } from "@/components/animations/SpecularButton";
+import { BorderGlow } from "@/components/animations/BorderGlow";
 
 export const Route = createFileRoute("/academy/deep-learning")({
   head: () => ({
@@ -10,7 +12,8 @@ export const Route = createFileRoute("/academy/deep-learning")({
       { title: "Deep Learning & Neural Networks Course — Accorto Academy" },
       {
         name: "description",
-        content: "Master deep neural networks. Build CNNs, RNNs, and Transformers using PyTorch and TensorFlow with active researchers.",
+        content:
+          "Master deep neural networks. Build CNNs, RNNs, and Transformers using PyTorch and TensorFlow with active researchers.",
       },
       { property: "og:title", content: "Deep Learning Course — Accorto Academy" },
       { property: "og:url", content: "https://accorto.tech/academy/deep-learning" },
@@ -41,15 +44,33 @@ function DeepLearningCourse() {
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: "Syllabus 1: Neural Nets Core", desc: "Perceptrons, backpropagations, activations (ReLU, Sigmoid), loss functions, and weights optimization." },
-                { title: "Syllabus 2: Computer Vision", desc: "CNN layers, pooling, spatial filters, image classification, and object detection grids." },
-                { title: "Syllabus 3: NLP & RNNs", desc: "Sequence processing models, LSTM, Gated Recurrent Units (GRU), and embeddings layers." },
-                { title: "Syllabus 4: Transformers", desc: "Self-attention matrix calculations, multi-head configurations, pos encoding, and GPT models." },
+                {
+                  title: "Syllabus 1: Neural Nets Core",
+                  desc: "Perceptrons, backpropagations, activations (ReLU, Sigmoid), loss functions, and weights optimization.",
+                },
+                {
+                  title: "Syllabus 2: Computer Vision",
+                  desc: "CNN layers, pooling, spatial filters, image classification, and object detection grids.",
+                },
+                {
+                  title: "Syllabus 3: NLP & RNNs",
+                  desc: "Sequence processing models, LSTM, Gated Recurrent Units (GRU), and embeddings layers.",
+                },
+                {
+                  title: "Syllabus 4: Transformers",
+                  desc: "Self-attention matrix calculations, multi-head configurations, pos encoding, and GPT models.",
+                },
               ].map((item, idx) => (
-                <div key={idx} className="glass rounded-2xl p-5">
-                  <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">{item.title}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">{item.desc}</p>
-                </div>
+                <BorderGlow key={idx} borderRadius={16} className="h-full">
+                  <div className="glass rounded-2xl p-5 h-full">
+                    <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </BorderGlow>
               ))}
             </div>
 
@@ -57,12 +78,14 @@ function DeepLearningCourse() {
               <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                 Duration: 8 Weeks · Level: Advanced
               </div>
-              <Link
+              <SpecularButton
                 to="/contact"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
+                size="sm"
+                variant="brand"
+                className="shadow-brand hover:shadow-brand-lg"
               >
                 Enroll Now <Award className="h-4 w-4" />
-              </Link>
+              </SpecularButton>
             </div>
           </div>
         </Reveal>

@@ -1,21 +1,35 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageHero } from "@/components/page-hero";
-import { Reveal } from "@/components/section";
-import { FinalCTA } from "@/components/home-sections";
+import { FinalCTA } from "@/components/home";
 import {
+  Activity,
   GraduationCap,
   Stethoscope,
   Factory,
   ShoppingBag,
   Landmark,
-  Truck,
   Building2,
+  Truck,
   ArrowRight,
   AlertCircle,
   Sparkles,
   Target,
 } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { EASING } from "@/config/animations";
+import { INDUSTRIES } from "@/data/industries";
+
+const INDUSTRY_ICONS: Record<string, React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
+  "utilities-environmental": Activity,
+  education: GraduationCap,
+  healthcare: Stethoscope,
+  manufacturing: Factory,
+  retail: ShoppingBag,
+  finance: Landmark,
+  government: Building2,
+  logistics: Truck,
+};
 
 export const Route = createFileRoute("/industries")({
   head: () => ({
@@ -24,12 +38,12 @@ export const Route = createFileRoute("/industries")({
       {
         name: "description",
         content:
-          "Explore our specialized consulting expertise in Education, Healthcare, Manufacturing, Retail, Finance, and Logistics. Tailored enterprise IT solutions.",
+          "Explore our specialized enterprise consulting expertise in Utilities & Environmental, Manufacturing, Healthcare, Finance, Retail, Education, Government, and Logistics.",
       },
-      { property: "og:title", content: "Industries we serve" },
+      { property: "og:title", content: "Industries & Sectors — Accorto Technologies" },
       {
         property: "og:description",
-        content: "Specialized solutions for regulated and complex industries.",
+        content: "Specialized enterprise systems for regulated, industrial, and utility sectors.",
       },
       { property: "og:url", content: "https://accorto.tech/industries" },
     ],
@@ -58,81 +72,13 @@ export const Route = createFileRoute("/industries")({
       },
     ],
   }),
-  component: Industries,
+  component: IndustriesPage,
 });
 
-const INDUSTRIES = [
-  {
-    id: "edu",
-    icon: GraduationCap,
-    name: "Education",
-    challenges: [
-      "Fragmented student systems",
-      "Hybrid learning at scale",
-      "Outdated campus operations",
-    ],
-    solutions: ["Modern SIS on cloud", "Smart campus platforms", "AI-driven student success"],
-    benefits: ["+18% retention", "Lower IT TCO", "Faster admissions"],
-    highlight: "Top-100 university unified 9 systems into one student platform in 7 months.",
-  },
-  {
-    id: "hc",
-    icon: Stethoscope,
-    name: "Healthcare",
-    challenges: ["Siloed clinical data", "Claims leakage", "Compliance burden"],
-    solutions: ["Interoperable HIS", "AI claims integrity", "HIPAA-grade cloud"],
-    benefits: ["-32% claim denials", "Faster discharge", "Audit-ready"],
-    highlight: "Multi-hospital network deployed AI claims engine across 12 facilities.",
-  },
-  {
-    id: "mfg",
-    icon: Factory,
-    name: "Manufacturing",
-    challenges: ["Unplanned downtime", "Supply chain shocks", "Quality variability"],
-    solutions: ["Predictive maintenance", "Control tower", "Digital twin"],
-    benefits: ["-41% downtime", "Inventory -22%", "Yield +9pt"],
-    highlight: "Global OEM cut maintenance cost by 41% with predictive AI across 22 plants.",
-  },
-  {
-    id: "ret",
-    icon: ShoppingBag,
-    name: "Retail",
-    challenges: ["Channel fragmentation", "Stockouts", "Personalization at scale"],
-    solutions: ["Unified commerce", "Demand forecasting", "In-store AI"],
-    benefits: ["+24% conversion", "Faster fulfillment", "Higher AOV"],
-    highlight: "Retail conglomerate unified 9 ERPs and 4 commerce stacks in 11 months.",
-  },
-  {
-    id: "fin",
-    icon: Landmark,
-    name: "Finance",
-    challenges: ["Legacy core", "Fraud at scale", "Regulatory burden"],
-    solutions: ["Core modernization", "Real-time fraud AI", "RegTech automation"],
-    benefits: ["92% fraud caught", "Lower cost-to-serve", "Faster product launches"],
-    highlight: "Tier-1 bank deployed real-time fraud AI scoring 1.2M txns/day.",
-  },
-  {
-    id: "gov",
-    icon: Building2,
-    name: "Government",
-    challenges: ["Citizen experience gaps", "Data silos", "Long procurement cycles"],
-    solutions: ["Citizen portals", "Open data platforms", "Secure cloud"],
-    benefits: ["Higher satisfaction", "Operational savings", "Transparency"],
-    highlight: "State agency launched citizen portal with 2.4M monthly users.",
-  },
-  {
-    id: "log",
-    icon: Truck,
-    name: "Logistics",
-    challenges: ["Visibility gaps", "Route inefficiency", "Warehouse labor"],
-    solutions: ["Control towers", "Route optimization", "Warehouse robotics"],
-    benefits: ["-19% fuel", "OTIF +12pt", "Higher throughput"],
-    highlight: "3PL operator improved OTIF by 12 points using control tower AI.",
-  },
-];
-
-function Industries() {
+function IndustriesPage() {
   const [active, setActive] = useState(INDUSTRIES[0].id);
+  const shouldReduceMotion = !!useReducedMotion();
+
   return (
     <>
       <PageHero
@@ -147,29 +93,38 @@ function Industries() {
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-24">
         <h2 className="sr-only">Industry Challenges, Solutions, and Benefits</h2>
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-10" role="tablist" aria-label="Industry sectors">
           {INDUSTRIES.map((it) => {
-            const A = it.icon;
+            const Icon = INDUSTRY_ICONS[it.id] || Factory;
             const isActive = active === it.id;
             return (
               <button
                 key={it.id}
+                role="tab"
+                aria-selected={isActive}
                 onClick={() => setActive(it.id)}
-                className={`group flex items-center gap-2 rounded-full px-4 py-2 text-sm transition-all ${
+                className={`group flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-brand ${
                   isActive
-                    ? "bg-gradient-brand text-white shadow-brand hover:shadow-brand-lg scale-105"
-                    : "bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300 shadow-xs hover:bg-slate-50 dark:hover:bg-white/10 hover:scale-105"
+                    ? "bg-gradient-brand text-white shadow-brand scale-102"
+                    : "bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300 shadow-xs hover:bg-slate-50 dark:hover:bg-white/10 hover:scale-102"
                 }`}
               >
-                <A className="h-4 w-4" /> {it.name}
+                <Icon className="h-4 w-4" aria-hidden="true" /> {it.name}
               </button>
             );
           })}
         </div>
 
-        {INDUSTRIES.filter((i) => i.id === active).map((it) => (
-          <Reveal key={it.id}>
-            <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-12 gap-6">
+        <AnimatePresence mode="wait">
+          {INDUSTRIES.filter((i) => i.id === active).map((it) => (
+            <motion.div
+              key={it.id}
+              initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -6 }}
+              transition={{ duration: 0.35, ease: EASING }}
+              className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-12 gap-6"
+            >
               <div className="sm:col-span-1 lg:col-span-4">
                 <Card
                   title="Challenges"
@@ -190,8 +145,8 @@ function Industries() {
                 <Card title="Benefits" icon={Target} items={it.benefits} tone="text-emerald-400" />
               </div>
               <div className="sm:col-span-3 lg:col-span-12">
-                <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-8 md:p-10 shadow-md dark:shadow-none">
-                  <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-gradient-brand opacity-[0.06] blur-3xl" />
+                <div className="relative overflow-hidden rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-8 md:p-10 shadow-md">
+                  <div className="absolute -top-20 -right-20 h-80 w-80 rounded-full bg-gradient-brand opacity-[0.06] blur-3xl pointer-events-none" />
                   <h3 className="text-xs uppercase tracking-widest text-slate-500 dark:text-slate-400 font-bold">
                     Case highlight
                   </h3>
@@ -200,15 +155,15 @@ function Industries() {
                   </p>
                   <Link
                     to="/case-studies"
-                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-brand hover:scale-105 hover:shadow-brand-lg transition-all"
+                    className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-brand hover:shadow-brand-lg transition-all focus-visible:ring-2 focus-visible:ring-brand outline-none"
                   >
-                    Read related case studies <ArrowRight className="h-4 w-4" />
+                    Read related case studies <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </Link>
                 </div>
               </div>
-            </div>
-          </Reveal>
-        ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </section>
 
       <FinalCTA />
@@ -223,28 +178,33 @@ function Card({
   tone,
 }: {
   title: string;
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>;
   items: string[];
   tone: string;
 }) {
   return (
-    <div className="h-full rounded-3xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-      <div className="flex items-center gap-3">
-        <div className="grid h-8 w-8 place-items-center rounded-lg bg-brand/10 dark:bg-white/5 text-brand shrink-0">
-          <Icon className="h-4 w-4" />
+    <div className="h-full rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 p-6 sm:p-7 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 motion-reduce:hover:translate-y-0 text-left flex flex-col justify-between">
+      <div>
+        <div className="flex items-center gap-3">
+          <div className="grid h-9 w-9 place-items-center rounded-xl bg-brand/10 dark:bg-white/5 text-brand shrink-0">
+            <Icon className="h-4.5 w-4.5" aria-hidden="true" />
+          </div>
+          <h3 className="font-display font-bold text-lg text-slate-900 dark:text-white leading-snug">
+            {title}
+          </h3>
         </div>
-        <h3 className="font-display font-semibold text-slate-900 dark:text-white">{title}</h3>
+        <ul className="mt-5 space-y-3 text-xs sm:text-sm text-[#64748B] dark:text-slate-300 font-medium leading-relaxed">
+          {items.map((b) => (
+            <li key={b} className="flex items-start gap-2.5">
+              <span
+                className={`mt-1.5 h-1.5 w-1.5 rounded-full ${tone.replace("text-", "bg-")} shrink-0`}
+                aria-hidden="true"
+              />
+              <span>{b}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-      <ul className="mt-4 space-y-2.5 text-sm text-[#64748B] dark:text-slate-400 font-medium">
-        {items.map((b) => (
-          <li key={b} className="flex gap-2">
-            <span
-              className={`mt-2 h-1 w-1 rounded-full ${tone.replace("text-", "bg-")} shrink-0`}
-            />{" "}
-            {b}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

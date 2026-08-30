@@ -3,6 +3,8 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
 import { FinalCTA } from "@/components/home-sections";
 import { Search, Award } from "lucide-react";
+import { SpecularButton } from "@/components/animations/SpecularButton";
+import { BorderGlow } from "@/components/animations/BorderGlow";
 
 export const Route = createFileRoute("/academy/rag")({
   head: () => ({
@@ -10,7 +12,8 @@ export const Route = createFileRoute("/academy/rag")({
       { title: "RAG Systems & Vector Database Course — Accorto Academy" },
       {
         name: "description",
-        content: "Master Retrieval-Augmented Generation (RAG). Learn document loaders, vector caching, and query optimization pipelines.",
+        content:
+          "Master Retrieval-Augmented Generation (RAG). Learn document loaders, vector caching, and query optimization pipelines.",
       },
       { property: "og:title", content: "RAG Systems Course — Accorto Academy" },
       { property: "og:url", content: "https://accorto.tech/academy/rag" },
@@ -41,15 +44,33 @@ function RAGSystemsCourse() {
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: "Syllabus 1: Document Pipelines", desc: "Loading PDF, HTML, JSON, parsing strategies, markdown chunking, and overlapping tokens." },
-                { title: "Syllabus 2: Embeddings & Vector Stores", desc: "OpenAI embeddings, local HuggingFace embeddings, Pinecone, Qdrant, PGVector, indexing and similarity metrics." },
-                { title: "Syllabus 3: Retrieval Optimization", desc: "Hybrid search, keyword sparse + dense dense, re-ranking with Cohere, and query expansion." },
-                { title: "Syllabus 4: Architecture & Evaluation", desc: "Prompt templates, system guidance, context stuffing control, and evaluation frameworks." },
+                {
+                  title: "Syllabus 1: Document Pipelines",
+                  desc: "Loading PDF, HTML, JSON, parsing strategies, markdown chunking, and overlapping tokens.",
+                },
+                {
+                  title: "Syllabus 2: Embeddings & Vector Stores",
+                  desc: "OpenAI embeddings, local HuggingFace embeddings, Pinecone, Qdrant, PGVector, indexing and similarity metrics.",
+                },
+                {
+                  title: "Syllabus 3: Retrieval Optimization",
+                  desc: "Hybrid search, keyword sparse + dense dense, re-ranking with Cohere, and query expansion.",
+                },
+                {
+                  title: "Syllabus 4: Architecture & Evaluation",
+                  desc: "Prompt templates, system guidance, context stuffing control, and evaluation frameworks.",
+                },
               ].map((item, idx) => (
-                <div key={idx} className="glass rounded-2xl p-5">
-                  <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">{item.title}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">{item.desc}</p>
-                </div>
+                <BorderGlow key={idx} borderRadius={16} className="h-full">
+                  <div className="glass rounded-2xl p-5 h-full">
+                    <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </BorderGlow>
               ))}
             </div>
 
@@ -57,12 +78,14 @@ function RAGSystemsCourse() {
               <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                 Duration: 6 Weeks · Level: Intermediate
               </div>
-              <Link
+              <SpecularButton
                 to="/contact"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
+                size="sm"
+                variant="brand"
+                className="shadow-brand hover:shadow-brand-lg"
               >
                 Enroll Now <Award className="h-4 w-4" />
-              </Link>
+              </SpecularButton>
             </div>
           </div>
         </Reveal>

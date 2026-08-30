@@ -16,7 +16,6 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     document.documentElement.classList.toggle("dark", initial === "dark");
   }, []);
 
-
   const toggle = () => {
     setTheme((t) => {
       const next = t === "dark" ? "light" : "dark";

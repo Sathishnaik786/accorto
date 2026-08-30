@@ -2,14 +2,14 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
-import { FinalCTA } from "@/components/home-sections";
+import { FinalCTA } from "@/components/home";
 import { ArrowRight, TrendingUp } from "lucide-react";
 import { PremiumCard } from "@/components/ui/PremiumCard";
 import { PremiumBadge } from "@/components/ui/PremiumBadge";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useMouseParallax } from "@/lib/motion-presets";
 import { ComparisonCard } from "@/components/premium/ComparisonCard";
-import { SectionDivider } from "@/components/premium/SectionDivider";
+import { CASE_STUDIES, type CaseStudyItem } from "@/data/case-studies";
 
 export const Route = createFileRoute("/case-studies")({
   head: () => ({
@@ -52,159 +52,61 @@ export const Route = createFileRoute("/case-studies")({
   component: CaseStudies,
 });
 
-const CASES = [
-  {
-    cat: "Oracle",
-    title: "Global manufacturer cuts financial close by 47%",
-    client: "Aurora Manufacturing",
-    img: "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=1000&q=80",
-    metric: "47% faster close",
-    desc: "Migrated 12 legal entities to Oracle Cloud ERP in 9 months.",
-    before: "17-day close",
-    after: "9-day close",
-    roi: "312% ROI in 12mo",
-    outcome: "Saved $2.4M annually",
-    industry: "Manufacturing",
-    tech: ["Oracle ERP Cloud", "EPM Cloud"],
-  },
-  {
-    cat: "SAP",
-    title: "Retail conglomerate unifies 9 ERPs into one",
-    client: "Northwind Retail",
-    img: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1000&q=80",
-    metric: "$28M savings",
-    desc: "S/4HANA RISE program across 14 brands.",
-    before: "9 legacy ERPs",
-    after: "1 S/4HANA core",
-    roi: "240% ROI in 18mo",
-    outcome: "$28M operational savings",
-    industry: "Retail",
-    tech: ["SAP S/4HANA RISE", "BTP"],
-  },
-  {
-    cat: "AI",
-    title: "Bank deploys real-time fraud AI at scale",
-    client: "Meridian Bank",
-    img: "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=1000&q=80",
-    metric: "92% fraud caught",
-    desc: "Real-time scoring on 1.2M transactions/day.",
-    before: "Manual audit check",
-    after: "Real-time AI score",
-    roi: "180% ROI in 6mo",
-    outcome: "92% fraud caught instantly",
-    industry: "Finance",
-    tech: ["Applied AI", "MLOps Platform"],
-  },
-  {
-    cat: "Cloud",
-    title: "Insurer modernizes core to AWS landing zone",
-    client: "Sentinel Insurance",
-    img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1000&q=80",
-    metric: "35% infra savings",
-    desc: "200+ workloads migrated with zero downtime.",
-    before: "On-premise servers",
-    after: "AWS landing zone",
-    roi: "195% ROI in 15mo",
-    outcome: "35% infrastructure savings",
-    industry: "Finance",
-    tech: ["AWS Migration", "Cloud Ops"],
-  },
-  {
-    cat: "Oracle",
-    title: "Hospital network rolls out Fusion HCM",
-    client: "Caremount Health",
-    img: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1000&q=80",
-    metric: "60k employees onboarded",
-    desc: "12-month HCM transformation across 18 hospitals.",
-    before: "Manual scheduling logs",
-    after: "Unified Fusion portal",
-    roi: "150% ROI in 12mo",
-    outcome: "60k employee onboarding automated",
-    industry: "Healthcare",
-    tech: ["Oracle Fusion HCM", "OIC"],
-  },
-  {
-    cat: "AI",
-    title: "Telco predicts churn 6 weeks earlier",
-    client: "Vantage Telecom",
-    img: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1000&q=80",
-    metric: "+22pt accuracy",
-    desc: "GenAI copilot for retention agents.",
-    before: "2-week latency flags",
-    after: "6-week predictive flags",
-    roi: "280% ROI in 9mo",
-    outcome: "Saved 18% churn pipeline",
-    industry: "Logistics",
-    tech: ["Generative AI", "Vector Database"],
-  },
-  {
-    cat: "SAP",
-    title: "FMCG launches integrated planning on BTP",
-    client: "Northstar FMCG",
-    img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1000&q=80",
-    metric: "Inventory -22%",
-    desc: "IBP + BTP extensions live in 5 months.",
-    before: "Excess inventory stockpile",
-    after: "BTP demand scheduling",
-    roi: "210% ROI in 12mo",
-    outcome: "Inventory stockpile cut by 22%",
-    industry: "Manufacturing",
-    tech: ["SAP BTP", "SAP CAPM"],
-  },
-  {
-    cat: "Cloud",
-    title: "Logistics control tower on Azure",
-    client: "GlobalRoute Logistics",
-    img: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1000&q=80",
-    metric: "OTIF +12pt",
-    desc: "Real-time visibility across 40+ DCs.",
-    before: "Manual routing control",
-    after: "Azure control tower",
-    roi: "225% ROI in 10mo",
-    outcome: "OTIF delivery rates up 12pt",
-    industry: "Logistics",
-    tech: ["Azure Cloud", "Data Analytics"],
-  },
-];
-
 const CATS = ["All", "Oracle", "SAP", "AI", "Cloud"];
 
-function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
+function CaseCard({ c, delay }: { c: CaseStudyItem; delay: number }) {
   const { parallaxProps, handleMouseMove, handleMouseLeave } = useMouseParallax(5);
+
+  const renderMetric = (metricStr: string) => {
+    const parts = metricStr.trim().split(" ");
+    if (parts.length > 1) {
+      const [value, ...rest] = parts;
+      return (
+        <span className="flex items-baseline gap-1">
+          <span className="font-extrabold text-emerald-400">{value}</span>
+          <span className="font-medium text-slate-200/90 text-[11px]">{rest.join(" ")}</span>
+        </span>
+      );
+    }
+    return <span className="font-bold text-white">{metricStr}</span>;
+  };
 
   return (
     <Reveal delay={delay}>
-      <div 
-        onMouseMove={handleMouseMove} 
-        onMouseLeave={handleMouseLeave} 
-        className="h-full"
-      >
+      <div onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} className="h-full">
         <motion.div {...parallaxProps} className="h-full">
-          <PremiumCard className="group h-full flex flex-col relative rounded-[32px] bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1">
-            <div className="absolute inset-0 bg-white/1 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" />
-            <div className="relative aspect-4/3 rounded-[32px] overflow-hidden m-3 shadow-md z-10 border border-slate-200/60 dark:border-transparent">
+          <PremiumCard className="group h-full flex flex-col relative rounded-4xl bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 motion-reduce:hover:translate-y-0">
+            <div className="absolute inset-0 bg-white/1 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" aria-hidden="true" />
+            <div className="relative aspect-16/10 rounded-[24px] overflow-hidden m-3 shadow-xs z-10 border border-slate-200/50 dark:border-white/5 bg-slate-100 dark:bg-white/5">
               <img
                 src={c.img}
-                alt={c.title}
+                alt={c.imageAlt || c.title}
                 loading="lazy"
-                className="h-full w-full object-cover rounded-[32px] brightness-[0.95] contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
+                className="h-full w-full object-cover rounded-[24px] brightness-[0.96] contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100 motion-reduce:transition-none"
               />
-              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent pointer-events-none" />
-              <div className="absolute top-4 left-4">
-                <PremiumBadge className="px-2.5 py-1 text-[10px] bg-black/40 border-white/10 text-white backdrop-blur-md">
+              <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent pointer-events-none" aria-hidden="true" />
+              <div className="absolute top-3 left-3">
+                <PremiumBadge className="px-2.5 py-1 text-[10px] font-mono font-bold uppercase tracking-wider bg-black/40 border-white/10 text-white backdrop-blur-md">
                   {c.cat}
                 </PremiumBadge>
               </div>
-              <div className="absolute bottom-4 right-4 bg-white dark:bg-slate-900 border border-slate-200/60 dark:border-white/10 rounded-full px-3.5 py-1.5 text-xs font-bold flex items-center gap-1.5 text-slate-800 dark:text-white shadow-md transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-1.5 group-hover:shadow-xl">
-                <TrendingUp className="h-3 w-3 text-emerald-500 dark:text-emerald-400" /> {c.metric}
+
+              <div className="absolute bottom-3 right-3 bg-slate-950/90 dark:bg-black/90 backdrop-blur-md border border-white/15 rounded-full px-3 py-1 text-xs text-white flex items-center gap-1.5 shadow-md">
+                <TrendingUp className="h-3 w-3 text-emerald-400 shrink-0" aria-hidden="true" />
+                {renderMetric(c.metric)}
               </div>
             </div>
+
             <div className="p-6 pt-3 flex flex-col flex-1 relative z-10 text-left">
-              <div className="text-[10px] text-zinc-500 font-bold uppercase tracking-[0.18em]">{c.client}</div>
-              <h3 className="mt-2 font-display text-lg font-semibold text-slate-900 dark:text-white group-hover:text-brand transition-colors leading-[1.02] tracking-tight">
+              <div className="text-[10px] text-brand dark:text-brand-2 font-mono font-bold uppercase tracking-widest">
+                {c.client}
+              </div>
+              <h3 className="mt-2 font-display text-lg font-bold text-slate-900 dark:text-white group-hover:text-brand transition-colors leading-snug tracking-tight">
                 {c.title}
               </h3>
-              <p className="mt-2 text-sm text-[#64748B] dark:text-zinc-400 leading-relaxed flex-1 font-medium">{c.desc}</p>
+              <p className="mt-2 text-xs sm:text-sm text-[#64748B] dark:text-slate-300 leading-relaxed font-medium">
+                {c.desc}
+              </p>
 
               <div className="mt-4 pt-4 border-t border-slate-200/40 dark:border-white/5 space-y-4">
                 <ComparisonCard
@@ -215,31 +117,47 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
                   afterVal={c.after}
                   className="p-4 gap-2"
                 />
-                
+
                 <div className="grid grid-cols-1 min-[380px]:grid-cols-2 gap-3">
                   <div className="bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-2xl p-3 sm:p-4 flex flex-col justify-between shadow-xs">
-                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">ROI Metric</span>
-                    <span className="font-bold text-emerald-600 dark:text-emerald-400 mt-1 block text-sm">{c.roi}</span>
+                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">
+                      ROI Metric
+                    </span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400 mt-1 block text-sm">
+                      {c.roi}
+                    </span>
                   </div>
                   <div className="bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 rounded-2xl p-3 sm:p-4 flex flex-col justify-between shadow-xs">
-                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">Outcome Goal</span>
-                    <span className="font-semibold text-slate-900 dark:text-white mt-1 block leading-tight text-xs">{c.outcome}</span>
+                    <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">
+                      Outcome Goal
+                    </span>
+                    <span className="font-semibold text-slate-900 dark:text-white mt-1 block leading-tight text-xs">
+                      {c.outcome}
+                    </span>
                   </div>
                 </div>
               </div>
 
               <div className="mt-4 pt-4 flex flex-wrap gap-1.5">
-                <span className="text-[9px] bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 text-slate-500 dark:text-zinc-400 rounded-md px-2.5 py-0.5 font-semibold shadow-xs">{c.industry}</span>
+                <span className="text-[9px] bg-slate-50 dark:bg-white/5 border border-slate-200/60 dark:border-white/10 text-slate-500 dark:text-zinc-400 rounded-md px-2.5 py-0.5 font-semibold shadow-xs">
+                  {c.industry}
+                </span>
                 {c.tech.map((t) => (
-                  <span key={t} className="text-[9px] bg-brand/10 text-brand dark:text-brand-3 border border-brand/20 rounded-md px-2.5 py-0.5 font-bold">{t}</span>
+                  <span
+                    key={t}
+                    className="text-[9px] bg-brand/10 text-brand dark:text-brand-3 border border-brand/20 rounded-md px-2.5 py-0.5 font-bold"
+                  >
+                    {t}
+                  </span>
                 ))}
               </div>
 
               <Link
                 to="/contact"
-                className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand dark:text-brand-3 hover:text-brand-2 transition-all self-start group/link"
+                className="mt-5 inline-flex items-center justify-between text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand transition-colors pt-3 border-t border-slate-100 dark:border-white/5 group/link outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-lg"
               >
-                Read full story <ArrowRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-1.5" />
+                <span>Read full story</span>
+                <ArrowRight className="h-3.5 w-3.5 text-brand transition-transform duration-300 ease-out group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0" aria-hidden="true" />
               </Link>
             </div>
           </PremiumCard>
@@ -252,9 +170,13 @@ function CaseCard({ c, delay }: { c: typeof CASES[0]; delay: number }) {
 function CaseStudies() {
   const [cat, setCat] = useState("All");
   const filtered = useMemo(
-    () => (cat === "All" ? CASES : CASES.filter((c) => c.cat === cat)),
+    () =>
+      cat === "All"
+        ? CASE_STUDIES
+        : CASE_STUDIES.filter((c) => c.cat.toLowerCase().includes(cat.toLowerCase())),
     [cat],
   );
+
   return (
     <>
       <PageHero
@@ -270,26 +192,47 @@ function CaseStudies() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-16 md:pb-24 lg:pb-32">
         <h2 className="sr-only">Client Case Studies</h2>
         <div className="flex flex-wrap gap-2 mb-14">
-          {CATS.map((c) => (
-            <button
-              key={c}
-              onClick={() => setCat(c)}
-              className={`rounded-full px-4 py-2 text-sm font-bold transition-all duration-300 ${
-                cat === c
-                  ? "bg-gradient-brand text-white shadow-brand hover:scale-105 hover:shadow-brand-lg"
-                  : "bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-50 dark:hover:bg-white/10 hover:scale-105"
-              }`}
-            >
-              {c}
-            </button>
-          ))}
+          {CATS.map((c) => {
+            const isActive = cat === c;
+            return (
+              <button
+                key={c}
+                onClick={() => setCat(c)}
+                className={`relative rounded-full px-4.5 py-2 text-sm font-semibold transition-colors duration-200 cursor-pointer ${
+                  isActive
+                    ? "text-white"
+                    : "bg-white dark:bg-white/5 border border-slate-200/80 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white"
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeCasePill"
+                    className="absolute inset-0 rounded-full bg-gradient-brand shadow-brand z-0"
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
+                )}
+                <span className="relative z-10">{c}</span>
+              </button>
+            );
+          })}
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((c, i) => (
-            <CaseCard key={c.title} c={c} delay={i * 0.04} />
-          ))}
-        </div>
+        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((c, i) => (
+              <motion.div
+                key={c.title}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.28 }}
+              >
+                <CaseCard c={c} delay={i * 0.04} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </section>
 
       <FinalCTA />

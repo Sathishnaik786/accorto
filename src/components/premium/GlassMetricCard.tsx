@@ -25,12 +25,14 @@ export function GlassMetricCard({
     <div
       className={cn(
         "inner-card p-4 flex flex-col justify-between select-none min-w-[140px]",
-        className
+        className,
       )}
     >
       <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-white/20 to-transparent pointer-events-none" />
       <div>
-        <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">{label}</span>
+        <span className="text-[9px] text-zinc-500 font-bold uppercase tracking-wider block">
+          {label}
+        </span>
         <div className="font-display text-2xl font-semibold mt-1 bg-clip-text text-transparent bg-gradient-brand leading-none">
           {displayVal}
         </div>

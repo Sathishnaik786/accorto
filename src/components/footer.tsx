@@ -11,14 +11,13 @@ export function Footer() {
     footerFadeUp,
     footerDelays,
     socialIconHover,
-    easing,
   } = useMotionSystem();
 
   return (
     <footer className="relative mt-16 md:mt-24 lg:mt-32 bg-[#F8FAFB] dark:bg-transparent">
       {/* Flagship top gradient divider */}
       <div className="absolute inset-x-0 -top-px h-px bg-linear-to-r from-transparent via-slate-200 dark:via-brand-3/20 to-transparent" />
-      <div className="absolute inset-x-0 top-[-2px] h-[3px] bg-linear-to-r from-transparent via-slate-200/40 to-transparent blur-xs pointer-events-none" />
+      <div className="absolute inset-x-0 -top-0.5 h-0.75 bg-linear-to-r from-transparent via-slate-200/40 to-transparent blur-xs pointer-events-none" />
       <motion.div
         variants={staggerContainer(0.08)}
         initial="initial"
@@ -28,9 +27,11 @@ export function Footer() {
       >
         <div className="bg-white dark:bg-card border border-slate-200/60 dark:border-white/5 rounded-3xl p-5 sm:p-8 md:p-12 shadow-xs dark:shadow-none">
           <div className="grid gap-12 lg:grid-cols-12">
-
             {/* Brand Column */}
-            <motion.div variants={footerFadeUp(footerDelays.brand)} className="lg:col-span-4 space-y-5">
+            <motion.div
+              variants={footerFadeUp(footerDelays.brand)}
+              className="lg:col-span-4 space-y-5"
+            >
               <Link to="/" className="flex flex-col items-start gap-2.5 group/logo relative">
                 {/* Logo Backdrop Glow */}
                 <div className="absolute -left-2 -top-2 w-36 h-20 rounded-full bg-brand/10 dark:bg-brand-3/10 blur-xl opacity-0 group-hover/logo:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -88,7 +89,7 @@ export function Footer() {
                     viewport={{ once: true }}
                     whileHover={socialIconHover}
                     whileTap={{ scale: 0.95 }}
-                    className="relative grid h-10 w-10 place-items-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-3 transition-all duration-300 group/social shadow-xs dark:shadow-none hover:shadow-md hover:-translate-y-0.5"
+                    className="relative grid h-10 w-10 place-items-center rounded-full border border-slate-200 dark:border-white/10 bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 hover:text-brand dark:hover:text-brand-3 transition-all duration-300 group/social shadow-xs dark:shadow-none hover:shadow-md hover:-translate-y-0.5 cursor-pointer"
                   >
                     {/* Hover indicator glow backdrop */}
                     <div className="absolute inset-0 rounded-full bg-brand/5 dark:bg-brand-3/5 opacity-0 group-hover/social:opacity-100 transition-opacity duration-300" />
@@ -106,7 +107,7 @@ export function Footer() {
                   links={[
                     ["About", "/about"],
                     ["Careers", "/careers"],
-                    ["Academy", "/academy"],
+                    ["AI Career Development", "/academy/ai-career-development"],
                     ["Insights", "/insights"],
                     ["Contact", "/contact"],
                   ]}
@@ -116,12 +117,12 @@ export function Footer() {
                 <FooterCol
                   title="Services"
                   links={[
-                    ["Oracle ERP", "/services"],
-                    ["SAP Solutions", "/services"],
-                    ["AI & ML", "/services"],
-                    ["Cloud Consulting", "/services"],
-                    ["Digital Transformation", "/services"],
-                    ["Digital Marketing", "/services"],
+                    ["AI & IoT", "/services/ai-iot"],
+                    ["Enterprise Structure", "/services/ai-enterprise-structure"],
+                    ["Enterprise Data", "/services/ai-enterprise-data"],
+                    ["Oracle ERP", "/services#oracle"],
+                    ["SAP Solutions", "/services#sap"],
+                    ["Cloud Consulting", "/services#cloud"],
                   ]}
                 />
               </motion.div>
@@ -129,18 +130,21 @@ export function Footer() {
                 <FooterCol
                   title="Industries"
                   links={[
+                    ["Utilities & Environmental", "/services/ai-iot"],
+                    ["Manufacturing", "/industries"],
                     ["Healthcare", "/industries"],
                     ["Finance", "/industries"],
                     ["Retail", "/industries"],
-                    ["Manufacturing", "/industries"],
-                    ["Education", "/industries"],
                   ]}
                 />
               </motion.div>
             </div>
 
             {/* Newsletter Column */}
-            <motion.div variants={footerFadeUp(footerDelays.contact)} className="lg:col-span-3 space-y-4">
+            <motion.div
+              variants={footerFadeUp(footerDelays.contact)}
+              className="lg:col-span-3 space-y-4"
+            >
               <h4 className="font-display font-bold text-slate-900 dark:text-white">Stay ahead</h4>
               <p className="text-sm text-slate-600 dark:text-slate-300">
                 Quarterly insights on enterprise AI, ERP, and cloud.
@@ -153,41 +157,24 @@ export function Footer() {
                   type="email"
                   required
                   placeholder="Work email"
+                  aria-label="Work email address for quarterly insights newsletter"
                   className="flex-1 bg-transparent px-4 py-2 text-sm outline-none placeholder:text-slate-500 dark:placeholder:text-slate-400 text-slate-900 dark:text-white"
                 />
                 <motion.button
+                  type="submit"
+                  aria-label="Subscribe to newsletter"
                   whileHover={shouldReduceMotion ? {} : { scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2, ease: EASING }}
-                  className="grid h-9 w-9 place-items-center rounded-full bg-gradient-brand text-white transition-colors"
+                  className="grid h-9 w-9 place-items-center rounded-full bg-gradient-brand text-white transition-colors cursor-pointer"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </motion.button>
               </form>
               <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
-                ISO 27001 · SOC 2 Type II · GDPR Ready
+                Enterprise Grade · Global Delivery
               </div>
             </motion.div>
-          </div>
-
-          <div className="mt-12 pt-8 border-t border-slate-200 dark:border-white/10 grid md:grid-cols-12 gap-6 items-center">
-            <div className="md:col-span-7 space-y-2">
-              <div className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                Trust & Compliance Statement
-              </div>
-              <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                Accorto Technologies Private Limited is committed to enterprise-grade security and compliance.
-                We are ISO 27001 certified and SOC 2 Type II audited, ensuring industry-standard security
-                safeguards across all digital consulting engagements.
-              </p>
-            </div>
-            <div className="md:col-span-5 flex flex-wrap gap-2 md:justify-end">
-              {["Oracle Certified", "SAP Expertise", "Cloud Consulting", "AI Solutions", "ISO 27001", "SOC 2 Type II"].map((cert) => (
-                <span key={cert} className="inline-flex items-center rounded-md bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 px-2.5 py-1 text-[10px] font-semibold text-slate-600 dark:text-slate-300">
-                  {cert}
-                </span>
-              ))}
-            </div>
           </div>
 
           <div className="mt-10 flex flex-col md:flex-row items-center justify-between gap-4 border-t border-slate-200 dark:border-white/10 pt-6 text-xs text-slate-500 dark:text-slate-400 font-semibold">
@@ -196,18 +183,10 @@ export function Footer() {
               reserved.
             </p>
             <div className="flex items-center gap-5">
-              <a href="#" className="hover:text-brand transition-colors">
-                Privacy
-              </a>
-              <a href="#" className="hover:text-brand transition-colors">
-                Terms
-              </a>
-              <a href="#" className="hover:text-brand transition-colors">
-                Cookies
-              </a>
-              <a href="#" className="hover:text-brand transition-colors">
-                Security
-              </a>
+              <span className="text-slate-500 dark:text-slate-400">Privacy</span>
+              <span className="text-slate-500 dark:text-slate-400">Terms</span>
+              <span className="text-slate-500 dark:text-slate-400">Cookies</span>
+              <span className="text-slate-500 dark:text-slate-400">Security</span>
             </div>
           </div>
         </div>
@@ -225,10 +204,8 @@ function FooterCol({ title, links }: { title: string; links: [string, string][] 
           <li key={label}>
             <Link
               to={to}
-              activeOptions={{ exact: true }}
-              className="relative text-slate-600 dark:text-slate-300 hover:text-brand dark:hover:text-white [&.active]:text-brand dark:[&.active]:text-brand-3 [&.active]:pl-3 transition-all duration-300 font-medium group/footlink flex items-center"
+              className="relative text-slate-600 dark:text-slate-300 hover:text-brand dark:hover:text-white transition-all duration-300 font-medium group/footlink flex items-center"
             >
-              <span className="absolute left-0 w-1 h-1 rounded-full bg-brand dark:bg-brand-3 opacity-0 group-[.active]/footlink:opacity-100 transition-opacity duration-300" />
               {label}
             </Link>
           </li>

@@ -8,11 +8,7 @@ export function BentoGrid({
   children: React.ReactNode;
   className?: string;
 }) {
-  return (
-    <div className={cn("grid grid-cols-1 md:grid-cols-12 gap-6", className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn("grid grid-cols-1 md:grid-cols-12 gap-6", className)}>{children}</div>;
 }
 
 export function BentoGridItem({
@@ -24,9 +20,5 @@ export function BentoGridItem({
   className?: string;
   colSpan?: string;
 }) {
-  return (
-    <div className={cn("col-span-1 h-full", colSpan, className)}>
-      {children}
-    </div>
-  );
+  return <div className={cn("col-span-1 h-full", colSpan, className)}>{children}</div>;
 }

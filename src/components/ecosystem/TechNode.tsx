@@ -116,7 +116,7 @@ export const TechNode = React.memo(
         </motion.div>
       </div>
     );
-  }
+  },
 );
 
 TechNode.displayName = "TechNode";

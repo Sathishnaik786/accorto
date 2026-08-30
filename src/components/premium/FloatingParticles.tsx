@@ -23,10 +23,10 @@ export function FloatingParticles() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    
+
     const colors = [
-      "rgba(0, 162, 255, 0.12)",  // Blue
-      "rgba(0, 217, 255, 0.12)",  // Cyan
+      "rgba(0, 162, 255, 0.12)", // Blue
+      "rgba(0, 217, 255, 0.12)", // Cyan
       "rgba(143, 255, 61, 0.08)", // Green
     ];
 
@@ -78,7 +78,7 @@ export function FloatingParticles() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-        
+
         ctx.fillStyle = p.color;
         ctx.fill();
       });
@@ -113,10 +113,5 @@ export function FloatingParticles() {
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none fixed inset-0 z-0"
-    />
-  );
+  return <canvas ref={canvasRef} className="pointer-events-none fixed inset-0 z-0" />;
 }

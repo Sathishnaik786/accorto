@@ -119,7 +119,7 @@ export const ConnectionLines = React.memo(
         })}
       </svg>
     );
-  }
+  },
 );
 
 ConnectionLines.displayName = "ConnectionLines";

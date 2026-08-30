@@ -27,7 +27,8 @@ export const Route = createFileRoute("/academy/ai-training")({
       { property: "og:title", content: "AI Engineering Course — Accorto Academy" },
       {
         property: "og:description",
-        content: "16 weeks curriculum from Python basics to Deep Learning, RAG pipelines, and Agent frameworks.",
+        content:
+          "16 weeks curriculum from Python basics to Deep Learning, RAG pipelines, and Agent frameworks.",
       },
       { property: "og:url", content: "https://accorto.tech/academy/ai-training" },
     ],
@@ -39,7 +40,8 @@ export const Route = createFileRoute("/academy/ai-training")({
           "@context": "https://schema.org",
           "@type": "Course",
           name: "Enterprise AI Engineering & Software Development Program",
-          description: "16-week comprehensive path from fundamentals to production-grade AI agents.",
+          description:
+            "16-week comprehensive path from fundamentals to production-grade AI agents.",
           provider: {
             "@type": "Organization",
             name: "Accorto Technologies Academy",
@@ -56,67 +58,121 @@ const MODULES = [
   {
     num: "MODULE 1",
     name: "AI Foundations",
-    topics: ["Introduction to AI", "Machine Learning concepts", "Deep Learning basics", "Generative AI paradigm"],
+    topics: [
+      "Introduction to AI",
+      "Machine Learning concepts",
+      "Deep Learning basics",
+      "Generative AI paradigm",
+    ],
     tools: ["ChatGPT", "Claude", "Gemini"],
   },
   {
     num: "MODULE 2",
     name: "Python For AI",
-    topics: ["Variables & logic gates", "Functions & modules", "Object-Oriented Programming (OOP)", "Data libraries (NumPy, Pandas)"],
+    topics: [
+      "Variables & logic gates",
+      "Functions & modules",
+      "Object-Oriented Programming (OOP)",
+      "Data libraries (NumPy, Pandas)",
+    ],
     tools: ["VS Code", "Jupyter Notebooks"],
   },
   {
     num: "MODULE 3",
     name: "Prompt Engineering",
-    topics: ["Zero-shot & Few-shot systems", "Chain-of-Thought (CoT) prompting", "Self-consistency & directional cues", "Structured JSON outputs & schemas"],
+    topics: [
+      "Zero-shot & Few-shot systems",
+      "Chain-of-Thought (CoT) prompting",
+      "Self-consistency & directional cues",
+      "Structured JSON outputs & schemas",
+    ],
     tools: ["ChatGPT", "Claude API"],
   },
   {
     num: "MODULE 4",
     name: "Machine Learning",
-    topics: ["Linear & Logistic Regression", "Support Vector Machines & Random Forests", "K-Means & DBSCAN Clustering"],
+    topics: [
+      "Linear & Logistic Regression",
+      "Support Vector Machines & Random Forests",
+      "K-Means & DBSCAN Clustering",
+    ],
     tools: ["Scikit-learn", "SciPy"],
   },
   {
     num: "MODULE 5",
     name: "Deep Learning",
-    topics: ["Multi-Layer Perceptrons (MLPs)", "Convolutional Neural Networks (CNNs)", "Recurrent Neural Networks (RNNs)", "Transformer architectures & self-attention"],
+    topics: [
+      "Multi-Layer Perceptrons (MLPs)",
+      "Convolutional Neural Networks (CNNs)",
+      "Recurrent Neural Networks (RNNs)",
+      "Transformer architectures & self-attention",
+    ],
     tools: ["TensorFlow", "PyTorch"],
   },
   {
     num: "MODULE 6",
     name: "Generative AI",
-    topics: ["Embedding generations", "Open-source LLM setups", "Supervised Fine-Tuning (SFT) workflows", "Vector representations & search metrics"],
+    topics: [
+      "Embedding generations",
+      "Open-source LLM setups",
+      "Supervised Fine-Tuning (SFT) workflows",
+      "Vector representations & search metrics",
+    ],
     tools: ["Hugging Face", "Ollama"],
   },
   {
     num: "MODULE 7",
     name: "RAG Systems",
-    topics: ["Vector search databases", "Document chunking & loading protocols", "Semantic cache strategies", "Hybrid search & re-ranking modules"],
+    topics: [
+      "Vector search databases",
+      "Document chunking & loading protocols",
+      "Semantic cache strategies",
+      "Hybrid search & re-ranking modules",
+    ],
     tools: ["LangChain", "LlamaIndex", "Pinecone", "ChromaDB"],
   },
   {
     num: "MODULE 8",
     name: "AI Agents",
-    topics: ["Agentic workflow loops", "Tool calling & parsing loops", "Multi-agent coordination graphs", "Memory states & persistence"],
+    topics: [
+      "Agentic workflow loops",
+      "Tool calling & parsing loops",
+      "Multi-agent coordination graphs",
+      "Memory states & persistence",
+    ],
     tools: ["LangGraph", "CrewAI", "AutoGen"],
   },
   {
     num: "MODULE 9",
     name: "MCP Protocol",
-    topics: ["Model Context Protocol architecture", "MCP servers implementations", "Context linking & dynamic tool binding", "Resource schemas & definitions"],
+    topics: [
+      "Model Context Protocol architecture",
+      "MCP servers implementations",
+      "Context linking & dynamic tool binding",
+      "Resource schemas & definitions",
+    ],
     tools: ["MCP Servers", "Cursor", "Claude Desktop"],
   },
   {
     num: "MODULE 10",
     name: "Deployment",
-    topics: ["Containerization & image builds", "REST APIs endpoints definition", "Cloud infrastructure setup", "CI/CD automated pipelines"],
+    topics: [
+      "Containerization & image builds",
+      "REST APIs endpoints definition",
+      "Cloud infrastructure setup",
+      "CI/CD automated pipelines",
+    ],
     tools: ["Docker", "FastAPI", "AWS", "Azure"],
   },
   {
     num: "MODULE 11",
     name: "Production AI",
-    topics: ["Observability & telemetry logs", "Output guardrails & filters", "System evaluation benchmarks (RAGAS)", "Cost tracking & latency reductions"],
+    topics: [
+      "Observability & telemetry logs",
+      "Output guardrails & filters",
+      "System evaluation benchmarks (RAGAS)",
+      "Cost tracking & latency reductions",
+    ],
     tools: ["LangSmith", "Helicone"],
   },
 ];
@@ -150,10 +206,22 @@ const PROJECTS = [
 ];
 
 const CERTS = [
-  { level: "Beginner", desc: "Python syntax, programming loops, basic ML algorithms, and prompt techniques." },
-  { level: "Associate", desc: "ML pipelines, deep learning network models (CNN/Transformers), and database queries." },
-  { level: "Professional", desc: "Advanced RAG, multi-agent frameworks, tool integrations, and custom prompt templates." },
-  { level: "Expert", desc: "Production MLOps pipelines, observabilities logs, fine-tuning setups, and cost evaluation plans." },
+  {
+    level: "Beginner",
+    desc: "Python syntax, programming loops, basic ML algorithms, and prompt techniques.",
+  },
+  {
+    level: "Associate",
+    desc: "ML pipelines, deep learning network models (CNN/Transformers), and database queries.",
+  },
+  {
+    level: "Professional",
+    desc: "Advanced RAG, multi-agent frameworks, tool integrations, and custom prompt templates.",
+  },
+  {
+    level: "Expert",
+    desc: "Production MLOps pipelines, observabilities logs, fine-tuning setups, and cost evaluation plans.",
+  },
 ];
 
 const TECHS = [
@@ -191,8 +259,8 @@ function AIEngineeringCourse() {
         subtitle="16-week comprehensive path from fundamentals to production-grade AI agents. Built for developers ready to build real systems."
       />
 
-      {/* Quick Metrics */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 pb-20 -mt-10">
+      {/* Next Section: Quick Metrics */}
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 md:py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
           {[
             { label: "Duration", val: "16 Weeks" },
@@ -201,7 +269,9 @@ function AIEngineeringCourse() {
             { label: "Methodology", val: "Cohort-based" },
           ].map((m, i) => (
             <div key={i} className="glass rounded-2xl p-6 text-center">
-              <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">{m.label}</div>
+              <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                {m.label}
+              </div>
               <div className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-1">
                 {m.val}
               </div>
@@ -418,7 +488,7 @@ function AIEngineeringCourse() {
           {TECHS.map((tech) => (
             <div
               key={tech.name}
-              className="glass rounded-xl p-4 flex items-center justify-center min-h-[64px] transition-all duration-300 group cursor-default select-none border border-border hover:border-brand/20 hover:-translate-y-0.5"
+              className="glass rounded-xl p-4 flex items-center justify-center min-h-16 transition-all duration-300 group cursor-default select-none border border-border hover:border-brand/20 hover:-translate-y-0.5"
             >
               <span
                 className={`font-display font-bold text-xs tracking-wider text-slate-400 dark:text-slate-500 group-hover:scale-105 transition-all ${tech.glow}`}

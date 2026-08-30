@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Reveal } from "@/components/section";
 import { PremiumCard } from "@/components/ui/PremiumCard";
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { FEATURED, ARTICLES, CATEGORIES } from "@/data/insights";
+import { SpecularButton } from "@/components/animations/SpecularButton";
+import { DotGrid } from "@/components/animations/DotGrid";
 
 export const Route = createFileRoute("/insights/")({
   head: () => ({
@@ -51,17 +54,34 @@ function InsightsIndex() {
   const [selectedCategory, setSelectedCategory] = useState("View All");
 
   // Grid displays everything except the top featured post
-  const displayArticles = ARTICLES.filter((a) => a.slug !== FEATURED.slug).filter(
-    (a) => {
-      if (selectedCategory === "View All") return true;
-      // Handle "AI Strategy" category match with "AI" filter
-      if (selectedCategory === "AI" && a.cat === "AI Strategy") return true;
-      return a.cat.toLowerCase() === selectedCategory.toLowerCase();
-    }
-  );
+  const displayArticles = ARTICLES.filter((a) => a.slug !== FEATURED.slug).filter((a) => {
+    if (selectedCategory === "View All") return true;
+    // Handle "AI Strategy" category match with "AI" filter
+    if (selectedCategory === "AI" && a.cat === "AI Strategy") return true;
+    return a.cat.toLowerCase() === selectedCategory.toLowerCase();
+  });
 
   return (
     <section className="relative min-h-screen w-full bg-background text-foreground pt-28 pb-20 lg:pt-36 lg:pb-24 overflow-hidden">
+      {/* Interactive Full-Bleed DotGrid Background */}
+      <div
+        className="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none h-full w-full"
+        aria-hidden="true"
+      >
+        <DotGrid
+          dotSize={4}
+          gap={26}
+          baseColor="#1A3155"
+          activeColor="#38BDF8"
+          proximity={110}
+          speedTrigger={140}
+          shockRadius={180}
+          shockStrength={3}
+          resistance={850}
+          returnDuration={1.2}
+        />
+      </div>
+
       {/* Ambient premium radial glows */}
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-brand/5 dark:bg-brand/10 blur-[150px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-3/3 dark:bg-brand-3/5 blur-[120px] pointer-events-none" />
@@ -72,162 +92,199 @@ function InsightsIndex() {
           {/* Left: Large Featured Article */}
           <div className="lg:col-span-8 flex flex-col gap-6">
             <Reveal>
-              <Link to="/insights/$slug" params={{ slug: FEATURED.slug }} className="group block">
-                <PremiumCard
-                  hover={true}
-                  className="p-0 bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1 rounded-[32px] overflow-hidden transition-all duration-500"
-                >
-                  {/* Image Container with rounded top corners */}
-                  <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px] border-b border-slate-200/60 dark:border-transparent">
-                    <img
-                      src={FEATURED.img}
-                      alt={FEATURED.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-103 group-hover:brightness-105"
-                    />
-                    <div className="absolute inset-0 bg-linear-to-t from-background via-background/10 to-transparent pointer-events-none" />
-                  </div>
+              <CardContainer className="w-full">
+                <CardBody className="p-0 bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl rounded-4xl overflow-hidden">
+                  <Link
+                    to="/insights/$slug"
+                    params={{ slug: FEATURED.slug }}
+                    aria-label={`${FEATURED.title} — Read featured story`}
+                    className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-4xl"
+                  >
+                    {/* Image Container with 3D Depth */}
+                    <CardItem translateZ={30} className="w-full">
+                      <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-4xl border-b border-slate-200/50 dark:border-white/5 bg-slate-100 dark:bg-white/5">
+                        <img
+                          src={FEATURED.img}
+                          alt={FEATURED.title}
+                          loading="lazy"
+                          className="h-full w-full object-cover brightness-[0.96] contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                        />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" aria-hidden="true" />
+                      </div>
+                    </CardItem>
 
-                  {/* Card Body */}
-                  <div className="p-8 space-y-4 text-left">
-                    <span className="inline-block text-xs font-semibold text-brand dark:text-brand-3 uppercase tracking-wider">
-                      {FEATURED.cat}
-                    </span>
-                    <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-300">
-                      {FEATURED.title}
-                    </h2>
-                    <p className="text-sm font-semibold text-slate-500 dark:text-zinc-400">
-                      {FEATURED.author} • {FEATURED.date}
-                    </p>
-                    <p className="text-[#64748B] dark:text-zinc-400 leading-relaxed text-sm sm:text-base font-medium max-w-3xl">
-                      {FEATURED.excerpt}
-                    </p>
-                  </div>
-                </PremiumCard>
-              </Link>
+                    {/* Card Body with 3D Layers */}
+                    <div className="p-6 sm:p-8 space-y-4 text-left">
+                      <CardItem translateZ={15} className="w-fit">
+                        <span className="inline-block text-[11px] font-mono font-bold text-brand dark:text-brand-2 uppercase tracking-wider">
+                          {FEATURED.cat}
+                        </span>
+                      </CardItem>
+
+                      <CardItem translateZ={25} className="w-full">
+                        <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight group-hover:text-brand transition-colors duration-300">
+                          {FEATURED.title}
+                        </h2>
+                      </CardItem>
+
+                      <CardItem translateZ={15} className="w-fit">
+                        <p className="text-xs sm:text-sm font-semibold text-slate-500 dark:text-zinc-400">
+                          {FEATURED.author} • {FEATURED.date}
+                        </p>
+                      </CardItem>
+
+                      <CardItem translateZ={20} className="w-full">
+                        <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-300 leading-relaxed font-medium max-w-3xl">
+                          {FEATURED.excerpt}
+                        </p>
+                      </CardItem>
+
+                      <CardItem translateZ={15} className="w-fit pt-2">
+                        <div className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand transition-colors">
+                          <span>Read featured story</span>
+                          <span className="text-brand text-xs font-bold" aria-hidden="true">→</span>
+                        </div>
+                      </CardItem>
+                    </div>
+                  </Link>
+                </CardBody>
+              </CardContainer>
             </Reveal>
           </div>
 
-          {/* Right: Featured Stack (3 list items) */}
-          <div className="lg:col-span-4 flex flex-col items-start text-left">
-            <Reveal>
-              <h2 className="font-display text-3xl sm:text-5xl font-semibold tracking-tight text-slate-900 dark:text-white mb-8">
-                Featured
-              </h2>
-            </Reveal>
+            {/* Right: Featured Stack (3 list items) */}
+            <div className="lg:col-span-4 flex flex-col items-start text-left">
+              <Reveal>
+                <h2 className="font-display text-2xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-6">
+                  Featured
+                </h2>
+              </Reveal>
 
-            <div className="w-full divide-y divide-slate-200 dark:divide-white/10">
-              {ARTICLES.slice(0, 3).map((a, idx) => (
-                <Reveal key={idx} delay={idx * 0.08}>
-                  <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block py-5 first:pt-0 last:pb-0">
-                    <div className="flex justify-between items-start gap-4">
-                      <div className="space-y-2 flex-1">
-                        <h3 className="font-display text-sm font-semibold text-slate-800 dark:text-white group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-200 line-clamp-2 leading-snug">
-                          {a.title}
-                        </h3>
-                        <p className="text-[11px] font-semibold text-slate-500 dark:text-zinc-500 uppercase tracking-wider">
-                          {a.author}
-                        </p>
+              <div className="w-full divide-y divide-slate-200 dark:divide-white/10">
+                {ARTICLES.slice(0, 3).map((a, idx) => (
+                  <Reveal key={idx} delay={idx * 0.08}>
+                    <Link
+                      to="/insights/$slug"
+                      params={{ slug: a.slug }}
+                      className="group block py-5 first:pt-0 last:pb-0 outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-lg"
+                    >
+                      <div className="flex justify-between items-start gap-4">
+                        <div className="space-y-2 flex-1">
+                          <h3 className="font-display text-sm font-bold text-slate-800 dark:text-white group-hover:text-brand transition-colors duration-200 line-clamp-2 leading-snug">
+                            {a.title}
+                          </h3>
+                          <p className="text-[11px] font-mono font-bold text-slate-500 dark:text-zinc-500 uppercase tracking-wider">
+                            {a.author}
+                          </p>
+                        </div>
+                        <div className="h-16 w-16 rounded-2xl overflow-hidden shrink-0 border border-slate-200/60 dark:border-white/5 shadow-xs bg-slate-100 dark:bg-white/5">
+                          <img
+                            src={a.img}
+                            alt={a.title}
+                            className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
                       </div>
-                      <div className="h-16 w-16 rounded-xl overflow-hidden shrink-0 border border-slate-200/60 dark:border-white/5 shadow-sm">
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Category Scroll Menu */}
+          <div className="border-b border-slate-200 dark:border-white/10 mt-16 mb-10">
+            <div className="flex items-center gap-8 overflow-x-auto no-scrollbar py-3 scroll-smooth" role="tablist" aria-label="Insight categories">
+              {CATEGORIES.map((cat: string) => {
+                const active = selectedCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    role="tab"
+                    aria-selected={active}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={cn(
+                      "relative pb-3 text-sm font-bold whitespace-nowrap transition-colors duration-200 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-sm",
+                      active
+                        ? "text-slate-900 dark:text-white"
+                        : "text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white",
+                    )}
+                  >
+                    {cat}
+                    {active && (
+                      <motion.div
+                        layoutId="activeCategory"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand"
+                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Latest Articles Grid */}
+          {displayArticles.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {displayArticles.map((a, idx) => (
+                <Reveal key={a.title} delay={idx * 0.05}>
+                  <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block h-full outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-4xl">
+                    <PremiumCard
+                      hover={true}
+                      className="h-full flex flex-col bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md hover:shadow-xl hover:-translate-y-1 rounded-4xl overflow-hidden transition-all duration-300 motion-reduce:hover:translate-y-0"
+                    >
+                      {/* Image at top */}
+                      <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-4xl border-b border-slate-200/50 dark:border-white/5 bg-slate-100 dark:bg-white/5">
                         <img
                           src={a.img}
                           alt={a.title}
-                          className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          loading="lazy"
+                          className="h-full w-full object-cover brightness-[0.96] contrast-[1.04] transition-transform duration-700 ease-out group-hover:scale-[1.03] motion-reduce:group-hover:scale-100 motion-reduce:transition-none"
                         />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent pointer-events-none" aria-hidden="true" />
                       </div>
-                    </div>
+
+                      {/* Card Body */}
+                      <div className="p-6 flex flex-col grow text-left justify-between gap-4">
+                        <div>
+                          <div className="space-y-0.5 mb-2">
+                            <span className="text-[11px] font-mono font-bold text-brand dark:text-brand-2 uppercase tracking-wider block">
+                              {a.cat}
+                            </span>
+                            <p className="text-xs text-slate-500 dark:text-zinc-400 font-medium">
+                              {a.author} • {a.date}
+                            </p>
+                          </div>
+
+                          <h3 className="font-display text-lg sm:text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand transition-colors duration-300 leading-snug mb-2">
+                            {a.title}
+                          </h3>
+
+                          <p className="text-xs sm:text-sm text-[#64748B] dark:text-slate-300 leading-relaxed line-clamp-3 font-medium">
+                            {a.excerpt}
+                          </p>
+                        </div>
+
+                        <div className="inline-flex items-center justify-between text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-brand transition-colors mt-auto pt-3 border-t border-slate-100 dark:border-white/5">
+                          <span>Read article</span>
+                          <span className="text-brand text-xs font-bold" aria-hidden="true">→</span>
+                        </div>
+                      </div>
+                    </PremiumCard>
                   </Link>
                 </Reveal>
               ))}
             </div>
-          </div>
-        </div>
-
-        {/* Category Scroll Menu */}
-        <div className="border-b border-slate-200 dark:border-white/10 mt-16 mb-10">
-          <div className="flex items-center gap-8 overflow-x-auto no-scrollbar py-3 scroll-smooth">
-            {CATEGORIES.map((cat: string) => {
-              const active = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  className={cn(
-                    "relative pb-3 text-sm font-bold whitespace-nowrap transition-colors duration-200 cursor-pointer",
-                    active ? "text-slate-900 dark:text-white" : "text-slate-500 dark:text-zinc-400 hover:text-slate-900 dark:hover:text-white"
-                  )}
-                >
-                  {cat}
-                  {active && (
-                    <motion.div
-                      layoutId="activeCategory"
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-brand-3"
-                      transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                    />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Latest Articles Grid */}
-        {displayArticles.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {displayArticles.map((a, idx) => (
-              <Reveal key={a.title} delay={idx * 0.05}>
-                <Link to="/insights/$slug" params={{ slug: a.slug }} className="group block h-full">
-                  <PremiumCard
-                    hover={true}
-                    className="h-full flex flex-col bg-white dark:bg-card border border-slate-100 dark:border-white/5 shadow-md dark:shadow-none hover:shadow-xl dark:hover:shadow-none hover:-translate-y-1 rounded-[32px] overflow-hidden transition-all duration-500"
-                  >
-                    {/* Image at top */}
-                    <div className="relative aspect-16/10 w-full overflow-hidden rounded-t-[32px] border-b border-slate-200/60 dark:border-transparent">
-                      <img
-                        src={a.img}
-                        alt={a.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-103 group-hover:brightness-105"
-                      />
-                      <div className="absolute inset-0 bg-linear-to-t from-background via-background/20 to-transparent pointer-events-none" />
-                    </div>
-
-                    {/* Card Body */}
-                    <div className="p-6 flex flex-col grow text-left">
-                      <div className="space-y-0.5 mb-3">
-                        <p className="text-[13px] font-semibold text-slate-800 dark:text-white/90">{a.author}</p>
-                        <p className="text-[12px] text-slate-500 dark:text-zinc-400 font-medium">{a.date}</p>
-                      </div>
-
-                      <h3 className="font-display text-xl font-bold text-slate-900 dark:text-white group-hover:text-brand dark:group-hover:text-brand-3 transition-colors duration-300 leading-snug mb-3">
-                        {a.title}
-                      </h3>
-
-                      <p className="text-[13px] text-slate-600 dark:text-zinc-400 leading-relaxed line-clamp-3 mb-6 font-medium">
-                        {a.excerpt}
-                      </p>
-
-                      <div className="mt-auto">
-                        <span className="inline-flex items-center text-xs font-bold text-slate-800 dark:text-white/80 group-hover:text-brand-3 transition-colors">
-                          Read post <span className="ml-1 text-[10px] font-sans">↗</span>
-                        </span>
-                      </div>
-                    </div>
-                  </PremiumCard>
-                </Link>
-              </Reveal>
-            ))}
-          </div>
         ) : (
-          <div className="py-20 text-center text-slate-500 dark:text-zinc-400 font-medium">
+          <div className="py-20 text-center text-slate-500 dark:text-zinc-400 font-normal">
             No articles found in this category.
           </div>
         )}
 
         {/* Newsletter Subscription Box */}
         <div className="mt-24">
-          <div className="relative overflow-hidden rounded-[32px] bg-white dark:bg-[#0C223D]/40 border border-slate-200/60 dark:border-white/10 p-10 md:p-14 text-center shadow-md dark:shadow-none">
+          <div className="relative overflow-hidden rounded-4xl bg-white dark:bg-[#0C223D]/40 border border-slate-200/60 dark:border-white/10 p-10 md:p-14 text-center shadow-md dark:shadow-none">
             <div className="absolute inset-0 bg-gradient-brand opacity-[0.06] dark:opacity-[0.08]" />
             <div className="relative max-w-2xl mx-auto">
               <Reveal>
@@ -237,8 +294,9 @@ function InsightsIndex() {
                 <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-4">
                   Get our <span className="text-gradient">quarterly briefing</span>.
                 </h2>
-                <p className="text-slate-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto mb-8 font-medium">
-                  Curated research on enterprise AI, ERP and cloud — written by our partners. No fluff.
+                <p className="text-slate-600 dark:text-zinc-400 text-sm md:text-base leading-relaxed max-w-lg mx-auto mb-8 font-normal">
+                  Curated research on enterprise AI, ERP and cloud — written by our partners. No
+                  fluff.
                 </p>
               </Reveal>
               <Reveal delay={0.1}>
@@ -250,12 +308,17 @@ function InsightsIndex() {
                     type="email"
                     required
                     placeholder="Work email"
-                    className="flex-1 bg-transparent px-4 py-2.5 text-sm outline-none placeholder:text-slate-400 dark:placeholder:text-zinc-500 text-slate-900 dark:text-white font-medium"
+                    className="flex-1 bg-transparent px-4 py-2.5 text-sm outline-none placeholder:text-slate-400 dark:placeholder:text-zinc-500 text-slate-900 dark:text-white font-normal"
                   />
                   <input type="hidden" name="form-name" value="newsletter" />
-                  <button className="rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white hover:scale-105 hover:shadow-lg transition-all duration-300">
+                  <SpecularButton
+                    type="submit"
+                    size="sm"
+                    variant="brand"
+                    className="shadow-brand hover:shadow-brand-lg"
+                  >
                     Subscribe
-                  </button>
+                  </SpecularButton>
                 </form>
               </Reveal>
             </div>

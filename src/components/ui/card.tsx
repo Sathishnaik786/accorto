@@ -1,15 +1,50 @@
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
+import { BorderGlow } from "../animations/BorderGlow";
 
-const Card = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn("rounded-xl border bg-card text-card-foreground shadow", className)}
-      {...props}
-    />
-  ),
+export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  glow?: boolean;
+  borderRadius?: number;
+  glowColor?: string;
+  colors?: string[];
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  (
+    {
+      className,
+      glow = true,
+      borderRadius = 16,
+      glowColor = "185 95 65",
+      colors = ["#00D9FF", "#70FF4A", "#38BDF8"],
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const cardEl = (
+      <div
+        ref={ref}
+        className={cn("rounded-xl border bg-card text-card-foreground shadow", className)}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+
+    if (!glow) return cardEl;
+
+    return (
+      <BorderGlow
+        borderRadius={borderRadius}
+        glowColor={glowColor}
+        colors={colors}
+        className="h-full w-full"
+      >
+        {cardEl}
+      </BorderGlow>
+    );
+  },
 );
 Card.displayName = "Card";
 
@@ -24,7 +59,7 @@ const CardTitle = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivE
   ({ className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("font-semibold leading-none tracking-tight", className)}
+      className={cn("font-heading font-semibold text-lg leading-snug tracking-tight text-card-foreground", className)}
       {...props}
     />
   ),
@@ -33,7 +68,7 @@ CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn("text-sm text-muted-foreground", className)} {...props} />
+    <div ref={ref} className={cn("font-normal text-sm text-muted-foreground leading-relaxed", className)} {...props} />
   ),
 );
 CardDescription.displayName = "CardDescription";

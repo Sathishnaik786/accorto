@@ -3,6 +3,8 @@ import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/section";
 import { FinalCTA } from "@/components/home-sections";
 import { BookOpen, Award } from "lucide-react";
+import { SpecularButton } from "@/components/animations/SpecularButton";
+import { BorderGlow } from "@/components/animations/BorderGlow";
 
 export const Route = createFileRoute("/academy/python-for-ai")({
   head: () => ({
@@ -10,7 +12,8 @@ export const Route = createFileRoute("/academy/python-for-ai")({
       { title: "Python for AI & Data Analysis Course — Accorto Academy" },
       {
         name: "description",
-        content: "Learn Python for AI development. Master variables, arrays, OOP, and libraries like NumPy and Pandas from scratch.",
+        content:
+          "Learn Python for AI development. Master variables, arrays, OOP, and libraries like NumPy and Pandas from scratch.",
       },
       { property: "og:title", content: "Python for AI Course — Accorto Academy" },
       { property: "og:url", content: "https://accorto.tech/academy/python-for-ai" },
@@ -41,15 +44,33 @@ function PythonForAICourse() {
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: "Syllabus 1: Python Basics", desc: "Data types, operators, dynamic allocations, list structures, dictionary models, and syntax formats." },
-                { title: "Syllabus 2: Code Structures", desc: "Functions definitions, parameter scopes, error handing logs, and module imports." },
-                { title: "Syllabus 3: Object-Oriented (OOP)", desc: "Classes, inheritances, encapsulation strategies, and data decorators." },
-                { title: "Syllabus 4: Data Engineering", desc: "NumPy matrix arrays, Pandas data tables, loading CSVs, filtering records, and plotting." },
+                {
+                  title: "Syllabus 1: Python Basics",
+                  desc: "Data types, operators, dynamic allocations, list structures, dictionary models, and syntax formats.",
+                },
+                {
+                  title: "Syllabus 2: Code Structures",
+                  desc: "Functions definitions, parameter scopes, error handing logs, and module imports.",
+                },
+                {
+                  title: "Syllabus 3: Object-Oriented (OOP)",
+                  desc: "Classes, inheritances, encapsulation strategies, and data decorators.",
+                },
+                {
+                  title: "Syllabus 4: Data Engineering",
+                  desc: "NumPy matrix arrays, Pandas data tables, loading CSVs, filtering records, and plotting.",
+                },
               ].map((item, idx) => (
-                <div key={idx} className="glass rounded-2xl p-5">
-                  <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">{item.title}</h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">{item.desc}</p>
-                </div>
+                <BorderGlow key={idx} borderRadius={16} className="h-full">
+                  <div className="glass rounded-2xl p-5 h-full">
+                    <h3 className="font-display font-semibold text-slate-900 dark:text-white text-sm">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-2 font-medium leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </BorderGlow>
               ))}
             </div>
 
@@ -57,12 +78,14 @@ function PythonForAICourse() {
               <div className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
                 Duration: 4 Weeks · Level: Beginner
               </div>
-              <Link
+              <SpecularButton
                 to="/contact"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg"
+                size="sm"
+                variant="brand"
+                className="shadow-brand hover:shadow-brand-lg"
               >
                 Enroll Now <Award className="h-4 w-4" />
-              </Link>
+              </SpecularButton>
             </div>
           </div>
         </Reveal>

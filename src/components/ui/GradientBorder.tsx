@@ -12,7 +12,8 @@ export const GradientBorder = React.forwardRef<HTMLDivElement, GradientBorderPro
         ref={ref}
         className={cn("rounded-[32px] p-px", className)}
         style={{
-          background: "linear-gradient(135deg, rgba(79, 70, 229, 0.18), transparent 30%, rgba(6, 182, 212, 0.15))",
+          background:
+            "linear-gradient(135deg, rgba(79, 70, 229, 0.18), transparent 30%, rgba(6, 182, 212, 0.15))",
         }}
         {...props}
       >
@@ -21,7 +22,7 @@ export const GradientBorder = React.forwardRef<HTMLDivElement, GradientBorderPro
         </div>
       </div>
     );
-  }
+  },
 );
 
 GradientBorder.displayName = "GradientBorder";

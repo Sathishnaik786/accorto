@@ -51,7 +51,6 @@ function InsightDetail() {
       <div className="absolute bottom-[20%] right-[-10%] w-[40%] h-[40%] rounded-full bg-brand-3/5 blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6">
-        
         {/* Back Link */}
         <div className="text-left mb-8">
           <Link
@@ -88,11 +87,7 @@ function InsightDetail() {
         {/* Hero Image */}
         <Reveal delay={0.15}>
           <div className="relative w-full aspect-video sm:aspect-21/9 overflow-hidden rounded-[32px] border border-white/10 shadow-2xl mb-12">
-            <img
-              src={article.img}
-              alt={article.title}
-              className="h-full w-full object-cover"
-            />
+            <img src={article.img} alt={article.title} className="h-full w-full object-cover" />
             <div className="absolute inset-0 bg-linear-to-t from-[#031224]/40 to-transparent pointer-events-none" />
           </div>
         </Reveal>
@@ -181,7 +176,6 @@ function InsightDetail() {
             </Reveal>
           ))}
         </div>
-
       </div>
     </section>
   );

@@ -16,9 +16,24 @@ export function StatsCluster({ className }: { className?: string }) {
   const { shouldReduceMotion } = useMotionSystem();
 
   const stats: StatItem[] = [
-    { value: 10, suffix: "+", label: "Industries Served", desc: "Healthcare, Finance, Retail & more" },
-    { value: 100, suffix: "+", label: "Enterprise Projects", desc: "Core transformations shipped globally" },
-    { value: 99, suffix: "%", label: "Client Satisfaction", desc: "Validated via post-launch surveys" },
+    {
+      value: 10,
+      suffix: "+",
+      label: "Industries Served",
+      desc: "Healthcare, Finance, Retail & more",
+    },
+    {
+      value: 100,
+      suffix: "+",
+      label: "Enterprise Projects",
+      desc: "Core transformations shipped globally",
+    },
+    {
+      value: 99,
+      suffix: "%",
+      label: "Client Satisfaction",
+      desc: "Validated via post-launch surveys",
+    },
     { value: 24, suffix: "×7", label: "Global Support", desc: "Follow-the-sun managed operations" },
   ];
 
@@ -37,11 +52,7 @@ export function StatsCluster({ className }: { className?: string }) {
             };
 
         return (
-          <motion.div
-            key={idx}
-            animate={floatAnim}
-            className="h-full"
-          >
+          <motion.div key={idx} animate={floatAnim} className="h-full">
             <PremiumCard
               hover={false}
               className="p-6 flex flex-col justify-between gap-4 h-full border border-slate-200/60 dark:border-white/10 hover:border-brand/25 dark:hover:border-brand-3/20 transition-all duration-500 rounded-[32px] shadow-lg hover:shadow-2xl"

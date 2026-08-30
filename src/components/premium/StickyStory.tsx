@@ -32,7 +32,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
       {
         threshold: 0.5,
         rootMargin: "-20% 0px -20% 0px",
-      }
+      },
     );
 
     const stepElements = containerRef.current?.querySelectorAll("[data-step-idx]");
@@ -64,7 +64,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
                 key={idx}
                 className={cn(
                   "transition-all duration-500 relative",
-                  isActive ? "opacity-100 translate-x-1" : "opacity-30"
+                  isActive ? "opacity-100 translate-x-1" : "opacity-30",
                 )}
               >
                 {isActive && (
@@ -73,9 +73,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
                 <span className="text-[10px] font-mono font-bold text-brand uppercase tracking-wider block">
                   Phase 0{idx + 1}
                 </span>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-1">
-                  {s.title}
-                </h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-1">{s.title}</h3>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
                   {s.desc}
                 </p>
@@ -93,7 +91,7 @@ export function StickyStory({ steps, className }: StickyStoryProps) {
             data-step-idx={idx}
             className={cn(
               "min-h-0 flex items-center justify-center pt-8 first:pt-0",
-              idx === steps.length - 1 ? "lg:min-h-[20vh]" : "lg:min-h-[50vh]"
+              idx === steps.length - 1 ? "lg:min-h-[20vh]" : "lg:min-h-[50vh]",
             )}
           >
             <motion.div

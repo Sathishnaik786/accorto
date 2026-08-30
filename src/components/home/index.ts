@@ -1,0 +1,12 @@
+export { ClientLogos } from "./ClientLogos";
+export { IntroStatement } from "./IntroStatement";
+export { EnterpriseMarquee } from "./EnterpriseMarquee";
+export { ActionMarquee } from "./ActionMarquee";
+export { ServicesShowcase } from "./ServicesShowcase";
+export { IndustriesSection, IndustriesSection as Industries } from "./IndustriesSection";
+export { JourneySection, JourneySection as Journey } from "./JourneySection";
+export { NextEraSection } from "./NextEraSection";
+export { MetricsSection, MetricsSection as Metrics } from "./MetricsSection";
+export { CaseStudiesPreview } from "./CaseStudiesPreview";
+export { Testimonials } from "./Testimonials";
+export { FinalCTA } from "./FinalCTA";
