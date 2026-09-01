@@ -7,7 +7,6 @@ import { FadeContent } from "@/components/animations/FadeContent";
 import { ShinyText } from "@/components/animations/ShinyText";
 import { AnimatedModal } from "@/components/animations/AnimatedModal";
 import { ScrollWordReveal } from "@/components/animations/ScrollWordReveal";
-import { ScrollVelocity } from "@/components/animations/ScrollVelocity";
 import { ImageCaptionOverlay } from "@/components/ui/ImageCaptionOverlay";
 import { ArrowRight, X, Linkedin } from "lucide-react";
 
@@ -106,7 +105,7 @@ const LEADERSHIP: Executive[] = [
     roleSubtitle: "CHIEF OPERATING OFFICER",
     company: "Accorto Technologies",
     initials: "VK",
-    image: "",
+    image: "/images/Vasu_coo.jpeg",
     linkedin: "https://www.linkedin.com/company/accorto-technologies",
     summary:
       "More than 25 years of experience across construction, infrastructure, operations, entrepreneurship, and business management.",
@@ -432,23 +431,6 @@ function About() {
           </div>
         </div>
       </section>
-
-      {/* =========================================================================
-          HORIZONTAL CINEMATIC MARQUEE
-          ========================================================================= */}
-      <div className="py-6 sm:py-10 border-b border-border/20 overflow-hidden bg-slate-50/50 dark:bg-card/30 backdrop-blur-xs">
-        <ScrollVelocity
-          items={[
-            "EXPERIENCE",
-            "ARCHITECTURE",
-            "IMPACT",
-            "CRAFTSMANSHIP",
-            "RESILIENCE",
-          ]}
-          direction="left"
-          defaultVelocity={1.5}
-        />
-      </div>
 
       {/* =========================================================================
           SECTION 3 — LEADERSHIP
