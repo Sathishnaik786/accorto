@@ -25,7 +25,7 @@ export const LOCATIONS: OfficeLocation[] = [
   },
   {
     id: "us",
-    name: "US Branch",
+    name: "California, US",
     region: "United States",
     addressLines: [
       "5602 Owens Drive, Suite 101,",

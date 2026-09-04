@@ -95,7 +95,7 @@ export const Route = createFileRoute("/contact")({
                 name: "Where are your teams based?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Global delivery hubs in Hyderabad, India and US Branch in Pleasanton, CA. Follow-the-sun coverage.",
+                  text: "Global delivery hubs in Hyderabad, India and California, US in Pleasanton, CA. Follow-the-sun coverage.",
                 },
               },
             ],
@@ -122,7 +122,7 @@ const FAQS = [
   },
   {
     q: "Where are your teams based?",
-    a: "Global delivery hubs in Hyderabad, India and US Branch in Pleasanton, CA. Follow-the-sun coverage.",
+    a: "Global delivery hubs in Hyderabad, India and California, US in Pleasanton, CA. Follow-the-sun coverage.",
   },
 ];
 

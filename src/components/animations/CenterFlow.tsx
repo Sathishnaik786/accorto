@@ -2,18 +2,29 @@ import React, { useState, useEffect, useRef, useMemo, useId } from "react";
 import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-export interface CenterFlowNode {
-  id: string;
+export interface TechGroupItem {
   name: string;
-  glowColor: string;
   icon?: string;
-  description?: string;
 }
+
+export interface TechGroupNode {
+  id: string;
+  title: string;
+  angle?: number;
+  glowColor: string;
+  accentColor?: string;
+  ariaLabel?: string;
+  items: TechGroupItem[];
+}
+
+// Backwards compatibility alias
+export type CenterFlowNode = TechGroupNode;
 
 export interface CenterFlowProps {
   centerTitle?: string;
   centerSubtitle?: string;
-  nodes?: CenterFlowNode[];
+  groups?: TechGroupNode[];
+  nodes?: TechGroupNode[]; // Backwards compatibility prop
   className?: string;
   pulseColor?: string;
   lineWidth?: number;
@@ -24,30 +35,97 @@ export interface CenterFlowProps {
   enableScrollParallax?: boolean;
 }
 
-const DEFAULT_NODES: CenterFlowNode[] = [
-  { id: "openai", name: "OpenAI & LLMs", glowColor: "#10A37F", icon: "/logos/Open-AI.png" },
-  { id: "salesforce", name: "Salesforce & PeopleSoft", glowColor: "#00A1E0" },
-  { id: "aws", name: "AWS", glowColor: "#FF9900", icon: "/logos/amazon.png" },
-  { id: "snowflake-databricks", name: "Snowflake & Databricks", glowColor: "#29B5E8" },
-  { id: "sap", name: "SAP", glowColor: "#0FAAFF", icon: "/logos/sap.png" },
-  { id: "gcp", name: "GCP", glowColor: "#4285F4", icon: "/logos/google_cloud.png" },
-  { id: "azure", name: "Azure", glowColor: "#0078D4", icon: "/logos/Azure.png" },
-  { id: "iot-sensors", name: "IoT & Sensors", glowColor: "#70FF4A" },
+export const DEFAULT_GROUPS: TechGroupNode[] = [
+  {
+    id: "ai-iot",
+    title: "AI & IoT",
+    angle: -Math.PI / 2, // -90 deg (12 o'clock / Top)
+    glowColor: "#10A37F",
+    accentColor: "#00E5A3",
+    ariaLabel: "AI & IoT: AI, OpenAI & LLMs, IoT & Sensors",
+    items: [
+      { name: "AI" },
+      { name: "OpenAI & LLMs", icon: "/logos/Open-AI.png" },
+      { name: "IoT & Sensors" },
+    ],
+  },
+  {
+    id: "data-platforms",
+    title: "Data Platforms",
+    angle: -Math.PI / 2 + (2 * Math.PI) / 5, // -18 deg (Upper-Right)
+    glowColor: "#00D9FF",
+    accentColor: "#29B5E8",
+    ariaLabel: "Data Platforms: Snowflake, Databricks",
+    items: [
+      { name: "Snowflake" },
+      { name: "Databricks" },
+    ],
+  },
+  {
+    id: "career-development",
+    title: "Career & Development",
+    angle: -Math.PI / 2 + 2 * ((2 * Math.PI) / 5), // +54 deg (Lower-Right)
+    glowColor: "#38BDF8",
+    accentColor: "#60A5FA",
+    ariaLabel: "Career & Development: Career, Development, Academy",
+    items: [
+      { name: "Career" },
+      { name: "Development" },
+      { name: "Academy" },
+    ],
+  },
+  {
+    id: "enterprise-platforms",
+    title: "Enterprise Platforms",
+    angle: -Math.PI / 2 + 3 * ((2 * Math.PI) / 5), // +126 deg (Lower-Left)
+    glowColor: "#0FAAFF",
+    accentColor: "#00A1E0",
+    ariaLabel: "Enterprise Platforms: Oracle, SAP, Salesforce",
+    items: [
+      { name: "Oracle", icon: "/logos/oracle.png" },
+      { name: "SAP", icon: "/logos/sap.png" },
+      { name: "Salesforce" },
+    ],
+  },
+  {
+    id: "cloud-platforms",
+    title: "Cloud Platforms",
+    angle: -Math.PI / 2 + 4 * ((2 * Math.PI) / 5), // +198 deg (Upper-Left)
+    glowColor: "#168CFF",
+    accentColor: "#4285F4",
+    ariaLabel: "Cloud Platforms: AWS, Azure, GCP",
+    items: [
+      { name: "AWS", icon: "/logos/amazon.png" },
+      { name: "Azure", icon: "/logos/Azure.png" },
+      { name: "GCP", icon: "/logos/google_cloud.png" },
+    ],
+  },
+];
+
+// Strict Mobile Architectural Stack Hierarchy Order
+const MOBILE_HIERARCHY_ORDER = [
+  "ai-iot",
+  "cloud-platforms",
+  "enterprise-platforms",
+  "data-platforms",
+  "career-development",
 ];
 
 export function CenterFlow({
   centerTitle = "ACCORTO",
   centerSubtitle = "INTELLIGENCE LAYER",
-  nodes = DEFAULT_NODES,
+  groups,
+  nodes,
   className,
   pulseColor = "#00D9FF",
   lineWidth = 1.85,
-  pulseWidth = 5.5,
-  pulseDuration = 4.0,
+  pulseWidth = 5.0,
+  pulseDuration = 4.2,
   interactive = true,
   enableMouseParallax = true,
   enableScrollParallax = true,
 }: CenterFlowProps) {
+  const activeGroups = groups || nodes || DEFAULT_GROUPS;
   const containerRef = useRef<HTMLDivElement>(null);
   const filterId = useId();
   const shouldReduceMotion = useReducedMotion();
@@ -55,19 +133,14 @@ export function CenterFlow({
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Single Source of Truth Responsive Dimensions & Unified Orbital Radius
+  // Responsive Dimensions & Uniform Connector Line Length
   const [dims, setDims] = useState({
-    width: 860,
-    height: 780,
-    radius: 280,
-    centerSize: 196,
-    nodeHeight: 48,
-    fontSize: 13.5,
-    iconSize: 32,
-    paddingX: 16,
-    gap: 9,
-    minNodeWidth: 90,
-    maxNodeWidth: 250,
+    width: 1040,
+    height: 860,
+    lineLength: 135, // Guaranteed identical visible connector line length for all 5 nodes
+    centerSize: 184,
+    cardWidth: 244,
+    cardHeight: 80,
     isMobile: false,
   });
 
@@ -76,84 +149,50 @@ export function CenterFlow({
     const updateDimensions = () => {
       if (typeof window === "undefined") return;
       const w = window.innerWidth;
-      if (w < 400) {
-        // Small mobile (375px)
+      if (w < 640) {
+        // Mobile screens: use vertical stacked architecture
         setDims({
-          width: 350,
-          height: 390,
-          radius: 126,
-          centerSize: 108,
-          nodeHeight: 32,
-          fontSize: 10,
-          iconSize: 18,
-          paddingX: 7,
-          gap: 5,
-          minNodeWidth: 65,
-          maxNodeWidth: 145,
-          isMobile: true,
-        });
-      } else if (w < 640) {
-        // Standard mobile (390px - 639px)
-        setDims({
-          width: Math.min(w - 24, 420),
-          height: 420,
-          radius: 142,
-          centerSize: 118,
-          nodeHeight: 36,
-          fontSize: 11,
-          iconSize: 22,
-          paddingX: 9,
-          gap: 6,
-          minNodeWidth: 75,
-          maxNodeWidth: 165,
+          width: Math.min(w - 24, 440),
+          height: 0, // Auto height in document flow
+          lineLength: 26,
+          centerSize: 132,
+          cardWidth: 280,
+          cardHeight: 74,
           isMobile: true,
         });
       } else if (w < 1024) {
-        // Tablet (640px - 1023px)
+        // Tablet (640px - 1023px): scaled radial pentagon with uniform lines
+        const containerW = Math.min(w - 32, 740);
         setDims({
-          width: Math.min(w - 48, 640),
-          height: 600,
-          radius: 205,
-          centerSize: 154,
-          nodeHeight: 42,
-          fontSize: 12,
-          iconSize: 26,
-          paddingX: 12,
-          gap: 7,
-          minNodeWidth: 85,
-          maxNodeWidth: 210,
+          width: containerW,
+          height: 700,
+          lineLength: 95, // Identical line length on tablet
+          centerSize: 148,
+          cardWidth: 204,
+          cardHeight: 72,
           isMobile: false,
         });
       } else if (w < 1440) {
-        // Desktop (1024px - 1439px)
+        // Standard Desktop (1024px - 1439px)
+        const containerW = Math.min(w - 48, 960);
         setDims({
-          width: Math.min(w - 64, 780),
-          height: 720,
-          radius: 255,
-          centerSize: 180,
-          nodeHeight: 46,
-          fontSize: 13,
-          iconSize: 30,
-          paddingX: 14,
-          gap: 8,
-          minNodeWidth: 90,
-          maxNodeWidth: 240,
+          width: containerW,
+          height: 810,
+          lineLength: 122, // Identical line length on standard desktop
+          centerSize: 174,
+          cardWidth: 236,
+          cardHeight: 78,
           isMobile: false,
         });
       } else {
-        // Large desktop (1440px - 1920px+)
+        // Large Desktop (1440px+)
         setDims({
-          width: 860,
-          height: 780,
-          radius: 280,
-          centerSize: 196,
-          nodeHeight: 48,
-          fontSize: 13.5,
-          iconSize: 32,
-          paddingX: 16,
-          gap: 9,
-          minNodeWidth: 90,
-          maxNodeWidth: 250,
+          width: 1040,
+          height: 860,
+          lineLength: 135, // Identical line length on large desktop
+          centerSize: 184,
+          cardWidth: 244,
+          cardHeight: 80,
           isMobile: false,
         });
       }
@@ -164,12 +203,12 @@ export function CenterFlow({
     return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
-  // Single Diagram Origin Coordinate (Absolute Center)
+  // Center Coordinates
   const centerX = dims.width / 2;
   const centerY = dims.height / 2;
   const centerRadius = dims.centerSize / 2;
 
-  // Layered Scroll Parallax
+  // Scroll Parallax
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
@@ -177,14 +216,14 @@ export function CenterFlow({
 
   const bgParallaxY = useTransform(scrollYProgress, [0, 1], [-8, 8]);
   const ringsParallaxY = useTransform(scrollYProgress, [0, 1], [-12, 12]);
-  const archParallaxY = useTransform(scrollYProgress, [0, 1], [-18, 18]);
+  const archParallaxY = useTransform(scrollYProgress, [0, 1], [-16, 16]);
 
-  // Subtle Pointer Parallax (Clamped to 2-3px)
+  // Pointer Parallax
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!enableMouseParallax || shouldReduceMotion || !containerRef.current || dims.isMobile) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 5;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 5;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 6;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * 6;
     setMousePos({ x, y });
   };
 
@@ -193,35 +232,48 @@ export function CenterFlow({
     setHoveredId(null);
   };
 
-  // Compute Exact Programmatic Radial Coordinates for All 8 Nodes from Unified Diagram Center
-  const nodePositions = useMemo(() => {
-    const totalNodes = nodes.length;
-    const angleStep = (2 * Math.PI) / totalNodes;
-    const startAngleRad = -Math.PI / 2; // -90 deg (12 o'clock / top)
+  // Compute Mathematically Balanced Regular Pentagon Coordinates
+  // CRITICAL REQUIREMENT: All 5 connector lines between center circumference and card boundary
+  // have the EXACT SAME VISIBLE LENGTH (`dims.lineLength`)!
+  const groupPositions = useMemo(() => {
+    if (dims.isMobile) return [];
 
-    return nodes.map((node, index) => {
-      const angleRad = startAngleRad + index * angleStep;
-      const angleDeg = (angleRad * 180) / Math.PI;
+    const GROUP_COUNT = activeGroups.length || 5;
+    const angleStep = (2 * Math.PI) / GROUP_COUNT;
+    const startAngleRad = -Math.PI / 2; // -90 deg (12 o'clock / Top)
 
-      // Exact single shared orbital radius R for every node
-      const x = centerX + Math.cos(angleRad) * dims.radius;
-      const y = centerY + Math.sin(angleRad) * dims.radius;
+    const hw = dims.cardWidth / 2;
+    const hh = dims.cardHeight / 2;
 
-      // Pulse start point: EXACT circumference of center circle
-      const startX = centerX + Math.cos(angleRad) * centerRadius;
-      const startY = centerY + Math.sin(angleRad) * centerRadius;
+    return activeGroups.map((group, index) => {
+      // Use mathematically exact pentagon angles: -90°, -18°, +54°, +126°, +198°
+      const angleRad = group.angle !== undefined ? group.angle : startAngleRad + index * angleStep;
+      const cosA = Math.cos(angleRad);
+      const sinA = Math.sin(angleRad);
 
-      // Pulse end point: boundary of tech card
-      const endOffset = dims.isMobile ? (dims.iconSize + dims.paddingX) : 44;
-      const endX = x - Math.cos(angleRad) * endOffset;
-      const endY = y - Math.sin(angleRad) * endOffset;
+      // 1. Connector Start: Exactly on the central ACCORTO circumference
+      const startX = centerX + cosA * centerRadius;
+      const startY = centerY + sinA * centerRadius;
 
-      const entranceDelay = 0.18 + index * 0.06;
-      const pulseDelay = index * 0.35;
+      // 2. Connector End: Exactly dims.lineLength distance away from start point along the radial spoke!
+      // This GUARANTEES that the connector line length is 100% IDENTICAL for all 5 groups!
+      const endX = startX + cosA * dims.lineLength;
+      const endY = startY + sinA * dims.lineLength;
+
+      // 3. Card Center: Placed so that the card's outer perimeter meets the connector endpoint (endX, endY)
+      const distX = Math.abs(cosA) > 1e-6 ? hw / Math.abs(cosA) : Infinity;
+      const distY = Math.abs(sinA) > 1e-6 ? hh / Math.abs(sinA) : Infinity;
+      const cardEdgeDist = Math.min(distX, distY);
+
+      // Position card center along the ray outward from end point
+      const x = endX + cosA * cardEdgeDist;
+      const y = endY + sinA * cardEdgeDist;
+
+      const entranceDelay = 0.15 + index * 0.08;
+      const pulseDelay = index * 0.45;
 
       return {
-        node,
-        angleDeg,
+        group,
         angleRad,
         x,
         y,
@@ -233,8 +285,180 @@ export function CenterFlow({
         pulseDelay,
       };
     });
-  }, [nodes, centerX, centerY, dims.radius, centerRadius, dims.isMobile, dims.iconSize, dims.paddingX]);
+  }, [activeGroups, centerX, centerY, dims.lineLength, centerRadius, dims.cardWidth, dims.cardHeight, dims.isMobile]);
 
+  // Ordered Groups for Mobile Architecture
+  const mobileOrderedGroups = useMemo(() => {
+    const groupMap = new Map(activeGroups.map((g) => [g.id, g]));
+    const ordered: TechGroupNode[] = [];
+
+    MOBILE_HIERARCHY_ORDER.forEach((id) => {
+      const match = groupMap.get(id);
+      if (match) ordered.push(match);
+    });
+
+    // Add any remaining groups if present
+    activeGroups.forEach((g) => {
+      if (!MOBILE_HIERARCHY_ORDER.includes(g.id)) {
+        ordered.push(g);
+      }
+    });
+
+    return ordered;
+  }, [activeGroups]);
+
+  // Loading Placeholder
+  if (!mounted) {
+    return (
+      <div className="relative flex items-center justify-center min-h-125 w-full">
+        <div className="w-36 h-36 rounded-full bg-cyan-500/15 border border-cyan-400/30 animate-pulse" />
+      </div>
+    );
+  }
+
+  // =========================================================================
+  // RESPONSIVE MOBILE STACKED ARCHITECTURE (width < 640px)
+  // Clean, vertical document flow with zero horizontal overflow
+  // Hierarchy: ACCORTO -> AI & IoT -> Cloud Platforms -> Enterprise Platforms -> Data Platforms -> Career & Development
+  // =========================================================================
+  if (dims.isMobile) {
+    return (
+      <motion.div
+        ref={containerRef}
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.1 }}
+        transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+        className={cn(
+          "relative flex flex-col items-center justify-center w-full select-none overflow-visible py-6 px-3",
+          className
+        )}
+      >
+        {/* Background Atmosphere Glow */}
+        <div
+          className="absolute pointer-events-none rounded-full blur-3xl opacity-50 -z-10"
+          style={{
+            width: 300,
+            height: 300,
+            top: 40,
+            background: "radial-gradient(circle, rgba(0, 217, 255, 0.2) 0%, rgba(22, 140, 255, 0.08) 60%, transparent 80%)",
+          }}
+        />
+
+        {/* 1. Central ACCORTO Core Node */}
+        <div
+          className="relative flex flex-col items-center justify-center rounded-full text-center"
+          style={{
+            width: dims.centerSize,
+            height: dims.centerSize,
+          }}
+          role="region"
+          aria-label="Accorto Intelligence Layer Core"
+        >
+          {/* Cyan Glow Halo */}
+          <div
+            className="absolute inset-0 rounded-full pointer-events-none -z-10"
+            style={{
+              background: "radial-gradient(circle, rgba(0, 217, 255, 0.45) 0%, rgba(22, 140, 255, 0.25) 50%, transparent 75%)",
+              filter: "blur(18px)",
+              transform: "scale(1.15)",
+            }}
+          />
+
+          {/* Central Glass Spherical Core */}
+          <div
+            className="relative flex flex-col items-center justify-center w-full h-full rounded-full overflow-hidden"
+            style={{
+              background: "linear-gradient(135deg, rgba(12, 38, 68, 0.96) 0%, rgba(7, 28, 52, 0.94) 55%, rgba(10, 34, 60, 0.96) 100%)",
+              border: "1.5px solid rgba(0, 217, 255, 0.6)",
+              boxShadow: "inset 0 1px 2px 0 rgba(255, 255, 255, 0.35), inset 0 -3px 10px 0 rgba(0, 217, 255, 0.3), 0 12px 32px rgba(0, 0, 0, 0.6), 0 0 18px rgba(0, 217, 255, 0.25)",
+              backdropFilter: "blur(20px)",
+            }}
+          >
+            <div className="absolute inset-0 rounded-full bg-linear-to-tr from-transparent via-cyan-400/15 to-white/25 pointer-events-none" />
+            <div className="absolute inset-0.5 rounded-full border border-cyan-400/30 pointer-events-none" />
+
+            <span className="font-display font-black tracking-wider text-white text-base leading-none select-none drop-shadow-[0_2px_10px_rgba(0,217,255,0.6)]">
+              {centerTitle}
+            </span>
+            <span className="font-mono font-bold tracking-[0.14em] text-cyan-300 uppercase text-[9px] mt-1.5 opacity-95 select-none text-center leading-tight drop-shadow-[0_1px_5px_rgba(0,217,255,0.4)]">
+              {centerSubtitle}
+            </span>
+          </div>
+        </div>
+
+        {/* 2. Vertical Stack of 5 Group Cards with Uniform Glowing Connectors */}
+        <div className="flex flex-col items-center w-full max-w-sm mt-1">
+          {mobileOrderedGroups.map((group, idx) => (
+            <React.Fragment key={group.id}>
+              {/* Vertical Glowing Connector Line */}
+              <div className="flex flex-col items-center justify-center my-1 h-6">
+                <div className="w-0.5 h-full bg-linear-to-b from-cyan-400/80 via-blue-500/60 to-cyan-400/80 relative">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-cyan-300 shadow-[0_0_6px_#00D9FF]" />
+                </div>
+              </div>
+
+              {/* Group Card with Generous Padding */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: 0.08 * idx, ease: "easeOut" }}
+                className="w-full rounded-2xl px-5 py-3.5 flex flex-col items-center text-center transition-all duration-300"
+                style={{
+                  background: "linear-gradient(135deg, rgba(12, 34, 60, 0.94) 0%, rgba(7, 24, 46, 0.92) 100%)",
+                  border: "1px solid rgba(0, 217, 255, 0.32)",
+                  boxShadow: `0 8px 24px rgba(0, 0, 0, 0.45), 0 0 12px ${group.glowColor}18`,
+                  backdropFilter: "blur(18px)",
+                }}
+                role="region"
+                aria-label={group.ariaLabel || `${group.title}: ${group.items.map((i) => i.name).join(", ")}`}
+              >
+                {/* Group Title with Domain Dot Indicator */}
+                <div className="flex items-center justify-center gap-1.5">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full shrink-0"
+                    style={{
+                      backgroundColor: group.glowColor,
+                      boxShadow: `0 0 6px ${group.glowColor}`,
+                    }}
+                  />
+                  <span className="font-display font-semibold text-white text-xs sm:text-sm tracking-wide">
+                    {group.title}
+                  </span>
+                </div>
+
+                {/* Technology Members */}
+                <div className="flex items-center justify-center flex-wrap gap-x-2 gap-y-1 mt-1.5 text-[11px] text-slate-200">
+                  {group.items.map((item, itemIdx) => (
+                    <span key={item.name} className="inline-flex items-center gap-1">
+                      {item.icon && (
+                        <img
+                          src={item.icon}
+                          alt=""
+                          className="w-3.5 h-3.5 object-contain shrink-0 filter contrast-[1.08] brightness-[1.02]"
+                        />
+                      )}
+                      <span className="font-medium text-slate-300">{item.name}</span>
+                      {itemIdx < group.items.length - 1 && (
+                        <span className="text-cyan-400/40 ml-1 select-none font-bold">·</span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            </React.Fragment>
+          ))}
+        </div>
+      </motion.div>
+    );
+  }
+
+  // =========================================================================
+  // DESKTOP & TABLET RADIAL ARCHITECTURE (width >= 640px)
+  // Mathematically balanced regular pentagon with identical connector line lengths
+  // Exactly 5 outer group nodes and 5 primary SVG connector spokes of identical length
+  // =========================================================================
   return (
     <motion.div
       ref={containerRef}
@@ -246,23 +470,18 @@ export function CenterFlow({
       transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
         "relative flex flex-col items-center justify-center w-full select-none overflow-visible py-6 sm:py-10",
-        className,
+        className
       )}
     >
-      {!mounted ? (
-        <div className="relative flex items-center justify-center min-h-125 w-full">
-          <div className="w-36 h-36 rounded-full bg-cyan-500/15 border border-cyan-400/30 animate-pulse" />
-        </div>
-      ) : (
-        /* Outer Constrained Sizing Frame — Mathematically Centered */
-        <div
-          className="relative flex items-center justify-center overflow-visible"
-          style={{
-            width: "100%",
-            maxWidth: dims.width,
-            height: dims.height,
-          }}
-        >
+      {/* Outer Constrained Sizing Frame — Mathematically Centered */}
+      <div
+        className="relative flex items-center justify-center overflow-visible"
+        style={{
+          width: "100%",
+          maxWidth: dims.width,
+          height: dims.height,
+        }}
+      >
         {/* =========================================================================
             LAYER 1: AMBIENT BACKGROUND ATMOSPHERE
             Concentric at (centerX, centerY)
@@ -271,16 +490,15 @@ export function CenterFlow({
           style={{ y: shouldReduceMotion ? 0 : bgParallaxY }}
           className="absolute inset-0 pointer-events-none z-0"
         >
-          {/* Cyan/Blue Atmospheric Radial Glow Halo */}
           <div
             className="absolute rounded-full pointer-events-none opacity-80 -translate-x-1/2 -translate-y-1/2"
             style={{
-              width: dims.radius * 2.4,
-              height: dims.radius * 2.4,
+              width: (centerRadius + dims.lineLength) * 2.3,
+              height: (centerRadius + dims.lineLength) * 2.3,
               left: centerX,
               top: centerY,
               background:
-                "radial-gradient(circle, rgba(0, 217, 255, 0.15) 0%, rgba(22, 140, 255, 0.08) 40%, rgba(3, 18, 36, 0) 70%)",
+                "radial-gradient(circle, rgba(0, 217, 255, 0.14) 0%, rgba(22, 140, 255, 0.07) 45%, rgba(3, 18, 36, 0) 70%)",
               filter: "blur(48px)",
             }}
           />
@@ -288,40 +506,40 @@ export function CenterFlow({
 
         {/* =========================================================================
             LAYER 2: CONCENTRIC RADAR ORBIT RINGS
-            All strictly centered at (centerX, centerY) via -translate-x-1/2 -translate-y-1/2
+            Strictly centered at (centerX, centerY) via -translate-x-1/2 -translate-y-1/2
             ========================================================================= */}
         <motion.div
           style={{ y: shouldReduceMotion ? 0 : ringsParallaxY }}
           className="absolute inset-0 pointer-events-none z-0"
         >
-          {/* Ring 1 (Inner Orbit) */}
+          {/* Ring 1 (Inner Orbit Accent) */}
           <div
-            className="absolute rounded-full border border-dashed border-cyan-400/25 dark:border-cyan-400/20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            className="absolute rounded-full border border-dashed border-cyan-400/20 dark:border-cyan-400/18 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             style={{
-              width: dims.radius * 1.30,
-              height: dims.radius * 1.30,
+              width: centerRadius * 2.7,
+              height: centerRadius * 2.7,
               left: centerX,
               top: centerY,
             }}
           />
 
-          {/* Ring 2 (Outer Main Orbit passing through every node center) */}
+          {/* Ring 2 (Main Orbit Ring connecting all 5 node endpoints at identical radius) */}
           <div
-            className="absolute rounded-full border border-dashed border-blue-500/25 dark:border-blue-400/20 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+            className="absolute rounded-full border border-cyan-500/28 dark:border-cyan-400/22 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             style={{
-              width: dims.radius * 2.0,
-              height: dims.radius * 2.0,
+              width: (centerRadius + dims.lineLength) * 2.0,
+              height: (centerRadius + dims.lineLength) * 2.0,
               left: centerX,
               top: centerY,
             }}
           />
 
-          {/* Ring 3 (Atmosphere Outer) */}
+          {/* Ring 3 (Outer Subtle Radar Boundary) */}
           <div
             className="absolute rounded-full border border-dashed border-cyan-400/10 dark:border-cyan-400/10 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
             style={{
-              width: dims.radius * 2.5,
-              height: dims.radius * 2.5,
+              width: (centerRadius + dims.lineLength) * 2.56,
+              height: (centerRadius + dims.lineLength) * 2.56,
               left: centerX,
               top: centerY,
             }}
@@ -329,8 +547,8 @@ export function CenterFlow({
         </motion.div>
 
         {/* =========================================================================
-            LAYER 3: COMPLETE ARCHITECTURE NETWORK
-            SVG Lines, Traveling Pulses, Center Node, & Tech Nodes LOCKED TOGETHER
+            LAYER 3: NETWORK LAYER (SVG Connectors & Traveling Pulse Packets)
+            All 5 lines have the EXACT same length dims.lineLength
             ========================================================================= */}
         <motion.div
           style={{
@@ -339,31 +557,28 @@ export function CenterFlow({
           }}
           className="absolute inset-0 w-full h-full pointer-events-none"
         >
-          {/* SVG Connection Lines & Radial Laser Pulse Packets */}
           <svg
             className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible"
             viewBox={`0 0 ${dims.width} ${dims.height}`}
             style={{ width: dims.width, height: dims.height }}
           >
             <defs>
-              {/* Multi-tier Cyan-to-Partner Linear Gradients */}
-              {nodePositions.map(({ node, startX, startY, x, y }) => (
+              {groupPositions.map(({ group, startX, startY, endX, endY }) => (
                 <linearGradient
-                  key={`flow-grad-${node.id}`}
-                  id={`flow-grad-${node.id}-${filterId}`}
+                  key={`flow-grad-${group.id}`}
+                  id={`flow-grad-${group.id}-${filterId}`}
                   x1={startX}
                   y1={startY}
-                  x2={x}
-                  y2={y}
+                  x2={endX}
+                  y2={endY}
                   gradientUnits="userSpaceOnUse"
                 >
                   <stop offset="0%" stopColor="#00D9FF" stopOpacity="0.95" />
                   <stop offset="55%" stopColor="#168CFF" stopOpacity="0.85" />
-                  <stop offset="100%" stopColor={node.glowColor} stopOpacity="0.95" />
+                  <stop offset="100%" stopColor={group.glowColor} stopOpacity="0.95" />
                 </linearGradient>
               ))}
 
-              {/* Glowing Laser Beam Filter */}
               <filter id={`beam-glow-${filterId}`} x="-50%" y="-50%" width="200%" height="200%">
                 <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur1" />
                 <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur2" />
@@ -375,50 +590,68 @@ export function CenterFlow({
               </filter>
             </defs>
 
-            {/* Connection Lines from True Center to Tech Node Center (Rendered Underneath Nodes) */}
-            {nodePositions.map(({ node, x, y, startX, startY, endX, endY, pulseDelay }) => {
-              const isHovered = hoveredId === node.id;
+            {/* Exactly 5 Primary Connection Lines of IDENTICAL length */}
+            {groupPositions.map(({ group, startX, startY, endX, endY, pulseDelay }) => {
+              const isHovered = hoveredId === group.id;
               const isOtherHovered = hoveredId !== null && !isHovered;
-
-              const baseOpacity = isHovered ? 1.0 : isOtherHovered ? 0.28 : 0.52;
-              const strokeW = isHovered ? lineWidth * 1.7 : lineWidth;
+              const baseOpacity = isHovered ? 1.0 : isOtherHovered ? 0.3 : 0.55;
+              const strokeW = isHovered ? lineWidth * 1.6 : lineWidth;
 
               return (
-                <g key={`spoke-${node.id}`}>
-                  {/* Background Connection Line: Starts at exact centerX, centerY under center node */}
+                <g key={`spoke-${group.id}`}>
+                  {/* Primary Connection Line */}
                   <motion.line
                     initial={{ pathLength: 0, opacity: 0 }}
                     whileInView={{ pathLength: 1, opacity: baseOpacity }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, delay: 0.12, ease: "easeOut" }}
-                    x1={centerX}
-                    y1={centerY}
-                    x2={x}
-                    y2={y}
-                    stroke={`url(#flow-grad-${node.id}-${filterId})`}
+                    x1={startX}
+                    y1={startY}
+                    x2={endX}
+                    y2={endY}
+                    stroke={`url(#flow-grad-${group.id}-${filterId})`}
                     strokeWidth={strokeW}
                     strokeLinecap="round"
                     animate={{ opacity: baseOpacity }}
                     style={{
                       filter: isHovered
-                        ? `drop-shadow(0 0 6px ${node.glowColor})`
+                        ? `drop-shadow(0 0 6px ${group.glowColor})`
                         : "drop-shadow(0 0 2px rgba(0, 217, 255, 0.4))",
                     }}
                   />
 
-                  {/* Traveling Data Pulse Bead (Travels from Center Circle Edge to Tech Card Edge) */}
+                  {/* Center Circumference Terminal Dot */}
+                  <circle
+                    cx={startX}
+                    cy={startY}
+                    r={isHovered ? 3.5 : 2.5}
+                    fill="#00D9FF"
+                    className="transition-all duration-300"
+                    style={{ filter: "drop-shadow(0 0 4px #00D9FF)" }}
+                  />
+
+                  {/* Group Card Perimeter Terminal Dot */}
+                  <circle
+                    cx={endX}
+                    cy={endY}
+                    r={isHovered ? 3.5 : 2.5}
+                    fill={group.glowColor}
+                    className="transition-all duration-300"
+                    style={{ filter: `drop-shadow(0 0 4px ${group.glowColor})` }}
+                  />
+
+                  {/* Traveling Data Pulse Bead — Perfectly Synchronized Speed */}
                   {!shouldReduceMotion && (
                     <>
-                      {/* Outer Luminous Glowing Pulse Bead */}
                       <motion.circle
-                        r={isHovered ? pulseWidth * 1.35 : pulseWidth}
-                        fill={isHovered ? node.glowColor : pulseColor}
+                        r={isHovered ? pulseWidth * 1.3 : pulseWidth}
+                        fill={isHovered ? group.glowColor : pulseColor}
                         filter={`url(#beam-glow-${filterId})`}
                         animate={{
                           cx: [startX, endX],
                           cy: [startY, endY],
                           opacity: [0, 0.95, 0.95, 0],
-                          scale: [0.85, 1.15, 1.05, 0.85],
+                          scale: [0.85, 1.1, 1.0, 0.85],
                         }}
                         transition={{
                           duration: pulseDuration,
@@ -428,9 +661,8 @@ export function CenterFlow({
                         }}
                       />
 
-                      {/* Inner White Data Spark Core */}
                       <motion.circle
-                        r={pulseWidth * 0.45}
+                        r={pulseWidth * 0.42}
                         fill="#FFFFFF"
                         animate={{
                           cx: [startX, endX],
@@ -453,7 +685,7 @@ export function CenterFlow({
 
           {/* =======================================================================
               CENTER INTELLIGENCE CORE NODE
-              Strictly Positioned with center at (centerX, centerY) via -translate-x-1/2 -translate-y-1/2
+              Strictly Positioned at (centerX, centerY) via -translate-x-1/2 -translate-y-1/2
               ======================================================================= */}
           <div
             className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto"
@@ -472,26 +704,15 @@ export function CenterFlow({
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
               className="relative w-full h-full flex flex-col items-center justify-center rounded-full text-center select-none"
             >
-              {/* Layer A: Core Cyan Glow Halo */}
+              {/* Cyan Glow Halo */}
               <div
                 className="absolute inset-0 rounded-full pointer-events-none -z-10"
                 style={{
                   background:
                     "radial-gradient(circle, rgba(0, 217, 255, 0.55) 0%, rgba(22, 140, 255, 0.3) 45%, transparent 70%)",
                   filter: "blur(24px)",
-                  transform: hoveredId ? "scale(1.32)" : "scale(1.18)",
+                  transform: hoveredId ? "scale(1.28)" : "scale(1.18)",
                   transition: "transform 0.5s ease-out",
-                }}
-              />
-
-              {/* Layer B: Ambient Blue Atmosphere */}
-              <div
-                className="absolute inset-0 rounded-full pointer-events-none -z-20 opacity-70"
-                style={{
-                  background:
-                    "radial-gradient(circle, rgba(22, 140, 255, 0.35) 0%, rgba(0, 217, 255, 0.15) 55%, transparent 75%)",
-                  filter: "blur(48px)",
-                  transform: "scale(1.4)",
                 }}
               />
 
@@ -519,7 +740,7 @@ export function CenterFlow({
                   backdropFilter: "blur(24px)",
                 }}
               >
-                {/* Spherical Specular Light Reflection */}
+                {/* Specular Light Reflection */}
                 <div className="absolute inset-0 rounded-full bg-linear-to-tr from-transparent via-cyan-400/15 to-white/30 pointer-events-none" />
                 <div className="absolute -top-6 left-1/2 -translate-x-1/2 w-3/4 h-1/2 bg-cyan-400/20 blur-md rounded-full pointer-events-none" />
 
@@ -546,105 +767,110 @@ export function CenterFlow({
           </div>
 
           {/* =======================================================================
-              OUTER TECHNOLOGY NODES
-              Positioned with center at (node.x, node.y) via -translate-x-1/2 -translate-y-1/2
+              OUTER TECHNOLOGY GROUP NODES (EXACTLY 5)
+              Positioned with center at (group.x, group.y) via -translate-x-1/2 -translate-y-1/2
+              Normalized identical footprint, generous padding, domain dot indicators
               ======================================================================= */}
           <div className="absolute inset-0 pointer-events-none">
-            {nodePositions.map(({ node, x, y, entranceDelay }) => {
-              const isHovered = hoveredId === node.id;
+            {groupPositions.map(({ group, x, y, entranceDelay }) => {
+              const isHovered = hoveredId === group.id;
 
               return (
                 <div
-                  key={node.id}
+                  key={group.id}
                   className="absolute -translate-x-1/2 -translate-y-1/2 pointer-events-auto select-none outline-hidden cursor-pointer group"
                   style={{
                     left: x,
                     top: y,
-                    width: "max-content",
-                    maxWidth: dims.maxNodeWidth,
-                    height: dims.nodeHeight,
+                    width: dims.cardWidth,
+                    height: dims.cardHeight,
                     zIndex: 30,
                   }}
                   tabIndex={0}
                   role="button"
-                  aria-label={`${node.name} integrated platform`}
+                  aria-label={group.ariaLabel || `${group.title}: ${group.items.map((i) => i.name).join(", ")}`}
                   aria-pressed={isHovered}
-                  onMouseEnter={() => interactive && setHoveredId(node.id)}
+                  onMouseEnter={() => interactive && setHoveredId(group.id)}
                   onMouseLeave={() => interactive && setHoveredId(null)}
-                  onFocus={() => interactive && setHoveredId(node.id)}
+                  onFocus={() => interactive && setHoveredId(group.id)}
                   onBlur={() => interactive && setHoveredId(null)}
                 >
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.85 }}
+                    initial={{ opacity: 0, scale: 0.88 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     animate={
                       isHovered && !shouldReduceMotion
-                        ? { scale: 1.04, y: -3 }
-                        : { scale: 1, y: 0 }
+                        ? { y: -2 }
+                        : { y: 0 }
                     }
                     transition={{
                       opacity: { duration: 0.55, delay: entranceDelay, ease: [0.16, 1, 0.3, 1] },
-                      scale: { type: "spring", stiffness: 320, damping: 22 },
-                      y: { type: "spring", stiffness: 320, damping: 22 },
+                      y: { duration: 0.2, ease: "easeOut" },
                     }}
-                    className="relative flex items-center rounded-full h-full"
+                    className="relative w-full h-full"
                   >
-                    {/* Ambient Brand Glow Halo */}
+                    {/* Ambient Glow Halo */}
                     <div
-                      className="absolute inset-0 rounded-full transition-opacity duration-300 -z-10 pointer-events-none"
+                      className="absolute inset-0 rounded-2xl transition-opacity duration-300 -z-10 pointer-events-none"
                       style={{
-                        background: `radial-gradient(circle, ${node.glowColor}55 0%, ${node.glowColor}15 45%, transparent 70%)`,
-                        opacity: isHovered ? 0.95 : 0.45,
-                        transform: isHovered ? "scale(1.45)" : "scale(1.25)",
-                        filter: "blur(10px)",
+                        background: `radial-gradient(circle, ${group.glowColor}40 0%, ${group.glowColor}10 50%, transparent 75%)`,
+                        opacity: isHovered ? 0.9 : 0.35,
+                        filter: "blur(14px)",
                       }}
                     />
 
-                    {/* Glass Pill Surface — Natural Content Expansion with Overflow Visible */}
+                    {/* Glassmorphic Group Card Surface with Generous Padding */}
                     <div
-                      className="relative flex items-center h-full rounded-full transition-all duration-300 overflow-visible shrink-0"
+                      className="relative flex flex-col items-center justify-center w-full h-full rounded-2xl px-4 py-3 text-center transition-all duration-300 overflow-hidden"
                       style={{
-                        paddingInline: dims.paddingX,
-                        gap: dims.gap,
-                        backgroundColor: isHovered
-                          ? "rgba(14, 40, 72, 0.96)"
-                          : "rgba(10, 31, 55, 0.94)",
+                        background: isHovered
+                          ? "linear-gradient(135deg, rgba(14, 38, 68, 0.97) 0%, rgba(10, 28, 52, 0.95) 100%)"
+                          : "linear-gradient(135deg, rgba(10, 30, 54, 0.94) 0%, rgba(7, 22, 42, 0.92) 100%)",
                         border: isHovered
-                          ? `1.5px solid ${node.glowColor}`
-                          : "1px solid rgba(90, 160, 200, 0.35)",
+                          ? `1.5px solid ${group.glowColor}`
+                          : "1px solid rgba(0, 217, 255, 0.32)",
                         boxShadow: isHovered
-                          ? `0 0 28px ${node.glowColor}66, 0 12px 32px rgba(0, 0, 0, 0.5)`
-                          : `0 8px 24px rgba(0, 0, 0, 0.38), 0 0 12px ${node.glowColor}22`,
+                          ? `0 0 26px ${group.glowColor}45, 0 10px 28px rgba(0, 0, 0, 0.55)`
+                          : `0 8px 24px rgba(0, 0, 0, 0.45), 0 0 12px ${group.glowColor}18`,
                         backdropFilter: "blur(20px)",
                       }}
                     >
-                      {/* Brand Icon */}
-                      {node.icon && (
-                        <div
-                          className="shrink-0 flex items-center justify-center rounded-full overflow-hidden"
-                          style={{ width: dims.iconSize, height: dims.iconSize }}
-                        >
-                          <img
-                            src={node.icon}
-                            alt={`${node.name} logo`}
-                            loading="lazy"
-                            className="w-full h-full object-contain filter contrast-[1.08] brightness-[1.02]"
-                            style={{
-                              width: dims.iconSize,
-                              height: dims.iconSize,
-                            }}
-                          />
-                        </div>
-                      )}
+                      {/* Top Specular Sheen */}
+                      <div className="absolute inset-0 rounded-2xl bg-linear-to-tr from-transparent via-cyan-400/5 to-white/10 pointer-events-none" />
 
-                      {/* Brand Title (Full, Crisp, Never Truncated) */}
-                      <span
-                        className="font-display font-semibold select-none whitespace-nowrap text-white dark:text-[#F5F7FA] leading-none"
-                        style={{ fontSize: dims.fontSize }}
-                      >
-                        {node.name}
-                      </span>
+                      {/* Level 2 Hierarchy: Dominant Group Title with Brand Dot */}
+                      <div className="flex items-center justify-center gap-1.5 leading-none">
+                        <span
+                          className="w-1.5 h-1.5 rounded-full shrink-0"
+                          style={{
+                            backgroundColor: group.glowColor,
+                            boxShadow: `0 0 6px ${group.glowColor}`,
+                          }}
+                        />
+                        <span className="font-display font-semibold text-white tracking-wide text-xs sm:text-[13px] leading-tight select-none drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
+                          {group.title}
+                        </span>
+                      </div>
+
+                      {/* Level 3 Hierarchy: Technology Members with Generous Spacing */}
+                      <div className="flex items-center justify-center flex-wrap gap-x-2 gap-y-0.5 mt-1.5 text-[10.5px] sm:text-[11.5px] text-slate-200 dark:text-slate-200 select-none">
+                        {group.items.map((item, idx) => (
+                          <span key={item.name} className="inline-flex items-center gap-1 whitespace-nowrap">
+                            {item.icon && (
+                              <img
+                                src={item.icon}
+                                alt=""
+                                className="w-3.5 h-3.5 object-contain shrink-0 filter contrast-[1.08] brightness-[1.05]"
+                              />
+                            )}
+                            <span className="leading-tight font-medium text-slate-300 dark:text-slate-200">{item.name}</span>
+                            {idx < group.items.length - 1 && (
+                              <span className="text-cyan-400/40 ml-0.5 select-none font-bold">·</span>
+                            )}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </motion.div>
                 </div>
@@ -653,7 +879,6 @@ export function CenterFlow({
           </div>
         </motion.div>
       </div>
-      )}
     </motion.div>
   );
 }
